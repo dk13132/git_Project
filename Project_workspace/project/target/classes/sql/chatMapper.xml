@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chat">
+	<select id="chat_list" parameterType="int" resultType="mc.chat.model.ChatListDto">
+		select c.chat_no, chat_name, name, (
+		select count(*) 
+		from chat_participation cp 
+		where c.chat_no = cp.chat_no) 'count', (
+		select max(send_time) 
+		from chat_message cm
+		where cm.chat_no = c.chat_no) 'send_time' 
+		from chat c, employee, chat_participation cp1
+		where c.employee_no = employee.employee_no
+        and cp1.chat_no = c.chat_no
+		and cp1.employee_no = #{employee_no};
+	</select>
+	
+	<select id="selectDept" resultType="mc.chat.model.DeptDto">
+		select * from department
+	</select>
+	
+	<select id="selectEmp" parameterType="int" resultType="mc.chat.model.EmpDto">
+		select * from employee where dept_no = #{dept_no}
+	</select>
+	
+	<select id="chatMaxNo" resultType="int">
+		select max(chat_no) + 1 from chat
+	</select>
+	
+	<select id="participationMaxNo" resultType="int">
+		select max(participation_no) + 1 from chat_participation
+	</select>
+	
+	<insert id="chatInsert" parameterType="mc.chat.model.ChatDto">
+		insert into chat values (#{chat_no}, #{employee_no}, #{chat_name})
+	</insert>
+	
+	<insert id="participationInsert" parameterType="mc.chat.model.Chat_participationDto">
+		insert into chat_participation values (#{participation_no}, #{employee_no}, #{chat_no})
+	</insert>
+</mapper>
