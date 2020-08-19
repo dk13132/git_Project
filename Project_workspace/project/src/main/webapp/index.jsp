@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>시작</title>
-<meta http-equiv="refresh" content="0;url=http://192.168.0.118:8081/mc/login.do">
+<meta http-equiv="refresh" content="0;url='login.do'">
 </head>
 <body>
 </body>

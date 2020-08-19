@@ -27,7 +27,7 @@
 	</table>
 </body>
 <script type="text/javascript">
-	let sock = new SockJS("http://192.168.0.118:8081/mc/echo");
+	let sock = new SockJS("http://localhost:8080/mc/echo");
 	sock.onopen = function() {
 		sendMessage(0);
 	};
