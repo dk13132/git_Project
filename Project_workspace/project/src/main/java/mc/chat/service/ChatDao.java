@@ -18,7 +18,7 @@ import mc.chat.model.MessageDto;
 @Repository
 public class ChatDao {
 	@Autowired
-	SqlSession session;
+	SqlSession session;//a
 	
 	public List<ChatListDto> chatList(int employee_no){
 		return session.selectList("chat.chat_list", employee_no);
