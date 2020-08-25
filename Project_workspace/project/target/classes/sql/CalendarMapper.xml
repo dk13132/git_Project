@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calendar">
+
+	<select id="calendarList"
+		resultType="mc.calendar.model.CalendarDto" parameterType="map">
+		select * from calendar where type=2 or type=1 and employee_no=#{employee_no};
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) FROM calendar
+	</select>
+
+	<!-- 검색 // 게시판 리스트 가져오기 -->
+	<select id="searchList"
+		resultType="mc.calendar.model.CalendarDto" parameterType="map">
+		select * from calendar c join employee e on e.employee_no =
+		c.employee_no
+		<where>
+			type=#{type}
+			<if test="type == 1">
+				and c.employee_no = #{employee_no}
+			</if>
+			<if
+				test="searchType=='subject' and keyword != null and keyword != ''">
+				and subject LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if
+				test="searchType=='name' and keyword != null and keyword != ''">
+				and name LIKE CONCAT('%',#{keyword},'%')
+			</if>
+		</where>
+		order by calendar_no desc
+	</select>
+
+	<select id="searchListNoType"
+		resultType="mc.calendar.model.CalendarDto" parameterType="map">
+		select * from calendar c join employee e on e.employee_no =
+		c.employee_no
+		<where>
+			<if
+				test="searchType=='subject' and keyword != null and keyword != ''">
+				subject LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if
+				test="searchType=='name' and keyword != null and keyword != ''">
+				name LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			and type = 2
+			or
+			<if
+				test="searchType=='subject' and keyword != null and keyword != ''">
+				subject LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if
+				test="searchType=='name' and keyword != null and keyword != ''">
+				name LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			and type=1 and c.employee_no=#{employee_no}
+		</where>
+		order by calendar_no desc
+	</select>
+
+	<!-- 검색// 게시물 총 개수 -->
+	<select id="searchCount" resultType="int" parameterType="map">
+		select count(*) FROM calendar c join employee e on e.employee_no =
+		c.employee_no
+		<where>
+			type=#{type}
+			<if test="keyword != null and keyword != ''">
+
+				<if test="searchType=='subject'">
+					AND subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='name'">
+					AND name like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</where>
+		order by calendar_no desc
+	</select>
+
+	<select id="noTypeSearchCount" resultType="int"
+		parameterType="map">
+		select count(*) FROM calendar c join employee e on e.employee_no =
+		c.employee_no
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="searchType=='subject'">
+					subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='name'">
+					name like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</where>
+		order by calendar_no desc
+	</select>
+
+	<!-- content -->
+	<select parameterType="int"
+		resultType="mc.calendar.model.CalendarDto" id="content">
+		select * from calendar,
+		employee where calendar.employee_no = employee.employee_no and
+		calendar_no = #{calendar_no}
+	</select>
+
+	<select parameterType="int"
+		resultType="mc.calendar.model.CalendarDto" id="fileContent">
+		select * from
+		calendar_file where calendar_no = #{calendar_no}
+	</select>
+
+
+	<update parameterType="mc.calendar.model.CalendarDto"
+		id="update">
+		update calendar set subject= #{subject}, contents = #{contents},
+		start_time = #{start_time}, end_time = #{end_time}, type=#{type}
+		where calendar_no = #{calendar_no}
+	</update>
+
+	<update parameterType="mc.calendar.model.CalendarDto"
+		id="fileUpdate">
+		update calendar_file set file_no=#{file_no},
+		calendar_no=#{calendar_no}, file_name=#{file_name},
+		file_path=#{file_path}, filesize=#{filesize}
+		where calendar_no
+		=#{calendar_no}
+	</update>
+
+	<!-- write -->
+	<insert parameterType="mc.calendar.model.CalendarDto" id="write"
+		useGeneratedKeys="true" keyProperty="calendar_no">
+		insert into
+		calendar(employee_no,subject,start_time,end_time,location,contents,type)
+		values(#{employee_no},#{subject},#{start_time},#{end_time},#{location},#{contents},#{type})
+	</insert>
+
+
+
+	<!-- delete -->
+	<delete parameterType="int" id="delete">
+		delete from calendar where
+		calendar_no = #{calendar_no}
+	</delete>
+
+	<!-- 첨부파일 작성 -->
+	<insert parameterType="hashMap" id="fileWrite">
+		insert into
+		calendar_file(calendar_no,
+		file_no,file_name,file_path,filesize,stored_file_name,del_gb)
+		values(#{calendar_no},#{file_no},#{file_name},#{file_path},#{filesize},#{stored_file_name},'N')
+	</insert>
+
+
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int"
+		resultType="hashMap">
+		select file_no, file_name, round(filesize/1024,1) as
+		filesize, del_gb from calendar_file
+		where calendar_no = #{calendar_no}
+		and del_gb = 'N' ORDER BY file_no asc
+	</select>
+
+
+
+	<!-- 첨부파일 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap"
+		resultType="hashMap">
+		select stored_file_name, file_name from calendar_file where
+		file_no = #{file_no}
+	</select>
+
+	<!-- 첨부파일 수정 -->
+	<update id="updateFile" parameterType="hashMap">
+		update calendar_file set
+		del_gb = 'Y' where file_no = #{file_no}
+	</update>
+</mapper>

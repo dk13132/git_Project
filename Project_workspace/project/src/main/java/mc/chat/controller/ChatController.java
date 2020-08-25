@@ -1,6 +1,8 @@
 package mc.chat.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,8 @@ import mc.chat.model.ChatDto;
 import mc.chat.model.ChatListDto;
 import mc.chat.model.DeptDto;
 import mc.chat.model.EmpDto;
+import mc.chat.model.Employee_info;
+import mc.chat.model.MessageDto;
 import mc.chat.service.ChatService;
 
 @Controller
@@ -68,5 +72,58 @@ public class ChatController {
 		int updateCount = service.addChat(dto, empSelect);
 		mav.addObject("count", updateCount);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/messageInfo.do", produces="text/plane;charset=UTF-8")
+	@ResponseBody
+	public String messageInfo(int chat_no, int employee_no) {
+		Map<String,Integer> map = new HashMap<>();
+		map.put("chat_no", chat_no);
+		map.put("employee_no", employee_no);
+		List<MessageDto> messageList = service.selectMessageInfo(map);
+		Gson json = new Gson();
+		return json.toJson(messageList);
+	}
+	
+	@GetMapping(value = "/chat_invitation.do" ,produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String chat_invitationForm(int chat_no) {
+		List<DeptDto> deptList = service.deptList();
+		Gson json = new Gson();
+		return json.toJson(deptList);
+	}
+	
+	@PostMapping(value = "/chat_invitation.do", produces = "text/plain;charset=UTF-8")
+	public ModelAndView chat_invitationPro(int chat_no, int[] empSelect) {
+		ModelAndView mav = new ModelAndView("chat_invitationPro");
+		Map<String, Object> map = service.chat_invitation(chat_no, empSelect);
+		mav.addObject("count", map.get("updateCount"));
+		mav.addObject("msg", map.get("msg"));
+		return mav;
+	}
+	
+	@RequestMapping(value = "/empInvitationList.do", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String empInvitationList(int dept_no, int chat_no) {
+		List<EmpDto> empList = service.participationInfo(dept_no, chat_no);
+		Gson json = new Gson(); 
+		return json.toJson(empList); 
+	}
+	
+	@RequestMapping(value = "/employeeInfo.do", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String employeeInfo(int chat_no) {
+		Map<Integer, List<Employee_info>> map = service.employeeInfo(chat_no);
+		Gson json = new Gson(); 
+		return json.toJson(map);
+	}
+	
+	@RequestMapping(value = "/exitChat.do")
+	public String exitChat_room(int chat_no, int employee_no) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("chat_no", chat_no);
+		map.put("employee_no",employee_no);
+		service.exitChat_room(map);
+		return "exit_chat";
 	}
 }
