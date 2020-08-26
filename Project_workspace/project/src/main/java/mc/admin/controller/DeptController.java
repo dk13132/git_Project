@@ -54,17 +54,15 @@ public class DeptController {
 		int number = list.getCount() - (pageNum - 1) * per;
 		m.addAttribute("number", number);
 		return "dept/deptInfo";
-	}
+	} 
 	
 	@RequestMapping(value = "/delete.do", method = RequestMethod.GET)
 	public String delete(@RequestParam("delete_dept") int[] dept_no, ModelMap modelMap)
 	throws Exception{
-		// 삭제할 사용자 id마다 반복해서 사용자 삭제
 		for(int delete : dept_no ) {
-			System.out.println("사용자 삭제 = "+dept_no);
+			System.out.println("�궗�슜�옄 �궘�젣 = "+dept_no);
 			int count = dept.deleteUser(delete);
 		}
-		//목록 페이지로 이동
 		return "redirect:/list.do";
 	}
 	
@@ -218,7 +216,7 @@ public class DeptController {
 	
 	
 	
-	@RequestMapping(value = "attrUpdate.do")//상태값으로 연차 계산
+	@RequestMapping(value = "attrUpdate.do")//�긽�깭媛믪쑝濡� �뿰李� 怨꾩궛
 	public String updateAttr(AttenDto e, Model m) {
 		
 		dept.updateAttr(e);
@@ -237,7 +235,7 @@ public class DeptController {
 		format = new SimpleDateFormat("yyyy-MM-dd");
 		//format.format(e.getStart_time());
 		
-		System.out.println("전달값::"+format.format(e.getStart_time()));
+		System.out.println("�쟾�떖媛�::"+format.format(e.getStart_time()));
 		
 		m.addAttribute("start_time", format.format(e.getStart_time()));
 		

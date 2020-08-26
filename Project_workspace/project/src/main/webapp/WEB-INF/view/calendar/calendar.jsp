@@ -5,6 +5,9 @@
 <html>
 <head>
 <title>일정 관리</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/component.css'/>" />
 <link href="<%=request.getContextPath()%>/resources/lib/main.css"
 	rel='stylesheet' />
 <script src="<%=request.getContextPath()%>/resources/lib/main.js"></script>
@@ -107,6 +110,32 @@ body {
 </style>
 </head>
 <body>
+	<section id="header">
+		<div id=headerwrap>
+			<div class="logo">
+				<a href="test.do"> <img src="resources/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="gnb">
+				<div class="gnb_list">
+					<ul>
+						<li><a href="#">사원정보</a></li>
+						<li><a href="#">게시판</a></li>
+						<li><a href="meeting_room.do">회의실</a></li>
+						<li><a href="#">프로젝트</a></li>
+						<li><a href="chat_list.do">채팅</a></li>
+						<li><a href="calendar.do">일정(캘린더)</a></li>
+						<li><a href="#">전자결재</a></li>
+						<c:if test="${mc_authority >= 3 }">
+							<li><a href="list.do">관리자</a></li>
+							<li><a href="#">근태관리</a></li>
+						</c:if>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</section>
 	<form align="center" id="data" method="post">
 		<input type="hidden" name="type" value="${type}"> <select
 			id="type" name="type" style="padding: 1px 0.5px 6px 1px;">

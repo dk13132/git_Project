@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title></title>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script type="text/javascript"
@@ -48,7 +49,7 @@
 	</table>
 </body>
 <script type="text/javascript">
-	let sock = new SockJS("http://192.168.0.118:8080/mc/echo");
+	let sock = new SockJS("http://localhost:8080/mc/echo");
 	sock.onopen = function() {
 		sendMessage(0);
 	};
@@ -97,7 +98,7 @@
 	})
 
 	$("#dept_no").click(function() {
-		alert($(this).val()+"");
+		alert($(this).val() + "");
 	});
 
 	function peopleList() {

@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/component.css'/>" />
 <title>채팅 목록</title>
 <script>
 	var tmp;
@@ -29,6 +32,33 @@
 </script>
 </head>
 <body>
+	<section id="header">
+		<div id=headerwrap>
+			<div class="logo">
+				<a href="test.do"> <img src="resources/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="gnb">
+				<div class="gnb_list">
+					<ul>
+						<li><a href="#">사원정보</a></li>
+						<li><a href="#">게시판</a></li>
+						<li><a href="meeting_room.do">회의실</a></li>
+						<li><a href="#">프로젝트</a></li>
+						<li><a href="chat_list.do">채팅</a></li>
+						<li><a href="calendar.do">일정(캘린더)</a></li>
+						<li><a href="#">전자결재</a></li>
+						<c:if test="${mc_authority >= 3 }">
+							<li><a href="list.do">관리자</a></li>
+							<li><a href="#">근태관리</a></li>
+						</c:if>
+					</ul>
+
+				</div>
+			</div>
+
+		</div>
+	</section>
 	<h1>내 채팅 목록</h1>
 	<table border="1" style="border-collapse: collapse;">
 		<tr>

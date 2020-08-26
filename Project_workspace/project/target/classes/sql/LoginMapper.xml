@@ -11,6 +11,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="notice" resultType="map">
-		select date(reg_date),subject from board order by board_no desc limit 0,6
+		select date(reg_date),subject from board where type=1 order by board_no desc limit 0,6
 	</select>
 </mapper>
