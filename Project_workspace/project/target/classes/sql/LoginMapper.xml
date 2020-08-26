@@ -5,6 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="login">
 	<select id="login" parameterType="String" resultType="hashMap">
-		select password, name from employee where employee_no=#{employee_no}
+		select
+		authority, password, name from employee where
+		employee_no=#{employee_no}
+	</select>
+
+	<select id="notice" resultType="map">
+		select date(reg_date),subject from board order by board_no desc limit 0,6
 	</select>
 </mapper>

@@ -29,7 +29,7 @@ public class LoginController {
 	@PostMapping
 	public ModelAndView loginPro(String employee_no, String password, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Map<String, String> map = service.login(employee_no);
+		Map<String, Object> map = service.login(employee_no);
 		
 		if(map == null) {
 			mav.addObject("check", 0);
@@ -42,7 +42,8 @@ public class LoginController {
 		else {
 			session.setAttribute("mc_employee_no", employee_no);
 			session.setAttribute("mc_name", map.get("name"));
-			mav.setViewName("main");
+			session.setAttribute("mc_authority", map.get("authority"));
+			mav.setViewName("test");
 		}
 		return mav;
 	}

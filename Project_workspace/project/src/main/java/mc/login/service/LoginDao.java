@@ -14,7 +14,7 @@ public class LoginDao {
 	@Autowired
 	SqlSession session;
 	
-	public Map<String, String> login(String employee_no) {
+	public Map<String, Object> login(String employee_no) {
 		return session.selectOne("login.login", employee_no);
 	}
 }

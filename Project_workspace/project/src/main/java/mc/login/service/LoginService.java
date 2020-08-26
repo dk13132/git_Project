@@ -13,7 +13,7 @@ public class LoginService {
 	@Autowired
 	LoginDao dao;
 	
-	public Map<String, String> login(String employee_no) {
+	public Map<String, Object> login(String employee_no) {
 		return dao.login(employee_no);
 	}
 }
