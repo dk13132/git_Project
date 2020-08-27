@@ -7,16 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <title> 전자결재 </title>
-    <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>"/>
-</head>
-<style type="text/css">
- a:link { text-decoration: none; color: #333}
- a:visited { text-decoration: none; color: #333}
- a:hover { text-decoration: underline;}
- 
-</style>
+  <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 
+</head>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
@@ -50,7 +45,7 @@ $(function(){
     <div id="wrap">
         <jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
         <section id="content">
-        <div id="nav">
+        <div id="leftcontent">
         
         	<div id="login">
         		<br>                    
@@ -82,7 +77,7 @@ $(function(){
 					</table>
          	</div>
         </div>
-        <div id="article">
+        <div id=rightcontent>
       
 				<div class="post">
 			

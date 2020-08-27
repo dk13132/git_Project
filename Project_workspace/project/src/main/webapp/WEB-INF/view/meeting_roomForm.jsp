@@ -6,6 +6,8 @@
 <title>회의실 예약</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/depinfo.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 	$(function() {
@@ -30,7 +32,7 @@
 
 	function changeDate() {
 		var url = "reservationInfo.do";
-
+		var index = 0;
 		var date = $("#date").val();
 		var params = "date=" + date;
 
@@ -43,27 +45,28 @@
 				.done(
 						function(args) {//응답이 성공 상태 코드를 반환하면 호출되는 함수
 							$('#table').empty();
-							$('#table').append("<tr>");
-							$('#table').append("<th>장소명</th>");
+							$('#table').append("<tr id='trMain'>");
+							$('#trMain').append("<th>장소명</th>");
 							for (var i = 0; i < 24; i++) {
-								$('#table').append("<th>" + i + "</th>");
+								$('#trMain').append("<th>" + i + "</th>");
 							}
 							$('#table').append("</tr>");
 							for ( var key in args) {
-								$('#table').append("<tr>");
-								$('#table').append("<th>" + key + "</th>");
+								$('#table').append("<tr id='tr" + index + "'>");
+								$('#tr' + index).append("<td>" + key + "</td>");
 								for (var i = 0; i < args[key].length; i++) {
 									if (args[key][i] == null) {
-										$('#table').append(
-												"<td width='50'>" + "</td>");
+										$('#tr' + index).append(
+												"<td>" + "</td>");
 									} else {
-										$('#table').append(
-												"<td width='50'>"
+										$('#tr' + index).append(
+												"<td>"
 														+ args[key][i]
 														+ "</td>");
 									}
 								}
 								$('#table').append("</tr>");
+								index++;
 							}
 						}).fail(function(e) {
 					alert(e.responseText);
@@ -80,7 +83,7 @@
 	<div id="wrap">
 		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
 		<section id="content">
-		 <div id="nav">
+		 <div id="leftcontent">
 			<div id="login">
         		<br>                    
                 <h1 align="left">환영합니다. ${mc_name}님</h1>
@@ -111,17 +114,17 @@
 					</table>
          	</div>
          </div>
-			<div id="article">
+			<div id="rightcontent">
 			<h1>회의실 예약 확인</h1>
 	<h2>
 		날짜 : <input type="date" id="date" name="date" onchange="changeDate()">
 	</h2>
-	<table id="table" border="1" style="border-collapse: collapse;">
+	<table id="table">
 	</table>
-	<input type="button" value="예약하기" onclick="openWindowPop()" />
+	<input class="myButton" type="button" value="예약하기" onclick="openWindowPop()" />
 
 	<h1>내 예약 현황</h1>
-	<table border="1" style="border-collapse: collapse;">
+	<table>
 		<tr>
 			<th>회의실명</th>
 			<th>예약자</th>

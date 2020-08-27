@@ -1,12 +1,12 @@
-body{font-family: 'Noto Sans KR', sans-serif; font-size: 12px; width: 100%; height: 100%; background-color}
+body{font-family: 'Noto Sans KR', sans-serif; width: 100%; height: 100%; background-color; font-size: 16px;}
 
 a:link {text-decoration: none;}
 a:visited {text-decoration: none;}
 
-#wrap {width: 100%;}
+#wrap {width: 100%; height: 100%; padding: 0px; margin: 0px;}
 
 #header{border-bottom: 2px solid #f0f0f0;}
-#header #headerwrap{width: 1350px; height: 80px; margin: 0 auto; Position:relative;}
+#header #headerwrap{width: 1200px; height: 80px; margin: 0 auto; Position:relative;}
 #header .logo{float: left; width: 148px; height: 60px; margin-top: 11px;}
 #header .gnb{float: right;}
 #header .gnb ul {margin-top: 33px}
@@ -14,46 +14,38 @@ a:visited {text-decoration: none;}
 #header .gnb ul li a{text-decoration: none; color:#a4a2a2;}
 #header .gnb ul li a:hover{text-decoration: none; color:#c00000;}
 
-#content {width: 1900px; margin: 0 auto;  height : 757px;}
-#content .post { padding: 20px 20px 20px 10px;}
-#content .entry { padding: 20px 20px 20px 10px;}
+#content { width: 1200px; margin: 0 auto;  height : 100%;}
+#leftcontent { float: left; width: 220px; height : 100%; }
+#rightcontent { float: right; width: 980px; height: 100%; border-left:1px groove; padding-left: 15px; }
+#foot{clear: both; width: 100%; margin:0 auto; height: 130px; background-color: aqua;}
+#foot ul li{ float: left; clear: both;}
 
-#nav {	float: left; height : 757px; width: 250px; padding: 0 20px 0 0; border-right:1px groove; }
-#login { height :200px; }
-#cal { height :230px;}
 
-/* #menu { height :200px; background-color:yellow;}
-#menu { height :230px; background-color:white;} */
+#leftcontent ul li {background-color:gray; padding: 5px;}
 
-#sidemenu ul  {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
+
+
+.myButton {
+	background:linear-gradient(to bottom, #d11414 5%, #bd1515 100%);
+	background-color:#d11414;
+	border: 0px solid;
+	border-radius:3px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	/* font-size:15px; */
+	padding:5px 10px;
+	text-decoration:none;
+	margin: 14px 0px 0px 0px;
 }
-#sidemenu li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+.myButton:hover {
+	background:linear-gradient(to bottom, #bd1515 5%, #d11414 100%);
+	background-color:#bd1515;
 }
-#sidemenu li a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-#sidemenu li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+.myButton:active {
+	position:relative;
+	top:1px;
 }
 
-
-#article { float: right;  height : 757px; width: 1600px; padding: 0 0 0 20px; }
-#calendar td{width: 30px; height: 30px; text-align: center; font-size: 15px;}    
-
-#foot {position: fixed; bottom: 0; width: 100%; height: 130px; background-color: rgb(30, 10, 1);
-    color: rgb(102, 78, 78); }
-#foot .fnbwrap{width: 1024px; margin: 0 auto; margin-top: 25px}
-.fnbwrap ul{overflow: hidden; font-weight: bold; font-size: 14px;}
-.fnbwrap ul li{float: left; margin-right: 15px;}
-.fnbwrap p {margin-top: 10px; line-height: 140%}
+input{padding:4px 10px 4px 10px; boder:1px solid #f2f2f2; border-radius: 3px; font-size: 14px;}
+h1{font-size: 22px; }

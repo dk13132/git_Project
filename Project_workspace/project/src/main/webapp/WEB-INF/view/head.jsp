@@ -22,7 +22,7 @@
 							<li><a href="#">프로젝트</a></li>
 							<li><a href="chat_list.do">채팅</a></li>
 							<li><a href="calendar.do">일정(캘린더)</a></li>
-							<li><a href="#">전자결재</a></li>
+							<li><a href="appdomt.do">전자결재</a></li>
 							<c:if test="${mc_authority >= 3 }">
 							<li><a href="list.do">관리자</a></li>
 							<li><a href="attendance.do">근태관리</a></li>

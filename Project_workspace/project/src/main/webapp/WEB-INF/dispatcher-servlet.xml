@@ -18,6 +18,8 @@
 	
 	<bean id="deptDao" class="mc.admin.service.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
 	
+	<bean id="domtDao" class="mc.domt.service.DomtDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
+	
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">

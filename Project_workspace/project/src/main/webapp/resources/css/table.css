@@ -1,0 +1,6 @@
+table {font-family: 'Noto Sans KR', sans-serif; border-collapse: collapse; width: 100%; text-decoration:none}
+th, td { text-align: left; padding: 7px;}
+tr:nth-child(even){background-color: #f2f2f2}
+th { background-color: #767676; color: white;}
+th:first-child { background-color: #767676; color: white; border-radius: 3px 0px 0px 0px }
+th:last-child { background-color: #767676; color: white; border-radius: 0px 3px 0px 0px }

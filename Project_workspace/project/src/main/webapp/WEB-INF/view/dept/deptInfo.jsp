@@ -9,62 +9,56 @@
 <title></title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/depinfo.css'/>" />
 </head>
-
-
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 	$(function() {
 
 		var dept_name = "";
 
-		$(".depts")
-				.on(
-						"click",
-						function() {
+		$(".depts").on(
+				"click",
+				function() {
 
-							dept_name = $(this).attr('value');
+					dept_name = $(this).attr('value');
 
-							var url = "emps.do";
-							var params = "dept_name=" + dept_name;
+					var url = "emps.do";
+					var params = "dept_name=" + dept_name;
 
-							//$('#empList').empty();
+					//$('#empList').empty();
 
-							$
-									.ajax({
-										type : "get",
-										url : url,
-										data : params,
-										dataType : "json"
-									})
-									.done(
-											function(args) {
-												$("#empList").find(
-														"tbody:gt(0)").remove();
+					$.ajax({
+						type : "get",
+						url : url,
+						data : params,
+						dataType : "json"
+					}).done(
+							function(args) {
+								$("#empList").find("tbody:gt(0)").remove();
 
-												for (var idx = 0; idx < args.length; idx++) {
+								for (var idx = 0; idx < args.length; idx++) {
 
-													$("#empList")
-															.append(
-																	"<tbody><tr><td width='100' align='center'>"
-																			+ args[idx].name
-																			+ "</td><td align='center' width='100'>"
-																			+ args[idx].dept_name
-																			+ "</td><td align='center' width='100'>"
-																			+ args[idx].position
-																			+ "</td><td align='center' width='200'>"
-																			+ args[idx].email
-																			+ "</td><td align='center' width='200'>"
-																			+ args[idx].phone
-																			+ "</td></tr></tbody>");
-												}
-											})
+									$("#empList").append(
+											"<tbody><tr><td>" + args[idx].name
+													+ "</td><td>"
+													+ args[idx].dept_name
+													+ "</td><td>"
+													+ args[idx].position
+													+ "</td><td>"
+													+ args[idx].email
+													+ "</td><td>"
+													+ args[idx].phone
+													+ "</td></tr></tbody>");
+								}
+							})
 
-									.fail(function(e) {
-										alert(e.responseText);
+					.fail(function(e) {
+						alert(e.responseText);
 
-									})
-						});
+					})
+				});
 
 	});
 </script>
@@ -72,150 +66,100 @@
 
 <body>
 	<div id="wrap">
-		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
-		<section id="content">
-			<div id="nav">
-
-				<div id="sidemenu">
-					<ul>
-
-						<li><a class="active" href="list.do">부서관리</a></li>
-						<br>
-						<li><a href="authority.do">권한관리</a></li>
-
-					</ul>
-
-				</div>
-
+		<jsp:include page="/WEB-INF/view/head.jsp" flush="false" />
+		<div id="content">
+			<div id="leftcontent">
+				<ul>
+					<li><a class="active" href="list.do">부서관리</a></li>
+					<li><a href="authority.do">권한관리</a></li>
+				</ul>
 			</div>
-			<div id="article">
-
-				<P>
+			<div id="rightcontent">
 				<h2>부서관리</h2>
-				</p>
-
-				<center>
-					<div>
-					<p><b>전체 부서&nbsp:&nbsp${list.count}</b></p>
-					<div style="position: relative;">
-						<form action="delete.do" method="get" name="removefrm"
-							onsubmit="return removeCheck()">
-
-							<table border="1" style="margin: auto" width="950">
-								<tr>
-									<th>순번</th>
-									<th>부서no.</th>
-									<th>부서명</th>
-									<th>부서 주소</th>
-									<th>Tel.</th>
-									<th>Fax.</th>
-									<th>상태</th>
-								</tr>
-								<c:forEach var="row" items="${list.boardList}">
-									<tr>
-										<td align="center" width="50"><c:out value="${number}" />
-											<c:set var="number" value="${number - 1}" /></td>
-										<td align="center" width="70">${row.dept_no}</td>
-										<td width="100"><a href="javascript:void(0);"
-											class="depts" value="${row.dept_name}">${row.dept_name}</a></td>
-										<td width="440">${row.dept_addr}</td>
-										<td align="center" width="125">${row.dept_phoneNum}</td>
-										<td align="center" width="125">${row.fax}</td>
-										<td align="center" width="40"><input type="checkbox"
-											id="delete_dept" name="delete_dept" value="${row.dept_no}"></td>
-
-									</tr>
-								</c:forEach>
-							</table>
-							<div style="position: relative; right: -430px; bottom: -5px;">
-								<button type="button" onclick="updateOpen();">수정</button>
-								<input type="submit" value="삭제">
-							</div>
-						</form>
-					</div>
-
-					<div>
-
-						<c:if test="${list.count > 0}">
-							<c:if test="${list.p.beginPageNumber > 5}">
-								<a href="list.do?p=${list.p.beginPageNumber-1}"><<</a>&nbsp
-		</c:if>
-							<c:forEach var="pno" begin="${list.p.beginPageNumber}"
-								end="${list.p.endPageNumber}">
-								<a href="list.do?p=${pno}">[${pno}]</a>
-							</c:forEach>
-							<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-			&nbsp<a href="list.do?p=${list.p.endPageNumber + 1}">>></a>
-							</c:if>
-
-						</c:if>
-
-					</div>
-				</div>	
-					<br>
-					<br>
-					<br>
-					<div style="magin: 0 0 100px 0;">
-						<p>
-							<b>신규부서 등록</b>
-						</p>
-					</div>
-					<div></div>
-
-					<div>
-						<form action="insert.do" method="get" name="deptinput"
-							onSubmit="return checkIt()">
-							<table width="780" frame="void">
-								<tr>
-									<td width="280"><label for="dept_no">부서번호&nbsp:&nbsp</label><input
-										type="text" value="" name="dept_no" id="dept_no"></td>
-									<td><label for="dept_name">부서명&nbsp:&nbsp</label><input
-										type="text" value="" name="dept_name" id="dept_name"></td>
-									<td width="213"><label for="dept_phoneNum">Tel.&nbsp&nbsp</label><input
-										type="text" value="" name="dept_phoneNum" id="dept_phoneNum"></td>
-								</tr>
-								<tr>
-									<td colspan="2"><label for="zipcode">우편번호&nbsp:&nbsp</label><input
-										type="text" value="" name="zipcode" id="zipcode" readonly>
-										<input type="button" value="우편번호"
-										onClick="sample4_execDaumPostcode()"></td>
-									<td width="213"><label for="fax">Fax.&nbsp&nbsp</label><input
-										type="text" style="width: 166px" value="" name="fax" id="fax"><br></td>
-								<tr>
-									<td colspan="3"><label for="dept_addr">부서주소&nbsp:&nbsp</label><input
-										type="text" value="" name="dept_addr" id="dept_addr"
-										style="width: 438px;"></td>
-								</tr>
-							</table>
-							<input type="submit" value="등록">
-						</form>
-
-					</div>
-					<br>
-
-					<div></div>
-
-					<div>
-						<br>
-						<p>
-							<b>사원 목록</b>
-						<p>
-						<table id="empList" frame="void" width="700">
+				<b>전체 부서&nbsp:&nbsp${list.count}</b>
+				<form id="deptformlist" action="delete.do" method="get"
+					name="removefrm" onsubmit="return removeCheck()">
+					<table>
+						<tr>
+							<th>순번</th>
+							<th>부서no.</th>
+							<th>부서명</th>
+							<th>부서 주소</th>
+							<th>Tel.</th>
+							<th>Fax.</th>
+							<th>상태</th>
+						</tr>
+						<c:forEach var="row" items="${list.boardList}">
 							<tr>
-								<th width="100" align="center">이름</th>
-								<th width="100" align="center">부서</th>
-								<th width="100" align="center">직급</th>
-								<th width="200" align="center">이메일</th>
-								<th width="200" align="center">Tel.</th>
+								<td><c:out value="${number}" /> <c:set var="number"
+										value="${number - 1}" /></td>
+								<td>${row.dept_no}</td>
+								<td><a href="javascript:void(0);" class="depts"
+									value="${row.dept_name}">${row.dept_name}</a></td>
+								<td>${row.dept_addr}</td>
+								<td>${row.dept_phoneNum}</td>
+								<td>${row.fax}</td>
+								<td><input type="checkbox" id="delete_dept"
+									name="delete_dept" value="${row.dept_no}"></td>
 							</tr>
-
-						</table>
-					</div>
-
-				</center>
+						</c:forEach>
+					</table>
+					<button type="button" onclick="updateOpen();">수정</button>
+					<input type="submit" value="삭제">
+				</form>
+				<div>
+					<c:if test="${list.count > 0}">
+						<c:if test="${list.p.beginPageNumber > 5}">
+							<a href="list.do?p=${list.p.beginPageNumber-1}"><<</a>&nbsp;
+		</c:if>
+						<c:forEach var="pno" begin="${list.p.beginPageNumber}"
+							end="${list.p.endPageNumber}">
+							<a href="list.do?p=${pno}">[${pno}]</a>
+						</c:forEach>
+						<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
+			&nbsp;<a href="list.do?p=${list.p.endPageNumber + 1}">>></a>
+						</c:if>
+					</c:if>
+				</div>
+				<div>신규부서 등록</div>
+				<form action="insert.do" method="get" name="deptinput"
+					onSubmit="return checkIt()">
+					<table>
+						<tr>
+							<td><label for="dept_no">부서번호&nbsp;:&nbsp;</label><input
+								type="text" value="" name="dept_no" id="dept_no"></td>
+							<td><label for="dept_name">부서명&nbsp;:&nbsp;</label><input
+								type="text" value="" name="dept_name" id="dept_name"></td>
+							<td><label for="dept_phoneNum">Tel.&nbsp;&nbsp;</label><input
+								type="text" value="" name="dept_phoneNum" id="dept_phoneNum"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><label for="zipcode">우편번호&nbsp;:&nbsp;</label><input
+								type="text" value="" name="zipcode" id="zipcode" readonly>
+								<input type="button" value="우편번호"
+								onClick="sample4_execDaumPostcode()"></td>
+							<td><label for="fax">Fax.&nbsp;&nbsp;</label><input
+								type="text" value="" name="fax" id="fax"><br></td>
+						<tr>
+							<td colspan="3"><label for="dept_addr">부서주소&nbsp;:&nbsp;</label><input
+								type="text" value="" name="dept_addr" id="dept_addr"></td>
+						</tr>
+					</table>
+					<input type="submit" value="등록">
+				</form>
+				사원 목록
+				<table id="empList">
+					<tr>
+						<th width="100" align="center">이름</th>
+						<th width="100" align="center">부서</th>
+						<th width="100" align="center">직급</th>
+						<th width="200" align="center">이메일</th>
+						<th width="200" align="center">Tel.</th>
+					</tr>
+				</table>
 			</div>
-		</section>
-		<jsp:include page="/WEB-INF/view/foot.jsp"  flush="false"/>
+		</div>
+		<jsp:include page="/WEB-INF/view/foot.jsp" flush="false" />
 	</div>
 
 </body>
