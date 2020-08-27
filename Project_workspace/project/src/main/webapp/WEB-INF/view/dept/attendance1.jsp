@@ -6,6 +6,8 @@
 <html>
 <head>
 <title>Insert title here</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 
@@ -34,7 +36,25 @@ $(function(){
 
 </head>
 <body>
-<h2>근태 현황</h2><br>
+	<div id="wrap">
+		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
+		<section id="content">
+			<div id="nav">
+
+				<div id="sidemenu">
+					<ul>
+
+						<li><a class="active" href="attendance.do">근태 현황</a></li>
+						<br>
+						
+					</ul>
+
+				</div>
+
+			</div>
+			<div id="article">
+
+				<h2>근태 현황</h2><br>
 <div>
 		
 <form action="attenList.do" method="get">
@@ -121,6 +141,12 @@ $(function(){
 	</c:if>
 </c:if>
 </div>
+
+			</div>
+		</section>
+		<jsp:include page="/WEB-INF/view/foot.jsp"  flush="false"/>
+	</div>
+	
 
 </body>
 

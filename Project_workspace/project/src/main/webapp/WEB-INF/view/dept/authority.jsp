@@ -6,9 +6,7 @@
 <head>
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/component.css'/>" />
-
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script>
@@ -225,35 +223,8 @@
 
 </head>
 <body>
-
 	<div id="wrap">
-		<section id="header">
-			<div id=headerwrap>
-				<div class="logo">
-					<a href="test.do"> <img src="resources/img/logo.png" alt="">
-					</a>
-				</div>
-				<div class="gnb">
-					<div class="gnb_list">
-						<ul>
-							<li><a href="#">사원정보</a></li>
-							<li><a href="#">게시판</a></li>
-							<li><a href="meeting_room.do">회의실</a></li>
-							<li><a href="#">프로젝트</a></li>
-							<li><a href="chat_list.do">채팅</a></li>
-							<li><a href="calendar.do">일정(캘린더)</a></li>
-							<li><a href="#">전자결재</a></li>
-							<c:if test="${mc_authority >= 3 }">
-								<li><a href="list.do">관리자</a></li>
-								<li><a href="#">근태관리</a></li>
-							</c:if>
-						</ul>
-
-					</div>
-				</div>
-
-			</div>
-		</section>
+		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
 		<section id="content">
 			<div id="nav">
 
@@ -335,29 +306,9 @@
 				</center>
 
 
-
-
-
 			</div>
 		</section>
-		<section id="foot">
-			<div class="fnbwrap">
-
-				<ul>
-					<li>회사소개</li>
-					<li>이용약관</li>
-					<li>개인정보처리방침</li>
-					<li>스팸정책</li>
-					<li>제휴문의</li>
-				</ul>
-				<p>
-					서울특별시 서초구 서초대로77길 54 서초 W타워 13,14층 | (주)이젠아카데미 | 대표자 : 고태곤<br>
-					사업자등록번호 : 153-88-00321 | 통신판매업신고번호 : 2016-서울서초-1204 호<br>
-					Copyright Ezen IT MaraChoco TECHONOLOGY INC. All rights reserved.<br>
-				</p>
-
-			</div>
-		</section>
+		<jsp:include page="/WEB-INF/view/foot.jsp"  flush="false"/>
 	</div>
 
 </body>
