@@ -5,26 +5,23 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
-
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 </head>
 <body>
 	<div id="wrap">
 		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
 		<section id="content">
-			<div id="nav">
-			
-				<div id="sidemenu">
+			<div id="leftcontent">		
 					<ul>
 						<li><a href="list.do">부서관리</a></li>
 						<br>
 						<li><a class="active" href="authority.do">권한관리</a></li>
 						<br>					
-					</ul>
-				</div>
-				
+					</ul>			
 			</div>
 			
-			<div id="article">
+			<div id="rightcontent">
+			
 			
 			</div>
 			

@@ -9,9 +9,10 @@
 <title></title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/depinfo.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/deptcs.css'/>" />
+
 </head>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 	$(function() {
@@ -76,10 +77,10 @@
 			</div>
 			<div id="rightcontent">
 				<h2>부서관리</h2>
-				<b>전체 부서&nbsp:&nbsp${list.count}</b>
+				<b>전체 부서&nbsp;:&nbsp;${list.count}</b>
 				<form id="deptformlist" action="delete.do" method="get"
 					name="removefrm" onsubmit="return removeCheck()">
-					<table>
+					<table id="empSty">
 						<tr>
 							<th>순번</th>
 							<th>부서no.</th>
@@ -104,10 +105,12 @@
 							</tr>
 						</c:forEach>
 					</table>
-					<button type="button" onclick="updateOpen();">수정</button>
-					<input type="submit" value="삭제">
+					<div class="relbut">
+					<button class="myButt" type="button" onclick="updateOpen();">수정</button>
+					<input class="myButt" type="submit" value="삭제">
+					</div>
 				</form>
-				<div>
+				<div id = "paging">
 					<c:if test="${list.count > 0}">
 						<c:if test="${list.p.beginPageNumber > 5}">
 							<a href="list.do?p=${list.p.beginPageNumber-1}"><<</a>&nbsp;
@@ -117,14 +120,14 @@
 							<a href="list.do?p=${pno}">[${pno}]</a>
 						</c:forEach>
 						<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-			&nbsp;<a href="list.do?p=${list.p.endPageNumber + 1}">>></a>
+						&nbsp;<a href="list.do?p=${list.p.endPageNumber + 1}">>></a>
 						</c:if>
 					</c:if>
 				</div>
-				<div>신규부서 등록</div>
+				<div id = "register"><p>신규부서 등록<p>
 				<form action="insert.do" method="get" name="deptinput"
 					onSubmit="return checkIt()">
-					<table>
+					<table id="resi">
 						<tr>
 							<td><label for="dept_no">부서번호&nbsp;:&nbsp;</label><input
 								type="text" value="" name="dept_no" id="dept_no"></td>
@@ -147,14 +150,15 @@
 					</table>
 					<input type="submit" value="등록">
 				</form>
+				</div>
 				사원 목록
 				<table id="empList">
 					<tr>
-						<th width="100" align="center">이름</th>
-						<th width="100" align="center">부서</th>
-						<th width="100" align="center">직급</th>
-						<th width="200" align="center">이메일</th>
-						<th width="200" align="center">Tel.</th>
+						<th>이름</th>
+						<th>부서</th>
+						<th>직급</th>
+						<th>이메일</th>
+						<th>Tel.</th>
 					</tr>
 				</table>
 			</div>

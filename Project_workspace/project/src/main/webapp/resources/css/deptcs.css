@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.myButt {
+	background:linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
+	background-color:#8c9ebd;
+	border-radius:3px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 10px;
+	text-decoration:none;
+	margin: 14px 0px 0px 0px;
+}
+
+.relbut{
+	float:right;
+}
+
+table {text-align: center; font-family: 'Noto Sans KR', sans-serif; border-collapse: collapse; width: 100%; text-decoration:none}
+th, td {padding: 7px; width: 100px;}
+tr:nth-child(even){background-color: #f2f2f2}
+th { background-color: #767676; color: white;}
+th:first-child { background-color: #767676; color: white; border-radius: 3px 0px 0px 0px }
+th:last-child { background-color: #7}
+
+#empSty td:nth-child(4){ width:600px;}
+#paging{margin-top:12px;}
+#register{margin-top:50px; margin-bottom:50px;}
+#register p{font-weight:bold; text-align:center;}
+
+#resi tr{background: none;}
+
+
+
+	
+

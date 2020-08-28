@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 
@@ -39,60 +40,55 @@ $(function(){
 	<div id="wrap">
 		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
 		<section id="content">
-			<div id="nav">
-
-				<div id="sidemenu">
+			<div id="leftcontent">
 					<ul>
-
-						<li><a class="active" href="attendance.do">근태 현황</a></li>
-						<br>
 						
+						<li><a class="active" href="attendance.do">근태 현황</a></li>
+											
 					</ul>
 
-				</div>
-
 			</div>
-			<div id="article">
+			<div id="rightcontent">
 
 				<h2>근태 현황</h2><br>
 <div>
 		
 <form action="attenList.do" method="get">
-<label for="start_time"><b>조회일자</b></label>&nbsp&nbsp
-<input type="date" size="40" maxlength="50"  name="start_time" id="start_time" value="<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>">
+<label for="start_time"><b>조회일자</b></label>&nbsp;&nbsp;
+<input type="date" name="start_time" id="start_time" value="<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>">
 
 <input type="submit" value = "조회">
 
-</form><br>
+</form>
 </div>
 <div>
 <form action="deptAttr.do">
 <input type="hidden" name="start_time" value="<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>">
-<table id = "empList" frame="void" width="820">
+<table id = "empList">
 	<tr>
-		<th width="30"align="center">&nbsp&nbsp</th> 
-		<th width="140" align="left"><select  style="width:80px"  id = "dept_no" name="dept_no" style="text-align-last:center">
+		<th>&nbsp;&nbsp;</th> 
+		<th><select id = "dept_no" name="dept_no">
 		<option value="${dept_no}"><c:if test="${dept_no == null}"> 부 서</c:if>
 		<c:if test="${dept_no != null}">${dept_name}</c:if>
-		</option></select><input type="submit" value="검색" style="HEIGHT: 15.5pt"/></th>
-		<th width="100"align="center">직 급</th>
-		<th width="100"align="center">이 름</th>
-		<th width="150"align="center">일 자</th>
-		<th width="100"align="center">출근 시간</th>
-		<th width="100"align="center">퇴근 시간</th>
-		<th width="100"align="center">구 분</th>
+		</option></select><input type="submit" value="검색"/></th>
+		<th>직 급</th>
+		<th>이 름</th>
+		<th>일 자</th>
+		<th>출근 시간</th>
+		<th>퇴근 시간</th>
+		<th>구 분</th>
 	</tr>
 	
 	<c:forEach var="row" items="${list.boardList}">
 	<tr>
-		<td align="center"><input type="radio" id = "attendance_no" name="attendance_no" value="${row.attendance_no}"/></td>
-		<td align="center">${row.dept_name}</td>
-		<td align="center">${row.position}</td>		
-		<td align="center">${row.name}</td>
-		<td align="center"><fmt:formatDate value="${row.start_time}" pattern="yyyy-MM-dd"/></td>
-		<td align="center"><fmt:formatDate value="${row.start_time}" pattern="HH:mm"/></td>
-		<td align="center"><fmt:formatDate value="${row.end_time}" pattern="HH:mm"/></td>
-		<td align="center"><c:choose>
+		<td><input type="radio" id = "attendance_no" name="attendance_no" value="${row.attendance_no}"/></td>
+		<td>${row.dept_name}</td>
+		<td>${row.position}</td>		
+		<td>${row.name}</td>
+		<td><fmt:formatDate value="${row.start_time}" pattern="yyyy-MM-dd"/></td>
+		<td><fmt:formatDate value="${row.start_time}" pattern="HH:mm"/></td>
+		<td><fmt:formatDate value="${row.end_time}" pattern="HH:mm"/></td>
+		<td><c:choose>
 
 							<c:when test="${row.state eq 0}"> 정 상</c:when>
 							<c:when test="${row.state eq 0.5}"> 반 차 </c:when>
@@ -102,32 +98,31 @@ $(function(){
 							<c:otherwise> 휴 가</c:otherwise> </c:choose> </td> </tr>	
 	</c:forEach>	
 </table><br>
-<div style="position: relative; right:-748px; top:-11px">
+<div>
 <button type="button" onclick="updateAttr()">수 정</button>
 </div>
 </form>
 </div>
 
-<div style="position: relative; top:-38px; width: 650px;">
+<div>
 <c:if test="${list.count > 0}">
 	<c:if test="${dept_no == null}">
  	<c:if test="${list.p.beginPageNumber > 5}">
-			<a href="attenList.do?p=${list.p.beginPageNumber-1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>"><<</a>&nbsp
+			<a href="attenList.do?p=${list.p.beginPageNumber-1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>"><<</a>&nbsp;
 	</c:if>
-	
 		<c:forEach var="pno" begin="${list.p.beginPageNumber}" end="${list.p.endPageNumber}">
 		<a href="attenList.do?p=${pno}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>">[${pno}]</a>
 		</c:forEach>
 		
 		<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-			&nbsp<a href="attenList.do?p=${list.p.endPageNumber + 1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>">>></a>
+			&nbsp;<a href="attenList.do?p=${list.p.endPageNumber + 1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>">>></a>
 	</c:if>
 	</c:if>
 	
 	<c:if test="${dept_no != null}">
 	
 	<c:if test="${list.p.beginPageNumber > 5}">
-			<a href="deptAttr.do?p=${list.p.beginPageNumber-1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>&dept_no=${dept_no}"><<</a>&nbsp
+			<a href="deptAttr.do?p=${list.p.beginPageNumber-1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>&dept_no=${dept_no}"><<</a>&nbsp;
 	</c:if>
 	
 		<c:forEach var="pno" begin="${list.p.beginPageNumber}" end="${list.p.endPageNumber}">
@@ -135,14 +130,13 @@ $(function(){
 		</c:forEach>
 		
 		<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-			&nbsp<a href="deptAttr.do?p=${list.p.endPageNumber + 1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>&dept_no=${dept_no}">>></a>
+			&nbsp;<a href="deptAttr.do?p=${list.p.endPageNumber + 1}&start_time=<fmt:formatDate value="${start_time}" pattern="yyyy-MM-dd"/>&dept_no=${dept_no}">>></a>
 	</c:if>
 	
 	</c:if>
 </c:if>
 </div>
-
-			</div>
+		</div>
 		</section>
 		<jsp:include page="/WEB-INF/view/foot.jsp"  flush="false"/>
 	</div>
@@ -164,11 +158,9 @@ function updateAttr(){
 	return false
 		}
 		
-	window.open('updateAttr.do?attendance_no='+update_attr,'update_Attr','width=330,height=200,location=no,status=no,scrollbars=yes');
+	window.open('updateAttr.do?attendance_no='+update_attr,'update_Attr','width=350,height=230,location=no,status=no,scrollbars=yes');
 	
 }
-
-
 
 </script>
 

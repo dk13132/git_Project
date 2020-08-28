@@ -7,9 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title> 전자결재 </title>
-  <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/depinfo.css'/>" />
 
 </head>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script>
@@ -226,65 +227,54 @@
 	<div id="wrap">
 		<jsp:include page ="/WEB-INF/view/head.jsp" flush="false"/>
 		<section id="content">
-			<div id="nav">
-
-				<div id="sidemenu">
+			<div id="leftcontent">
 					<ul>
 
 						<li><a href="list.do">부서관리</a></li>
-						<br>
+						
 						<li><a class="active" href="authority.do">권한관리</a></li>
 
 					</ul>
 
-				</div>
-
 			</div>
-			<div id="article">
-
-				<P>
+			<div id="rightcontent">
+				
 				<h2>권한 관리</h2>
-				</p>
-				<center>
-					<p>
+					
 					<h3>조 회</h3>
-					</p>
-					<table width="780" frame="void">
+					
+					<table>
 						<tr>
-							<td width="200"><label for="dept_name"><b>부서명&nbsp:&nbsp</b></label>
+							<td><label for="dept_name"><b>부서명&nbsp;:&nbsp;</b></label>
 								<select id="dept_name" name="dept_name" onchange="selectDept()">
 									<option value="">::부서선택::</option>
 							</select></td>
 
 
-							<td width="180"><label for="position"><b>직급&nbsp:&nbsp</b>
+							<td><label for="position"><b>직급&nbsp;:&nbsp;</b>
 							</label> <select id="position" name="position" onchange="selectName()">
 									<option value="">::직급선택::</option>
 							</select></td>
 
-							<td width="200"><label for="name"><b>사원선택&nbsp:&nbsp
+							<td><label for="name"><b>사원선택&nbsp;:&nbsp;
 								</b></label> <select id="name" name="name" onchange="selectNumber()">
 									<option value="">::사원선택::</option>
 							</select></td>
 
-							<td width="200"><label for="employee_no"><b>사번선택&nbsp:&nbsp
+							<td><label for="employee_no"><b>사번선택&nbsp;:&nbsp;
 								</b></label> <select id="employee_no" name="employee_no">
 									<option value="0">::사번선택::</option>
 							</select></td>
 						</tr>
 					</table>
-					<br>
+					
 
-					<button style="width: 50px;" onclick="pushList()">조회</button>
-
-					<br>
-					<br>
-					<br>
-					<p>
+					<button onclick="pushList()">조회</button>
+					
 					<h3>사원정보</h3>
-					</p>
+					
 
-					<table id="empList" frame="void" width="700">
+					<table id="empList">
 						<thead>
 							<tr>
 								<th width="200" align="center">부 서</th>
@@ -297,14 +287,10 @@
 
 						</tbody>
 					</table>
-					<br>
-					<br>
+					
 					<!-- <button type ="button" style="width:70px;" id="update" name="update" onclick="update();">수정</button> -->
-					<button type="button" style="width: 70px;" id="test" name="test"
+					<button type="button" id="test" name="test"
 						onclick="test();">수 정</button>
-
-				</center>
-
 
 			</div>
 		</section>
