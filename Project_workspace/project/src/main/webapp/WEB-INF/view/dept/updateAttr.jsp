@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/deptcs.css'/>" />
 </head>
 <body>
 
@@ -39,8 +39,8 @@
 						
 </select><br>
 
-<input type ="submit" value="수 정" onclick="window.close()">
-<button type="button" onclick="window.close()" >취 소</button>
+<input class="myButt" type ="submit" value="수 정" onclick="window.close()">
+<button class="myButt" type="button" onclick="window.close()" >취 소</button>
 </form>
 </div>
 

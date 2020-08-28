@@ -110,7 +110,7 @@
 					<input class="myButt" type="submit" value="삭제">
 					</div>
 				</form>
-				<div id = "paging">
+				<div class = "paging">
 					<c:if test="${list.count > 0}">
 						<c:if test="${list.p.beginPageNumber > 5}">
 							<a href="list.do?p=${list.p.beginPageNumber-1}"><<</a>&nbsp;
@@ -124,7 +124,7 @@
 						</c:if>
 					</c:if>
 				</div>
-				<div id = "register"><p>신규부서 등록<p>
+				<div class = "register"><p>신규부서 등록<p>
 				<form action="insert.do" method="get" name="deptinput"
 					onSubmit="return checkIt()">
 					<table id="resi">
@@ -148,10 +148,13 @@
 								type="text" value="" name="dept_addr" id="dept_addr"></td>
 						</tr>
 					</table>
-					<input type="submit" value="등록">
+					<div class="btncenter">
+					<input class="myButt" type="submit" value="등록">
+					</div>
 				</form>
 				</div>
-				사원 목록
+				<div id="empSty1">
+				<p>사원 목록</p>
 				<table id="empList">
 					<tr>
 						<th>이름</th>
@@ -161,6 +164,7 @@
 						<th>Tel.</th>
 					</tr>
 				</table>
+				</div>
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/view/foot.jsp" flush="false" />

@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/deptcs.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script>
@@ -53,7 +53,8 @@ $(function(){
 
 				<h2>근태 현황</h2>
 
-				<div>
+				<div class="bttbl1">
+				
 				<form action="attenList.do" method="get" onsubmit="return checkVal();">
 				<label for="start_time"><b>조회일자</b></label>&nbsp;&nbsp;
 				<input type="date" name="start_time" id="start_time">
@@ -63,10 +64,10 @@ $(function(){
 				
 				<!-- <input type="date" size="40" maxlength="50" name="end_time" id="end_time"> -->
 				
-				<input type="submit" value = "조회">
+				<input class="myButt" type="submit" value = "조회">
 				
 				</form>
-				   
+				 
 				<table id = "empList">
 				<tr><th></th><th>
 				<select id = "dept_name" name="dept_name"><option value="">부서</option></select>

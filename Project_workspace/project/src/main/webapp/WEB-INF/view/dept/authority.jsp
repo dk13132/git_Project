@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/deptcs.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script>
@@ -241,7 +241,7 @@
 				
 				<h2>권한 관리</h2>
 					
-					<h3>조 회</h3>
+					<h4>조 회</h4>
 					
 					<table>
 						<tr>
@@ -268,10 +268,11 @@
 						</tr>
 					</table>
 					
-
-					<button onclick="pushList()">조회</button>
-					
-					<h3>사원정보</h3>
+					<div class="btncenter">
+					<button class="myButt" onclick="pushList()">조회</button>
+					</div>
+					<div id="bttbl">
+					<h4>사원정보</h4>
 					
 
 					<table id="empList">
@@ -287,11 +288,12 @@
 
 						</tbody>
 					</table>
-					
+					<div class="btncenter">
 					<!-- <button type ="button" style="width:70px;" id="update" name="update" onclick="update();">수정</button> -->
-					<button type="button" id="test" name="test"
+					<button class="myButt" type="button" id="test" name="test"
 						onclick="test();">수 정</button>
-
+					</div>
+					</div>
 			</div>
 		</section>
 		<jsp:include page="/WEB-INF/view/foot.jsp"  flush="false"/>
