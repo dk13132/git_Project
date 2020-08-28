@@ -1,0 +1,23 @@
+	.nemberbtncss{margin-top: 10px;}
+	.nemberbtncss a {float:left;	padding:4px;	margin-right:3px;	width:22px;	color:#000;	font:bold 12px tahoma;
+	border:1px solid #d3d3d3; 	text-align:center;	text-decoration:none; margin-top: 3px;}
+   .myButton {float:right;
+	background-color:#d11414; 	border: 0px solid;	border-radius:3px;	display:inline-block;	cursor:pointer;
+	color:#ffffff; 	/* font-size:15px; */ 	padding:5px 10px; 	text-decoration:none;	margin: 14px 0px 0px 0px;
+	font-weight: bold;
+	}
+	.myButton:hover {background:linear-gradient(to bottom, #bd1515 5%, #d11414 100%);background-color:#bd1515;}
+	.myButton:active {position:relative;top:1px;} 
+	.clear{clear: both;}
+	
+	
+/* 	#appwarp {width: 720px;margin: 0 auto; margin-top: 30px;}
+table{	border-collapse: collapse;}
+tr, td {border: solid 1px #7A7A7A; text-align: center; }
+input, button {border: solid 1px #7A7A7A;}
+h2 {text-align: center;	margin-bottom: 60px;}
+#domtinfortable {width: 98%;}
+#apptable{margin: auto;margin-right: 0px; padding: 10px;font-size: 12px;}
+h4 {margin:10px 0px 5px 0px;}
+.subject{width: 98%; font-size: 16px; padding: 3px;}
+.naversm{width: 98%;} */
