@@ -11,39 +11,59 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<mvc:annotation-driven />
-	<mvc:resources mapping="/resources/**" location="/resources/"/>
-	
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
+
 	<context:annotation-config />
 	<context:component-scan base-package="mc.*" />
-	
-	<bean id="deptDao" class="mc.admin.service.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
-	
-	<bean id="domtDao" class="mc.domt.service.DomtDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
-	
+
+	<bean id="deptDao" class="mc.admin.service.DeptDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+
+	<bean id="domtDao" class="mc.domt.service.DomtDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+
+	<bean id="projectDao" class="mc.project.service.ProjectDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+
+	<bean id="boardDao" class="mc.board.service.BoardDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+		
+	<bean id="deptBoardDao" class="mc.board.service.DeptBoardDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+		
+	<bean id="employeeDao" class="mc.employee.Service.EmployeeDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+		
+	<bean id="myInfoDao" class="mc.myInfo.Service.MyInfoDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
+
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				
+
 				<prop key="org.springframework.validation.BindException">
 					error/400exception
 				</prop>
-				
-				 
-				<prop key="org.springframework.dao.DataIntegrityViolationException">
+
+
+				<prop
+					key="org.springframework.dao.DataIntegrityViolationException">
 					error/500exception
 				</prop>
-				
-		
+
+
 			</props>
 		</property>
 	</bean>
-	
-	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-      <property name="maxUploadSize" value="-1" />
-      <property name="maxInMemorySize" value="100000000" />
-   </bean>
+
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1" />
+		<property name="maxInMemorySize" value="100000000" />
+	</bean>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
