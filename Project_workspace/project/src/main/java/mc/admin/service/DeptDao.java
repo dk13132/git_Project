@@ -17,7 +17,7 @@ import java.util.Map;
 public class DeptDao extends SqlSessionDaoSupport{
 	
 	public int count() {
-		return getSqlSession().selectOne("board.count");
+		return getSqlSession().selectOne("admin.count");
 		
 	}
 	
@@ -25,58 +25,58 @@ public class DeptDao extends SqlSessionDaoSupport{
 		Map<String, Integer> m = new HashMap<String, Integer>();
 		m.put("start",start);
 		m.put("per",per);
-		return getSqlSession().selectList("board.list",m);
+		return getSqlSession().selectList("admin.list",m);
 	}
 	
 	public int deleteUser(int dept_no) {
-		return getSqlSession().delete("board.delete", dept_no);
+		return getSqlSession().delete("admin.delete", dept_no);
 	}
 	
 	public void insertDept(DeptDto d) {
-		getSqlSession().insert("board.insert", d);
+		getSqlSession().insert("admin.insert", d);
 	}
 	
 	public List<Map<String,Object>> getDept(String d) {
-		return getSqlSession().selectList("board.dept_info",d);
+		return getSqlSession().selectList("admin.dept_info",d);
 	}
 	
 	public DeptDto updateUser(int dept_no) {
-		return getSqlSession().selectOne("board.dept_user", dept_no);
+		return getSqlSession().selectOne("admin.dept_user", dept_no);
 
 	}
 	
 	public void update(DeptDto d) {
-		getSqlSession().update("board.update", d);
+		getSqlSession().update("admin.update", d);
 
 	}
 	public List<DeptDto> selectDepts(){
-		return getSqlSession().selectList("board.depts");
+		return getSqlSession().selectList("admin.depts");
 	}
 	
 	public List<Map<String,Object>> selectpositions(int dept_no) {
-		return getSqlSession().selectList("board.positions",dept_no);
+		return getSqlSession().selectList("admin.positions",dept_no);
 	}
 	
 	public List<Map<String,Object>> selectNames(DeptInfo e) {
-		return getSqlSession().selectList("board.names", e);
+		return getSqlSession().selectList("admin.names", e);
 	}
 	
 	public List<Map<String,Object>> selectNo(DeptInfo e) {
-		return getSqlSession().selectList("board.no",e);
+		return getSqlSession().selectList("admin.no",e);
 	}
 	
 	public List<Map<String,Object>> selectPush(DeptInfo info) {
-		return getSqlSession().selectList("board.push",info);
+		return getSqlSession().selectList("admin.push",info);
 	}
 	
 	public int update_auto(emName e) {
 		
-		return getSqlSession().update("board.update_auto", e);
+		return getSqlSession().update("admin.update_auto", e);
 
 	}
 	
 	public int count1(Date start_time) {
-		return getSqlSession().selectOne("board.count1", start_time);
+		return getSqlSession().selectOne("admin.count1", start_time);
 		
 	}
 	
@@ -87,24 +87,24 @@ public class DeptDao extends SqlSessionDaoSupport{
 		m.put("per",per);
 		m.put("start_time",start_time);
 		
-		return getSqlSession().selectList("board.list1",m);
+		return getSqlSession().selectList("admin.list1",m);
 	}
 	
 	
 	public void updateAttr(AttenDto d) {
 		
-		getSqlSession().update("board.update_attr", d);
+		getSqlSession().update("admin.update_attr", d);
 
 	}
 	
 	public AttenDto attrForm(int attendance_no) {
 		
-		return getSqlSession().selectOne("board.attr_form", attendance_no);
+		return getSqlSession().selectOne("admin.attr_form", attendance_no);
 
 	}
 	
 	public int count2(AttenDto a) {
-		return getSqlSession().selectOne("board.count2", a);
+		return getSqlSession().selectOne("admin.count2", a);
 		
 	}
 	
@@ -116,12 +116,12 @@ public class DeptDao extends SqlSessionDaoSupport{
 		m.put("start_time",a.getStart_time());
 		m.put("dept_no",a.getDept_no());
 		
-		return getSqlSession().selectList("board.list2",m);
+		return getSqlSession().selectList("admin.list2",m);
 	}
 	
 	public double getAnnual(AttenDto d) {
 		
-		return getSqlSession().selectOne("board.annual",d);
+		return getSqlSession().selectOne("admin.annual",d);
 		
 	}
 	

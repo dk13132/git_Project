@@ -52,7 +52,7 @@ $(function(){
         		<br>                    
                 <h1 align="left">환영합니다. ${mc_name}님</h1>
                 <br>
-				<button type="button">내정보</button>&nbsp;&nbsp;
+				<button type="button" onclick="location.href='conPw.do'">내정보</button>&nbsp;&nbsp;
 				<button type="button" onclick="javascript:location.href='logout.do'">로그아웃</button>	
 			</div>
 			

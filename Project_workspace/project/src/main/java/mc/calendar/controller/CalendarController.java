@@ -124,7 +124,7 @@ public class CalendarController {
 		this.service = service;
 	}
 	
-	@RequestMapping(value="/fileDown.do")
+	@RequestMapping(value="/cfileDown.do")
 	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
 		Map<String, Object> resultMap = service.selectFileInfo(map);
 		String storedFileName = (String) resultMap.get("stored_file_name");

@@ -33,6 +33,7 @@
 </head>
 <body onload="pageLoad()">
 	<form id="conf" onsubmit="return confirm()">
+		<input type="hidden" name="employee_no" value="${mc_employee_no}">
 		<input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요." /> 
 		<input type="submit" name="submit" id="submit" value="보내기">
 		<input type="hidden" name="rsint" id="rsint" value="${rsint}">

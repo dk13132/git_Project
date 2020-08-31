@@ -2,6 +2,8 @@ package mc.myInfo.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,22 +22,22 @@ public class MyInfoController {
 	@Autowired
 	private MyInfoService myInfoService;
 
-	// 메인 > 내 정보 확인
+	// 硫붿씤 > �궡 �젙蹂� �솗�씤
 	@GetMapping("/conPw.do")
 	public String goConPw(MyInfoDto dto) throws Exception {
 		return "conPw";
 	}
 
-	// 내 정보 확인 > 내 정보 조회
+	// �궡 �젙蹂� �솗�씤 > �궡 �젙蹂� 議고쉶
 	@PostMapping("/conPw.do")
 	public String confirm(Model model, @ModelAttribute MyInfoDto dto) throws Exception {
-
-		dto.setEmployee_no(20100001); // dto에 정보 임의로 담음
 		/*
-		 * 로그인 코드 받으면 사용할 것.
+		 * 濡쒓렇�씤 肄붾뱶 諛쏆쑝硫� �궗�슜�븷 寃�. 
 		 * dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("employee_no")));
 		 */
-		MyInfoDto vDto = myInfoService.confirmPw(dto);
+		
+		System.out.println(dto.getEmployee_no()+ " " + dto.getPassword());
+		MyInfoDto vDto = myInfoService.confirmPw(dto); 
 
 		model.addAttribute("myInfo", vDto);
 
@@ -43,16 +45,16 @@ public class MyInfoController {
 		if (vDto == null) {
 			rsint = 1;
 			model.addAttribute("rsint", rsint);
-			return "conPw"; // 비밀번호 다를 경우 같은 페이지.
+			return "conPw"; // 鍮꾨�踰덊샇 �떎瑜� 寃쎌슦 媛숈� �럹�씠吏�.
 		} else {
-			return "myPage"; // 비밀번호 같을 경우 정보 조회 페이지 이동
+			return "myPage"; // 鍮꾨�踰덊샇 媛숈쓣 寃쎌슦 �젙蹂� 議고쉶 �럹�씠吏� �씠�룞
 		}
 	}
 
-	// 비밀번호 재조회
+	// 鍮꾨�踰덊샇 �옱議고쉶
 	@PostMapping("/reSltPw.do")
 	public String reSltPw(Model model, @ModelAttribute MyInfoDto dto) throws Exception {
-		dto.setEmployee_no(20100001); // dto에 정보 임의로 담음
+		dto.setEmployee_no(20100001); // dto�뿉 �젙蹂� �엫�쓽濡� �떞�쓬
 
 		MyInfoDto vDto = myInfoService.sltInfo(dto);
 		model.addAttribute("myInfo", vDto);
@@ -60,7 +62,7 @@ public class MyInfoController {
 		return "udtPw";
 	}
 
-	// 비밀번호 변경
+	// 鍮꾨�踰덊샇 蹂�寃�
 	@ResponseBody
 	@PostMapping("/udtPw.do")
 	public Map<String, Object> udtPw(@ModelAttribute MyInfoDto dto) throws Exception {
@@ -70,11 +72,11 @@ public class MyInfoController {
 
 	}
 
-	// 내 정보 수정
+	// �궡 �젙蹂� �닔�젙
 	@PostMapping("/myPage.do")
 	public String updInfo(Model model, MultipartHttpServletRequest request, @ModelAttribute MyInfoDto dto)
 			throws Exception {
-		dto.setEmployee_no(20100001); // dto에 정보 임의로 담음
+		dto.setEmployee_no(20100001); // dto�뿉 �젙蹂� �엫�쓽濡� �떞�쓬
 
 		myInfoService.udtInfo(dto, request);
 		MyInfoDto vDto = myInfoService.sltInfo(dto);

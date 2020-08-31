@@ -28,7 +28,7 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 
-	@RequestMapping(value = "/list.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/blist.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "per", defaultValue = "10") int per,
 			@RequestParam(value = "type", defaultValue = "1") int type, Model m,
@@ -51,7 +51,6 @@ public class BoardController {
 
 	@RequestMapping(value = "/content.do", method = RequestMethod.GET)
 	public String content(@RequestParam(value = "p") int pageNum, int board_no, BoardDto dto, Model m, HttpSession session) throws Exception{
-		session.setAttribute("employee_no", 2);
 		
 		List<Map<String, Object>> fileList = service.selectFileList(dto.getBoard_no());
 		m.addAttribute("file", fileList);
@@ -64,23 +63,17 @@ public class BoardController {
 
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public String writeForm(@ModelAttribute("dto") BoardDto dto, HttpSession session) {
-		session.setAttribute("employee_no", 2);
 		return "board/boardWrite";
 	}
 
 	@RequestMapping(value = "/write2.do", method = RequestMethod.POST)
 	public String write(BoardDto dto, MultipartHttpServletRequest mpRequest) throws Exception  {
-		System.out.println(dto.getSubject());
-		System.out.println(dto.getReg_date());
-		System.out.println(dto.getContents());
-		System.out.println(dto.getType());
 		service.insert(dto, mpRequest);
-		return "redirect:/list.do";
+		return "redirect:/blist.do";
 	}
 
 	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
 	public String updateForm(int board_no, int p, Model m, BoardDto dto, HttpSession session) throws Exception{
-		session.setAttribute("employee_no", 2);
 		
 		List<Map<String, Object>> fileList = service.selectFileList(dto.getBoard_no());
 		m.addAttribute("file", fileList);
@@ -97,17 +90,17 @@ public class BoardController {
 			 @RequestParam(value="fileNameDel[]") String[] fileNames,
 			 MultipartHttpServletRequest mpRequest) throws Exception  {
 		service.update(dto, files, fileNames, mpRequest);
-		return "redirect:/list.do";
+		return ":/blist.do";
 	}
 
-	@RequestMapping(value = "/delete.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/bdelete.do", method = RequestMethod.GET)
 	public String delete(int board_no, int p, Model m) throws Exception{
 		m.addAttribute("board_no", board_no);
 		m.addAttribute("pageNum", p);
 		service.delete(board_no);
 	
 			 
-		return "redirect:/list.do";
+		return "redirect:/blist.do";
 	}
 	
 	@ResponseBody
@@ -119,14 +112,14 @@ public class BoardController {
 	
 	
 	
-	//파일 다운
+	//�뙆�씪 �떎�슫
 		@RequestMapping(value="BoardFileDown.do")
 		public void BoardFileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
 			Map<String, Object> resultMap = service.selectFileInfo(map);
 			String storedFileName = (String) resultMap.get("stored_file_name");
 			String originalFileName = (String) resultMap.get("file_name");
 			
-			// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+			// �뙆�씪�쓣 ���옣�뻽�뜕 �쐞移섏뿉�꽌 泥⑤��뙆�씪�쓣 �씫�뼱 byte[]�삎�떇�쑝濡� 蹂��솚�븳�떎.
 			byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("D:\\board\\"+storedFileName));
 			
 			response.setContentType("application/octet-stream");
@@ -137,9 +130,6 @@ public class BoardController {
 			response.getOutputStream().close();
 			
 		}
-		
-	
-	
 
 	public void setService(BoardService service) {
 		this.service = service;

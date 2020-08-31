@@ -3,8 +3,8 @@
 
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <head>
 <title>공지사항 게시판</title>
 <style type='text/css'>
@@ -78,8 +78,8 @@ body, td, a, div, p, pre, input, textarea {
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -89,7 +89,7 @@ body, td, a, div, p, pre, input, textarea {
 				<br>
 				<form method="post" name="readForm">
 					<input type="hidden" name="type" value="2"> <input
-						type="hidden" name="employee_no" value="${employee_no}"> <input
+						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
 						type="hidden" name="board_no" value="${board_no}">
 					<table width="740" border="1" cellspacing="0" cellpadding="0"
 						align="center">
@@ -123,14 +123,14 @@ body, td, a, div, p, pre, input, textarea {
 						</tr>
 						<tr height="30">
 							<td colspan="4" align="right"><c:if
-									test="${employee_no == board.employee_no}">
+									test="${mc_employee_no == board.employee_no}">
 									<input type="button" value="글수정"
 										onclick="document.location.href='deptUpdate.do?board_no=${board.board_no}&p=${pageNum}'">
 					&nbsp; <input type="button" value="글삭제"
 										onclick="document.location.href='deptDelete.do?board_no=${board.board_no}&p=${pageNum}'">
 					&nbsp; 
 				</c:if> <input type="button" value="글목록"
-								onclick="document.location.href='deptList.do?type=${board.type}&p=${pageNum}'">&nbsp;
+								onclick="document.location.href='deptBoardList.do?type=${board.type}&p=${pageNum}'">&nbsp;
 							</td>
 
 						</tr>

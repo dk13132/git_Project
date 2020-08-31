@@ -36,6 +36,10 @@ public class Meeting_roomDao {
 	}
 	
 	public int getLastNo() {
-		return session.selectOne("meeting_room.lastNo");
+		String lastNo = session.selectOne("meeting_room.lastNo");
+		if(lastNo == null) {
+			return 1;
+		}
+		return Integer.parseInt(lastNo);
 	}
 }

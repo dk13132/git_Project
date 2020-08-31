@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <head>
 <title>게시판</title>
 <style>
@@ -103,8 +103,8 @@ $(document).ready(function(){
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -114,7 +114,7 @@ $(document).ready(function(){
 				<form>
 					<input type="hidden" name="type" value="2"> <input
 						type="hidden" name="dept_no" value="${board.dept_no}"> <input
-						type="hidden" name="employee_no" value="${employee_no}"> <input
+						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
 						type="hidden" name="board_no" value="${ board_no }"> <b>부서
 						게시판</b><br>
 					<br>
@@ -182,14 +182,14 @@ $(document).ready(function(){
 				<form align="center">
 					<c:if test="${list.count > 0}">
 						<c:if test="${list.p.beginPageNumber > 10}">
-							<a href="deptList.do?p=${list.p.beginPageNumber-1}">이전</a>
+							<a href="deptBoardList.do?p=${list.p.beginPageNumber-1}">이전</a>
 						</c:if>
 						<c:forEach var="pno" begin="${list.p.beginPageNumber}"
 							end="${list.p.endPageNumber}">
-							<a href="deptList.do?p=${pno}">[${pno}]</a>
+							<a href="deptBoardList.do?p=${pno}">[${pno}]</a>
 						</c:forEach>
 						<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-							<a href="deptList.do?p=${list.p.endPageNumber + 1}">다음</a>
+							<a href="deptBoardList.do?p=${list.p.endPageNumber + 1}">다음</a>
 						</c:if>
 					</c:if>
 				</form>

@@ -16,8 +16,8 @@
                 <div class="gnb">
                     <div class="gnb_list">
                         <ul>
-                            <li><a href="#">사원정보</a></li>
-							<li><a href="#">게시판</a></li>
+                            <li><a href="sltEmp.do">사원정보</a></li>
+							<li><a href="blist.do">게시판</a></li>
 							<li><a href="meeting_room.do">회의실</a></li>
 							<li><a href="#">프로젝트</a></li>
 							<li><a href="chat_list.do">채팅</a></li>

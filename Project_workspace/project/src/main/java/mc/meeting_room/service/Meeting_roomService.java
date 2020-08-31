@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class Meeting_roomService {
 	
 	public Map<String, String[]> roomList(Date date) {
 		List<Meeting_roomDto> list = dao.roomList();
-		Map<String, String[]> result = new HashMap<>();
+		Map<String, String[]> result = new TreeMap<>();
 		for(int i = 0; i < list.size(); i++) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("currentDate", date);

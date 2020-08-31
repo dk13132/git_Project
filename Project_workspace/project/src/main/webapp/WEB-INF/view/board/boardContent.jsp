@@ -80,8 +80,8 @@ body, td, a, div, p, pre, input, textarea {
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -92,7 +92,7 @@ body, td, a, div, p, pre, input, textarea {
 				<section id="container">
 					<form method="post" name="readForm">
 						<input type="hidden" name="type" value="1"> <input
-							type="hidden" name="employee_no" value="${employee_no}">
+							type="hidden" name="employee_no" value="${mc_employee_no}">
 						<input type="hidden" name="board_no" value="${board_no}">
 						<input type="hidden" name="board_no" value="${board.readcount}">
 						<table width="740" border="1" cellspacing="0" cellpadding="0"
@@ -127,14 +127,14 @@ body, td, a, div, p, pre, input, textarea {
 							</tr>
 							<tr height="30">
 								<td colspan="4" align="right"><c:if
-										test="${employee_no == board.employee_no}">
+										test="${mc_employee_no == board.employee_no}">
 										<input type="button" value="글수정"
 											onclick="document.location.href='update.do?board_no=${board.board_no}&p=${pageNum}'">
 					&nbsp; <input class="delete_btn" type="button" value="글삭제"
-											onclick="document.location.href='delete.do?board_no=${board.board_no}&p=${pageNum}'">
+											onclick="document.location.href='bdelete.do?board_no=${board.board_no}&p=${pageNum}'">
 					&nbsp; 
 				</c:if> <input type="button" value="글목록"
-									onclick="document.location.href='list.do?p=${pageNum}'">&nbsp;
+									onclick="document.location.href='blist.do?p=${pageNum}'">&nbsp;
 								</td>
 
 							</tr>

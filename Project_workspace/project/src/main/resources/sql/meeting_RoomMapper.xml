@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into room_reservation values(#{reservation_no}, #{employee_no}, #{room_no}, #{start_time}, #{end_time}, #{personnel}, #{purpose})
 	</insert>
 	
-	<select id="lastNo" resultType="int">
+	<select id="lastNo" resultType="String">
 		select max(reservation_no) + 1 from room_reservation
 	</select>
 </mapper>

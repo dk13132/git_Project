@@ -5,8 +5,8 @@
 
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <head>
 <title>공지사항 게시판</title>
 <script type="text/javascript"></script>
@@ -89,8 +89,8 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -101,7 +101,7 @@
 					onsubmit="return writeSave()" enctype="multipart/form-data">
 					<input type="hidden" name="type" value="2"> <input
 						type="hidden" name="board_no" value="${board.board_no}"> <input
-						type="hidden" name="employee_no" value="${employee_no}"> <input
+						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
 						type="hidden" id="fileNoDel" name="fileNoDel[]" value="">
 					<input type="hidden" id="fileNameDel" name="fileNameDel[]" value="">
 
@@ -162,7 +162,7 @@
 						<tr>
 							<td colspan=2 align="center"><input type="submit"
 								value="글수정"> <input type="button" value="목록보기"
-								onclick="document.location.href='deptList.do?p=${pageNum}'"></td>
+								onclick="document.location.href='deptBoardList.do?p=${pageNum}'"></td>
 						</tr>
 					</table>
 				</form>

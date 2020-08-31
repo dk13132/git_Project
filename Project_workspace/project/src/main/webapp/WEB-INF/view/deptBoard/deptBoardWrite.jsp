@@ -4,8 +4,8 @@
 
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <head>
 <title>공지사항 게시판</title>
 <script type="text/javascript"></script>
@@ -74,8 +74,8 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -98,10 +98,10 @@
 							<%-- <td width="185" align="center">작성자</td>
 				<td align="left" width="555">${board.name} --%>
 							<td><input type="hidden" name="employee_no"
-								value="${employee_no}"></td>
+								value="${mc_employee_no}"></td>
 						</tr>
 
-						<tr>
+						<tr> 
 							<td width="185" align="center">날 짜</td>
 							<td width="555"><input type="date" size="40" maxlength="50"
 								name="reg_date"
@@ -124,7 +124,7 @@
 						<tr>
 							<td colspan=2 align="center"><input type="submit" value="확인">
 								<input type="button" value="취소"
-								OnClick="window.location='deptList.do?type=2'"></td>
+								OnClick="window.location='deptBoardList.do?type=2'"></td>
 						</tr>
 					</table>
 				</form>

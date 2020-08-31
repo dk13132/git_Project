@@ -37,6 +37,9 @@
 		
 	<bean id="myInfoDao" class="mc.myInfo.Service.MyInfoDao"
 		p:sqlSessionFactory-ref="sqlSessionFactory" />
+		
+	<bean id="projectWorkDao" class="mc.projectWork.service.ProjectWorkDao"
+		p:sqlSessionFactory-ref="sqlSessionFactory" />
 
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

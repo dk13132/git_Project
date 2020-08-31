@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 조회 둘다 했을 때 -->
 	<select id = "sltAllFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
 		select * 
-		from employee e natural join department d 
+		from employee e natural join department d
 		where e.position = #{position} and d.dept_no = #{dept_no}
 	</select>
 	

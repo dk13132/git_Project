@@ -76,8 +76,8 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -87,7 +87,7 @@
 				<form method="POST" name="boardWrite" action="write2.do"
 					enctype="multipart/form-data" onsubmit="return writeSave()">
 					<input type="hidden" name="type" value="1"> <input
-						type="hidden" name="employee_no" value="${employee_no}"> <input
+						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
 						type="hidden" name="board_no" value="${dto.board_no}"> <input
 						type="hidden" name="board_no" value="${dto.readcount}">
 
@@ -101,7 +101,7 @@
 							<%-- <td width="185" align="center">작성자</td>
 				<td align="left" width="555">${board.name} --%>
 							<td><input type="hidden" name="employee_no"
-								value="${employee_no}"></td>
+								value="${mc_employee_no}"></td>
 						</tr>
 
 						<tr>
@@ -127,7 +127,7 @@
 						<tr>
 							<td colspan=2 align="center"><input type="submit" value="확인">
 								<input type="button" value="취소"
-								OnClick="window.location='list.do'"></td>
+								OnClick="window.location='blist.do'"></td>
 						</tr>
 					</table>
 				</form>

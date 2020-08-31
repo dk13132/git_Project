@@ -23,7 +23,7 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao dao;
 
-	// 사원 정보 조회
+	// �궗�썝 �젙蹂� 議고쉶
 	public List<Object> sltEmp(EmployeeDto dto) throws Exception {
 		List<Object> list = null;
 
@@ -41,19 +41,19 @@ public class EmployeeService {
 		return list;
 	}
 
-	// 사원 정보 상세 조회
+	// �궗�썝 �젙蹂� �긽�꽭 議고쉶
 	public EmployeeDto sltDtlEmp(EmployeeDto dto) throws Exception {
 		return dao.sltEmpDtl(dto);
 	}
 
-	// 사원 정보 상세 조회 - 부서 정보
+	// �궗�썝 �젙蹂� �긽�꽭 議고쉶 - 遺��꽌 �젙蹂�
 	public List<Map<String, EmployeeDto>> sltbxDno() throws Exception {
 		return dao.sltbxDno();
 	}
 
-	// 사원 정보 수정
+	// �궗�썝 �젙蹂� �닔�젙
 	public void udtEmp(EmployeeDto dto, MultipartHttpServletRequest request) throws Exception {
-		// 두개 변경하는 부분 중에 하나가 없거나 하면은 없는건 실행 안되게끔.
+		// �몢媛� 蹂�寃쏀븯�뒗 遺�遺� 以묒뿉 �븯�굹媛� �뾾嫄곕굹 �븯硫댁� �뾾�뒗嫄� �떎�뻾 �븞�릺寃뚮걫.
 
 		dao.udtEmp(dto);
 
@@ -77,12 +77,12 @@ public class EmployeeService {
 		}
 	}
 
-	// 사원 삭제
+	// �궗�썝 �궘�젣
 	public void dltEmp(EmployeeDto dto) throws Exception {
 		dao.dltEmp(dto);
 	}
 
-	// 사원 삭제 - 관리자 인증
+	// �궗�썝 �궘�젣 - 愿�由ъ옄 �씤利�
 	public int cntatrt(HttpSession hs) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -94,7 +94,7 @@ public class EmployeeService {
 		return cntatrt;
 	}
 
-	// 사원 등록
+	// �궗�썝 �벑濡�
 	public void istEmp(EmployeeDto dto) throws Exception {
 
 		Random rand = new Random();
@@ -117,7 +117,7 @@ public class EmployeeService {
 		dao.istEmp(dto);
 	}
 
-	// 사원 사진 등록
+	// �궗�썝 �궗吏� �벑濡�
 	public void istEmpPt(EmployeeDto dto, MultipartHttpServletRequest request) throws Exception {
 		
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/employee/");
@@ -139,9 +139,6 @@ public class EmployeeService {
 	}
 
 	public EmployeeDto deptInfo(EmployeeDto dto) {
-
 		return dao.deptInfo(dto);
-
 	}
-
 }
