@@ -53,7 +53,6 @@ public class EmployeeService {
 
 	// �궗�썝 �젙蹂� �닔�젙
 	public void udtEmp(EmployeeDto dto, MultipartHttpServletRequest request) throws Exception {
-		// �몢媛� 蹂�寃쏀븯�뒗 遺�遺� 以묒뿉 �븯�굹媛� �뾾嫄곕굹 �븯硫댁� �뾾�뒗嫄� �떎�뻾 �븞�릺寃뚮걫.
 
 		dao.udtEmp(dto);
 
@@ -71,9 +70,8 @@ public class EmployeeService {
 				mf.transferTo(new File(path));
 			}
 
-			{
-				dao.udtEmpPt(dto);
-			}
+			dao.udtEmpPt(dto);
+
 		}
 	}
 
@@ -119,7 +117,7 @@ public class EmployeeService {
 
 	// �궗�썝 �궗吏� �벑濡�
 	public void istEmpPt(EmployeeDto dto, MultipartHttpServletRequest request) throws Exception {
-		
+
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/employee/");
 		List<MultipartFile> fileList = request.getFiles("photo");
 
@@ -133,7 +131,7 @@ public class EmployeeService {
 				String path = rootPath + mf.getOriginalFilename();
 				mf.transferTo(new File(path));
 			}
-			
+
 			dao.istEmpPt(dto);
 		}
 	}

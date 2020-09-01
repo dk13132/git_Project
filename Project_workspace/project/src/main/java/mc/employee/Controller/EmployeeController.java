@@ -42,8 +42,6 @@ public class EmployeeController {
 	@ResponseBody
 	@PostMapping("/sltFtEmp")
 	public Map<String, Object> sltFtEmp(Model model, @ModelAttribute EmployeeDto dto) throws Exception {
-		System.out.println(dto.getDept_no());
-		System.out.println(dto.getPosition());
 		List<Map<String, EmployeeDto>> list = employeeService.sltbxDno();
 		List<Object> vDto = employeeService.sltEmp(dto);
 
