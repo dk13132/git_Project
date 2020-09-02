@@ -99,7 +99,7 @@ $(document).ready(function(){
 						
 						${article.name}<br>
 						
-						<a href="list.do?project_no=${article.project_no}&p=${list.requestPage}">${article.subject}</a><br>
+						<a href="wlist.do?project_no=${article.project_no}&p=${list.requestPage}">${article.subject}</a><br>
 						
 						<fmt:formatDate value="${article.start_time}" type="date" dateStyle="long" /><br>
 						

@@ -16,10 +16,12 @@
                 <div class="gnb">
                     <div class="gnb_list">
                         <ul>
+                       	    <c:if test="${mc_authority >= 3 }">
                             <li><a href="sltEmp.do">사원정보</a></li>
+                            </c:if>
 							<li><a href="blist.do">게시판</a></li>
 							<li><a href="meeting_room.do">회의실</a></li>
-							<li><a href="#">프로젝트</a></li>
+							<li><a href="projectSearch.do">프로젝트</a></li>
 							<li><a href="chat_list.do">채팅</a></li>
 							<li><a href="calendar.do">일정(캘린더)</a></li>
 							<li><a href="appdomt.do">전자결재</a></li>

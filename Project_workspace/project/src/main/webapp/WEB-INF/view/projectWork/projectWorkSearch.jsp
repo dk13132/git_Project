@@ -127,7 +127,7 @@ $(document).ready(function(){
 						<c:otherwise>낮음</c:otherwise>
 					</c:choose></td>
 
-					<td align="center" width="400"><a href="content.do?work_no=${article.work_no}&p=${list.requestPage}">${article.subject}</a></td>
+					<td align="center" width="400"><a href="wcontent.do?work_no=${article.work_no}&p=${list.requestPage}">${article.subject}</a></td>
 
 					<td align="center" width="100">${article.name}</td>
 					<td align="center" width="230"><fmt:formatDate value="${article.start_time}" type="date" dateStyle="long" /></td>

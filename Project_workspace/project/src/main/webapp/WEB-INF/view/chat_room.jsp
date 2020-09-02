@@ -94,12 +94,35 @@
 			alert(e.responseText);
 		})
 		peopleList();
-		openWindowInvitation();
+		loadDept();
 	})
+	
+	function deptClick(dept_no){
+		var url = "empInvitationList.do";
+		var chat_no = $('#chat_no').val();
+		var params = "dept_no=" + dept_no + "&chat_no=" + chat_no;
 
-	$("#dept_no").click(function() {
-		alert($(this).val() + "");
-	});
+		$.ajax({
+			type : "post",
+			url : url,
+			data : params,
+			dataType : "json"
+		}).done(
+				function(args) {//응답이 성공 상태 코드를 반환하면 호출되는 함수
+					$('#dept').empty();
+					if (args !== null) {
+						for (var i = 0; i < args.length; i++) {
+							if (args[i].employee_no != $("#myNo").val()) {
+								$('#dept').append(
+										"<input type='checkbox' value='"+args[i].employee_no+"'>"
+												+ args[i].name);
+							}
+						}
+					}
+				}).fail(function(e) {
+			alert(e.responseText);
+		})
+	}
 
 	function peopleList() {
 		var url = "employeeInfo.do";
@@ -208,7 +231,7 @@
 		}
 	}
 
-	function openWindowInvitation() {
+	function loadDept() {
 		var chat_no = $('#chat_no').val();
 		var url = "chat_invitation.do";
 		$.ajax({
@@ -220,8 +243,8 @@
 				function(args) {//응답이 성공 상태 코드를 반환하면 호출되는 함수
 					for (var i = 0; i < args.length; i++) {
 						$("#dept").append(
-								"<button id='dept_no' value=" + args[i].dept_no + ">"
-										+ args[i].dept_name + "</button>");
+								"<div id='dept_no" + args[i].dept_no +"' value=" + args[i].dept_no + " onclick='deptClick(" + args[i].dept_no + ")'>"
+										+ args[i].dept_name + "</div>");
 					}
 				}).fail(function(e) {
 			alert(e.responseText);

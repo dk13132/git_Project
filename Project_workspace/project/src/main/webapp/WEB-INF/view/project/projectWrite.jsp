@@ -14,6 +14,7 @@
 	<b>${dto.project_no} 프로젝트의 일감 등록</b>
 	<br>
 	<form method="post" name="projectWrite" action="proWrite.do">
+	<input type="hidden" name="employee_no" value="${mc_employee_no}">
 		<table border="1" align="center">
 			<tr>
 				<td width="150" height="60" align="center">프로젝트명</td>

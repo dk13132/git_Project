@@ -29,8 +29,8 @@ public class ProjectWorkController {
 	@Autowired
 	ProjectWorkService service;
 
-	// 게시물 목록 + 페이징 추가 + 검색 + 파일
-	@RequestMapping(value = "/list.do")
+	// 寃뚯떆臾� 紐⑸줉 + �럹�씠吏� 異붽� + 寃��깋 + �뙆�씪
+	@RequestMapping(value = "/wlist.do")
 	public String list(ProjectWorkDto dto,
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "per", defaultValue = "20") int per, Model m,
@@ -40,40 +40,40 @@ public class ProjectWorkController {
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
 
-		ProjectWorkModel list = service.listSearch(pageNum, per, searchType, keyword);	//매퍼에서 리졸트타입을 dto로 선언해주고, dto에 담아서 하나씩 뽑아오기
+		ProjectWorkModel list = service.listSearch(pageNum, per, searchType, keyword);	//留ㅽ띁�뿉�꽌 由ъ「�듃���엯�쓣 dto濡� �꽑�뼵�빐二쇨퀬, dto�뿉 �떞�븘�꽌 �븯�굹�뵫 戮묒븘�삤湲�
 		int number = list.getCount() - (pageNum - 1) * per;
 		
 		m.addAttribute("employee_no", dto.getEmployee_no());
 		m.addAttribute("name", dto.getName());
-		m.addAttribute("list", list);	//list에 담긴 데이터를 "list"라는 이름으로 담는다.
+		m.addAttribute("list", list);	//list�뿉 �떞湲� �뜲�씠�꽣瑜� "list"�씪�뒗 �씠由꾩쑝濡� �떞�뒗�떎.
 		m.addAttribute("searchType", searchType);
 		m.addAttribute("keyword", keyword);
 		m.addAttribute("number", number);
 				
-		//파일 selectFileList에 파라미터값(게시글 조회한 번호)을 넣어주고 Map타입의 List타입 fileList에 넣어줍니다.
-		//model.addAttribute를 이용하여 fileList를 file이라는 이름으로 jsp에 값을 보낼준비를 합니다.
+		//�뙆�씪 selectFileList�뿉 �뙆�씪誘명꽣媛�(寃뚯떆湲� 議고쉶�븳 踰덊샇)�쓣 �꽔�뼱二쇨퀬 Map���엯�쓽 List���엯 fileList�뿉 �꽔�뼱以띾땲�떎.
+		//model.addAttribute瑜� �씠�슜�븯�뿬 fileList瑜� file�씠�씪�뒗 �씠由꾩쑝濡� jsp�뿉 媛믪쓣 蹂대궪以�鍮꾨�� �빀�땲�떎.
 		List<Map<String, Object>> fileList = service.selectFileList(dto.getWork_no());
 		m.addAttribute("file", fileList);
 			
 		return "projectWork/projectWorkSearch";
 	}
 
-	//글 작성쪽에 첨부파일의 파라미터값을 받을수 있는 MultipartHttpServlertRequest mpRequest를 추가,
+	//湲� �옉�꽦履쎌뿉 泥⑤��뙆�씪�쓽 �뙆�씪誘명꽣媛믪쓣 諛쏆쓣�닔 �엳�뒗 MultipartHttpServlertRequest mpRequest瑜� 異붽�,
 	@RequestMapping(value = "/write.do")
 	public String write(Model m, ProjectWorkDto dto, MultipartHttpServletRequest mpRequest) throws Exception{
-		service.write(dto, mpRequest);//서비스를 실행할때에 받는 파라미터(mpRequest)도 추가해줍니다.
+		service.write(dto, mpRequest);//�꽌鍮꾩뒪瑜� �떎�뻾�븷�븣�뿉 諛쏅뒗 �뙆�씪誘명꽣(mpRequest)�룄 異붽��빐以띾땲�떎.
 		return "redirect:list.do";
 	}
 	
 	@RequestMapping(value = "/projectWorkWrite.do")
 	public String projectWorkWrite(Model m) throws Exception{
-		//담당자 리스트 - 모델 추가
+		//�떞�떦�옄 由ъ뒪�듃 - 紐⑤뜽 異붽�
 		List<Map<String, Object>> list = service.getNameList();
 		m.addAttribute("list", list);
 		return "projectWork/projectWorkWrite";
 	}
 	
-	// 게시판 수정
+	// 寃뚯떆�뙋 �닔�젙
 	@RequestMapping(value = "/projectWorkUpdate.do")
 	public String projectWorkUpdate(int work_no, int p, Model m, ProjectWorkDto dto) throws Exception{
 		//session.setAttribute("employee_no", 2);
@@ -108,7 +108,7 @@ public class ProjectWorkController {
 		return "redirect:list.do";
 	}
 	
-	@RequestMapping(value = "/content.do")
+	@RequestMapping(value = "/wcontent.do")
 	public String content(@RequestParam(value = "p") int pageNum, int work_no, Model m, ProjectWorkDto dto) throws Exception {
 		ProjectWorkDto dto2 = service.getContent(work_no);
 		
@@ -121,14 +121,14 @@ public class ProjectWorkController {
 		return "projectWork/projectWorkContent";
 	}
 	
-	//10. 첨부 파일 다운
+	//10. 泥⑤� �뙆�씪 �떎�슫
 	@RequestMapping(value="/fileDown.do")
 	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
 		Map<String, Object> resultMap = service.selectFileInfo(map);
 		String storedFileName = (String) resultMap.get("stored_file_name");
 		String fileName = (String) resultMap.get("file_name");
 		
-		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+		// �뙆�씪�쓣 ���옣�뻽�뜕 �쐞移섏뿉�꽌 泥⑤��뙆�씪�쓣 �씫�뼱 byte[]�삎�떇�쑝濡� 蹂��솚�븳�떎.
 		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\file\\"+storedFileName));
 		
 		response.setContentType("application/octet-stream");
@@ -145,7 +145,7 @@ public class ProjectWorkController {
 		return "redirect:list.do"; 
 	}
 	
-	// 체크박스 선택, 삭제
+	// 泥댄겕諛뺤뒪 �꽑�깮, �궘�젣
 	@ResponseBody
 	@RequestMapping(value = "/checkDelete.do")
 	public void checkDelete(@RequestParam(value = "work_no") int work_no) throws Exception {
