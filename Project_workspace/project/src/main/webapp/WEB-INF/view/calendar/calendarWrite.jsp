@@ -5,6 +5,12 @@
 <html>
 <head>
 <title>일정 게시판</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/depinfo.css'/>" />
 <script type="text/javascript"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

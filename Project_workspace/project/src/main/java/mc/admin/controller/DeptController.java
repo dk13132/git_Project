@@ -95,7 +95,7 @@ public class DeptController {
 		return "dept/updateForm";
 	}
 	
-	@RequestMapping("/update.do")
+	@RequestMapping("/updateDn.do")
 	public String update(DeptDto d) {
 		
 		dept.update(d);

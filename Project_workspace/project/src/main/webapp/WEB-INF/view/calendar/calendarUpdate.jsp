@@ -163,8 +163,6 @@
 					<td align="left" width="555" id="fileIndex">&nbsp;
 						<button type="button" class="fileAdd_btn">파일추가</button> <br>
 						<c:forEach var="file" items="${file}" varStatus="var">
-							<input type="hidden" id="file_no" name="file_no"
-								value="${file_no}">
 							<input type="hidden" id="file_no" name="file_no_${var.index}"
 								value="${file.file_no}">
 							<input type="hidden" id="file_name" name="file_name"

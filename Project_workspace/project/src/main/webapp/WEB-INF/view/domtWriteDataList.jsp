@@ -17,8 +17,8 @@
 		<section id="content">
 			<div id="leftcontent">
 				<ul>
-					<li><a href="list.do">부서관리</a></li>
-					<li><a class="active" href="authority.do">권한관리</a></li>
+					<li><a>결재진행함</a></li>
+					<li><a href="domt_imok_list.do">결재완료함</a></li>
 				</ul>
 			</div>
 

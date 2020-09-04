@@ -1,7 +1,23 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.myButton {
+	background: linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
+	background-color: #8c9ebd;
+	border-radius: 3px;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	padding: 5px 10px;
+	text-decoration: none;
+	margin: 14px 0px 0px 0px;
+}
+
+input{padding:4px 10px 4px 10px; boder:1px solid #f2f2f2; border-radius: 3px; font-size: 14px;}
+</style>
 <title>회의실 예약</title>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
@@ -55,7 +71,7 @@
 			} else {
 				document.getElementById(id).style.backgroundColor = "red";
 				document.getElementById("start_time").value = i;
-				document.getElementById("end_time").value = eval(i+1);
+				document.getElementById("end_time").value = eval(i + 1);
 				start = i;
 				index = 1;
 			}
@@ -78,7 +94,7 @@
 					var jId = j + "";
 					if (document.getElementById(jId).style.backgroundColor == "blue") {
 						error = -1;
-						if(start == i){
+						if (start == i) {
 							start = end;
 							end = i;
 						}
@@ -93,7 +109,7 @@
 						document.getElementById(jId).style.backgroundColor = "red";
 					}
 					document.getElementById("start_time").value = start;
-					document.getElementById("end_time").value = eval(end+1);
+					document.getElementById("end_time").value = eval(end + 1);
 					index = 2;
 				}
 			}
@@ -127,7 +143,7 @@
 						}
 						end = i;
 						document.getElementById("start_time").value = start;
-						document.getElementById("end_time").value = eval(end+1);
+						document.getElementById("end_time").value = eval(end + 1);
 					}
 				} else {
 					for (var j = start - 1; j >= i; j--) {
@@ -146,7 +162,7 @@
 						}
 						start = i;
 						document.getElementById("start_time").value = start;
-						document.getElementById("end_time").value = eval(end+1);
+						document.getElementById("end_time").value = eval(end + 1);
 					}
 				}
 			}
@@ -239,7 +255,7 @@
 				})
 	}
 
-	function check(){
+	function check() {
 		var room_no = form.room_no.value;
 		var purpose = form.purpose.value;
 		var date = form.date.value;
@@ -247,19 +263,19 @@
 		var start_time = form.st_time.value;
 		var end_time = form.ed_time.value;
 
-		if(room_no == -1){
+		if (room_no == -1) {
 			alert("회의실을 선택해주세요.");
 			return false;
 		}
-		if(purpose == ""){
+		if (purpose == "") {
 			alert("사용 목적을 입력해 주세요.");
 			return false;
 		}
-		if(date == ""){
+		if (date == "") {
 			alert("날짜를 입력해 주세요.");
 			return false;
 		}
-		if(personnel == ""){
+		if (personnel == "") {
 			alert("예약인원을 입력해 주세요.");
 			return false;
 		}
@@ -280,9 +296,9 @@
 		<table id="table" border="1" style="border-collapse: collapse;">
 		</table>
 		<input type="hidden" id="start_time" name="st_time" value="">
-		<input type="hidden" id="end_time" name="ed_time" value="">
-		<input type="submit" value="등록"> <input type="button"
-			value="취소" onclick="javascript:window.close()">
+		<input type="hidden" id="end_time" name="ed_time" value=""> <input
+			class="myButton" type="submit" value="등록"> <input class="myButton" type="button" value="취소"
+			onclick="javascript:window.close()">
 	</form>
 </body>
 </html>

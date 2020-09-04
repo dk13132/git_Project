@@ -13,7 +13,7 @@
 </head>
 <body>
 <div>
-<form action="update.do" method="get" target="list">
+<form action="updateDn.do" method="get" target="list">
 <!-- form 태그의 target 속성은 폼 데이터(form data)를 서버로 제출한 후 받는 응답이 열릴 위치를 명시합니다. -->
 
 <table id="resi1">

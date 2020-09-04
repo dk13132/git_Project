@@ -90,7 +90,7 @@ public class BoardController {
 			 @RequestParam(value="fileNameDel[]") String[] fileNames,
 			 MultipartHttpServletRequest mpRequest) throws Exception  {
 		service.update(dto, files, fileNames, mpRequest);
-		return ":/blist.do";
+		return "redirect:/blist.do";
 	}
 
 	@RequestMapping(value = "/bdelete.do", method = RequestMethod.GET)

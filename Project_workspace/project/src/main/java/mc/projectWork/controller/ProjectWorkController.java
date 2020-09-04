@@ -121,14 +121,12 @@ public class ProjectWorkController {
 		return "projectWork/projectWorkContent";
 	}
 	
-	//10. 泥⑤� �뙆�씪 �떎�슫
 	@RequestMapping(value="/fileDown.do")
 	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
 		Map<String, Object> resultMap = service.selectFileInfo(map);
 		String storedFileName = (String) resultMap.get("stored_file_name");
 		String fileName = (String) resultMap.get("file_name");
 		
-		// �뙆�씪�쓣 ���옣�뻽�뜕 �쐞移섏뿉�꽌 泥⑤��뙆�씪�쓣 �씫�뼱 byte[]�삎�떇�쑝濡� 蹂��솚�븳�떎.
 		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\file\\"+storedFileName));
 		
 		response.setContentType("application/octet-stream");

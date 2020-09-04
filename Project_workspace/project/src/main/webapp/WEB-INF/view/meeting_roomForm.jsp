@@ -11,6 +11,19 @@
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/depinfo.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<style>
+.myButton {
+	background:linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
+	background-color:#8c9ebd;
+	border-radius:3px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 10px;
+	text-decoration:none;
+	margin: 14px 0px 0px 0px;
+}
+</style>
 <script>
 	$(function() {
 		var today = new Date();
@@ -88,34 +101,9 @@
 		<jsp:include page="/WEB-INF/view/head.jsp" flush="false" />
 		<section id="content">
 			<div id="leftcontent">
-				<div id="login">
-					<br>
-					<h1 align="left">환영합니다. ${mc_name}님</h1>
-					<br>
-					<button type="button">내정보</button>
-					&nbsp;&nbsp;
-					<button type="button"
-						onclick="javascript:location.href='logout.do'">로그아웃</button>
-				</div>
-
-				<div id="cal">
-					<table id="calendar" frame="void">
-						<tr>
-							<td><label onclick="prevCalendar()"><<</label></td>
-							<td align="center" id="tbCalendarYM" colspan="5">yyyy년 m월</td>
-							<td><label onclick="nextCalendar()">>> </label></td>
-						</tr>
-						<tr>
-							<td align="center"><font color="#F79DC2">일</td>
-							<td align="center">월</td>
-							<td align="center">화</td>
-							<td align="center">수</td>
-							<td align="center">목</td>
-							<td align="center">금</td>
-							<td align="center"><font color="skyblue">토</td>
-						</tr>
-					</table>
-				</div>
+				<ul>
+					<li><a class="active" href="meeting_room.do">회의실 예약</a></li>
+				</ul>
 			</div>
 			<div id="rightcontent">
 				<h1>회의실 예약 확인</h1>

@@ -39,7 +39,7 @@
 					<c:forEach var="domt_list_view3" items="${domt_list3.boardList}">
 						<tr>
 							<td>${domt_list_view3.document_no}</td>
-							<td><a href="domtViewApp.do?document_no=${domt_list_view3.document_no}">${domt_list_view3.subject}</a></td>
+							<td><a href="domtView.do?document_no=${domt_list_view3.document_no}">${domt_list_view3.subject}</a></td>
 							<td><fmt:formatDate value="${domt_list_view3.reg_date}" /></td>
 							<td>${domt_list_view3.type}</td>
 						</tr>
@@ -91,7 +91,7 @@
 					</c:if>
 					<c:forEach var="pno" begin="${domt_list4.p.beginPageNumber}"
 						end="${domt_list4.p.endPageNumber}">
-						<a href="appdomt.do?p=${pno}">[${pno}]</a>
+						<a href="appdomt.do?p=${pno}">${pno}</a>
 					</c:forEach>
 					<c:if test="${domt_list4.p.endPageNumber < domt_list4.p.totalPageCount}">&nbsp;
 						<a href="appdomt.do?p=${domt_list4.p.endPageNumber + 1}">>></a>

@@ -27,13 +27,6 @@ public class EchoHandler extends TextWebSocketHandler {
 
 	private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 
-	// 클라이언트가 연결 되었을 때 실행
-	/*
-	 * @Override public void afterConnectionEstablished(WebSocketSession session)
-	 * throws Exception { sessionList.add(session); logger.info("{} 연결됨",
-	 * session.getId()); }
-	 */
-
 	// 클라이언트가 웹소켓 서버로 메시지를 전송했을 때 실행
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {

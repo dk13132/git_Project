@@ -1,10 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <html>
 <head>
 <title>일정 게시판</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/depinfo.css'/>" />
 <style type='text/css'>
 <!--
 a:link {
@@ -68,7 +73,7 @@ body, td, a, div, p, pre, input, textarea {
 </script>
 
 <body>
-	<b>글내용 보기</b>
+	<b>일정 상세 보기</b>
 	<br>
 	<br>
 	<section id="container">

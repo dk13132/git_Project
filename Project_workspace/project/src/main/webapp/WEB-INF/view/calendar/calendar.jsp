@@ -91,13 +91,14 @@ body {
 }
 
 .add-button {
-	position: absolute;
-	background: #2C3E50;
-	border: 0;
-	color: white;
-	height: 35px;
-	border-radius: 3px;
-	width: 157px;
+	background-color:#2C3E50;
+	border-radius:3px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 10px;
+	text-decoration:none;
+	margin: 14px 0px 0px 0px;
 }
 
 .fc-day-sun {
@@ -110,47 +111,34 @@ body {
 </style>
 </head>
 <body>
-	<section id="header">
-		<div id=headerwrap>
-			<div class="logo">
-				<a href="test.do"> <img src="resources/img/logo.png" alt="">
-				</a>
+	<div id="wrap">
+		<jsp:include page="/WEB-INF/view/head.jsp" flush="false" />
+		<section id="content">
+			<div id="leftcontent">
+				<ul>
+					<li><a class="active" href="calendar.do">일정관리</a></li>
+				</ul>
 			</div>
-			<div class="gnb">
-				<div class="gnb_list">
-					<ul>
-						<li><a href="#">사원정보</a></li>
-						<li><a href="#">게시판</a></li>
-						<li><a href="meeting_room.do">회의실</a></li>
-						<li><a href="#">프로젝트</a></li>
-						<li><a href="chat_list.do">채팅</a></li>
-						<li><a href="calendar.do">일정(캘린더)</a></li>
-						<li><a href="#">전자결재</a></li>
-						<c:if test="${mc_authority >= 3 }">
-							<li><a href="list.do">관리자</a></li>
-							<li><a href="#">근태관리</a></li>
-						</c:if>
-					</ul>
-
-				</div>
+			<div id="rightcontent">
+				<form align="center" id="data" method="post">
+					<input type="hidden" name="type" value="${type}"> <select
+						id="type" name="type" style="padding: 1px 0.5px 6px 1px;">
+						<option value="0" ${type == "0"?"selected":""}>전체 일정</option>
+						<option value="1" ${type == "1"?"selected":""}>개인 일정</option>
+						<option value="2" ${type == "2"?"selected":""}>회사 일정</option>
+					</select>&nbsp; <select id="searchType" name="searchType"
+						style="padding: 1px 0.5px 6px 1px;">
+						<option value="subject" ${searchType == "subject"?"selected":""}>제목</option>
+						<option value="name" ${searchType == "name"?"selected":""}>작성자</option>
+					</select> &nbsp; <input id="keyword" name="keyword" type="text"> <input
+						class="add-button" name="btnSearch" id="btnSearch" type="button" value="검색">
+					<br>
+				</form>
+				<br> <br>
+				<div id='calendar' style="position: relative;"></div>
 			</div>
-		</div>
-	</section>
-	<form align="center" id="data" method="post">
-		<input type="hidden" name="type" value="${type}"> <select
-			id="type" name="type" style="padding: 1px 0.5px 6px 1px;">
-			<option value="0" ${type == "0"?"selected":""}>전체 일정</option>
-			<option value="1" ${type == "1"?"selected":""}>개인 일정</option>
-			<option value="2" ${type == "2"?"selected":""}>회사 일정</option>
-		</select>&nbsp; <select id="searchType" name="searchType"
-			style="padding: 1px 0.5px 6px 1px;">
-			<option value="subject" ${searchType == "subject"?"selected":""}>제목</option>
-			<option value="name" ${searchType == "name"?"selected":""}>작성자</option>
-		</select> &nbsp; <input id="keyword" name="keyword" type="text"> <input
-			name="btnSearch" id="btnSearch" type="button" value="검색"> <br>
-	</form>
-	<br>
-	<br>
-	<div id='calendar' style="position: relative;"></div>
+		</section>
+		<jsp:include page="/WEB-INF/view/foot.jsp" flush="false" />
+	</div>
 </body>
 </html>

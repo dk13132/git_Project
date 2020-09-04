@@ -1,9 +1,17 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>채팅방</title>
+<style>
+th, td { text-align: left; padding: 7px;}
+tr:nth-child(even){background-color: #f2f2f2}
+th { background-color: #767676; color: white;}
+th:first-child { background-color: #767676; color: white; border-radius: 3px 0px 0px 0px }
+th:last-child { background-color: #767676; color: white; border-radius: 0px 3px 0px 0px }
+</style>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script type="text/javascript"
