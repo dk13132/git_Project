@@ -42,4 +42,8 @@ public class Meeting_roomDao {
 		}
 		return Integer.parseInt(lastNo);
 	}
+	
+	public void cancel(int reservation_no) {
+		session.delete("meeting_room.reservationCancel", reservation_no);
+	}
 }

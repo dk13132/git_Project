@@ -87,4 +87,10 @@ public class Meeting_roomService {
 		
 		return dao.roomReservation(data);
 	}
+	
+	public void cancel(int[] reservation_no) {
+		for(int i = 0; i < reservation_no.length; i++) {
+			dao.cancel(reservation_no[i]);
+		}
+	}
 }

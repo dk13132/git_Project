@@ -13,14 +13,14 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style>
 .myButton {
-	background:linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
-	background-color:#8c9ebd;
-	border-radius:3px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	padding:5px 10px;
-	text-decoration:none;
+	background: linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
+	background-color: #8c9ebd;
+	border-radius: 3px;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	padding: 5px 10px;
+	text-decoration: none;
 	margin: 14px 0px 0px 0px;
 }
 </style>
@@ -116,29 +116,34 @@
 				<input class="myButton" type="button" value="예약하기"
 					onclick="openWindowPop()" />
 
+				<br>
+				<br>
 				<h1>내 예약 현황</h1>
-				<div id="myTable">
-					<table>
-						<tr>
-							<th>회의실명</th>
-							<th>예약자</th>
-							<th>예약시간</th>
-							<th>예약인원</th>
-							<th>사용목적</th>
-							<th>비고</th>
-						</tr>
-						<c:forEach var="item" items="${list}">
+				<form action="reservationCancel.do" method="post">
+					<div id="myTable">
+						<table>
 							<tr>
-								<td>${item.room_name}</td>
-								<td>${mc_name}</td>
-								<td>${item.start_time}~${item.end_time}</td>
-								<td>${item.personnel}</td>
-								<td>${item.purpose}</td>
-								<td><input type="button" value="예약취소"></td>
+								<th>회의실명</th>
+								<th>예약자</th>
+								<th>예약시간</th>
+								<th>예약인원</th>
+								<th>사용목적</th>
+								<th>비고</th>
 							</tr>
-						</c:forEach>
-					</table>
-				</div>
+							<c:forEach var="item" items="${list}">
+								<tr>
+									<td>${item.room_name}</td>
+									<td>${mc_name}</td>
+									<td>${item.start_time}~${item.end_time}</td>
+									<td>${item.personnel}</td>
+									<td>${item.purpose}</td>
+									<td><input type="checkbox" name="reservation_no" value="${item.reservation_no}"></td>
+								</tr>
+							</c:forEach>
+						</table>
+						<input class="myButton" type="submit" value="예약취소" />
+					</div>
+				</form>
 			</div>
 		</section>
 		<jsp:include page="/WEB-INF/view/foot.jsp" flush="false" />

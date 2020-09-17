@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="myroom" parameterType="int"
 		resultType="mc.meeting_room.model.MyMeeting_room">
-		select room_name, start_time, end_time, personnel, purpose
+		select reservation_no, room_name, start_time, end_time, personnel, purpose
 		from meeting_room, room_reservation
 		where meeting_room.room_no = room_reservation.room_no
 		and employee_no = #{employee_no};
@@ -34,4 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="lastNo" resultType="String">
 		select max(reservation_no) + 1 from room_reservation
 	</select>
+	
+	<delete id="reservationCancel" parameterType="int">
+		delete from room_reservation where reservation_no = #{reservation_no}
+	</delete>
 </mapper>

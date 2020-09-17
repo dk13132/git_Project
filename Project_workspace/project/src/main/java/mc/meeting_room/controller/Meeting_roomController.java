@@ -72,4 +72,10 @@ public class Meeting_roomController {
 		Gson json = new Gson();
 		return json.toJson(result);
 	}
+	
+	@RequestMapping("/reservationCancel.do")
+	public String reservationCancel(int[] reservation_no) {
+		service.cancel(reservation_no);
+		return "redirect:meeting_room.do";
+	}
 }
