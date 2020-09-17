@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/tablebtn.css'/>" />
 <head>
 <title>게시판</title>
 
@@ -107,98 +108,97 @@ $(document).ready(function(){
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
-					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="list.do">공지사항 게시판</a></li>
+					<li><a href="deptList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
 
 			<div id="rightcontent">
 				
-					<form>
-						<b>공지사항 게시판</b><br> <br> <br> <input type="hidden"
-							name="type" value="1"> <input type="hidden"
-							name="board_no" id="board_no"> <input type="hidden"
-							name="p" id="p" value="${pageNum}">
+					<form><br>
+						<b>공지사항 게시판</b><br> <br> 
+						<input type="hidden" name="type" value="1"> 
+						<input type="hidden" name="board_no" id="board_no"> 					
+						<input type="hidden" name="p" id="p" value="${pageNum}">
 
 
 						<c:if test="${list.count == 0}">
-							<table width="700" border="1" cellpadding="0" cellspacing="0"
-								align="center">
+							<table width="880" border="1" cellpadding="0" cellspacing="0" align="center">
 
 								<tr>
 									<td align="center">게시판에 저장된 글이 없습니다.</td>
 								</tr>
-								<tr>
-									<td colspan="6" align="right"><input type="button"
-										value="글쓰기" onclick="document.location.href='write.do'"></td>
-								</tr>
+								
 							</table>
+							<div id="listButton">
+								<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='write.do'">
+							</div>
 						</c:if>
 
 						<c:if test="${list.count > 0}">
-							<table border="1" width="820" cellpadding="0" cellspacing="0"
-								align="center">
+							<table width="880" cellpadding="0" cellspacing="0" align="center">
 
 								<tr height="45">
 									<td align="center" width="50">번 호</td>
 									<td align="center" width="280">제 목</td>
-									<td align="center" width="100">작성자</td>
+									<td align="center" width="130">작성자</td>
 									<td align="center" width="170">작성일</td>
-									<td align="center" width="70">조 회</td>
-									<td align="center" width="50"><input type="checkbox"
-										name="checkbox" id="checkall"></td>
-
+									<td align="center" width="100">조 회</td>
+									<%-- <c:if test="${authority && board.authority == 3}"> --%>
+									<td align="center" width="50">
+									<input type="checkbox" name="checkbox" id="checkall"></td>
+									<%-- </c:if> --%>
 								</tr>
 
 								<c:forEach var="board" items="${list.boardList}">
 
-									<tr>
+									<tr height="45">
 										<td align="center" width="50"><c:out value="${number}" />
 											<c:set var="number" value="${number - 1}" /></td>
 										<td align="center" width="280"><a
 											href="content.do?board_no=${board.board_no}&p=${list.requestPage}">${board.subject}</a></td>
-										<td align="center" width="100">${board.name}</td>
+										<td align="center" width="130">${board.name}</td>
 										<td align="center" width="170"><fmt:formatDate
 												value="${board.reg_date}" type="date" dateStyle="long" /></td>
-										<td align="center" width="70">${board.readcount}</td>
-										<td align="center" width="50"><input type="checkbox"
-											name="chk" id="boardck" value="${board.board_no}"
-											onclick="fn_checked(this,${board.board_no});"></td>
+										<td align="center" width="100">${board.readcount}</td>	
+										<%-- <c:if test="${authority && board.authority == 3}"> --%>									
+										<td align="center" width="50">
+										<input type="checkbox" name="chk" id="boardck" value="${board.board_no}" onclick="fn_checked(this,${board.board_no});"></td>
+										<%-- </c:if> --%>
 									</tr>
 								</c:forEach>
-								<%-- <c:if test="${employee_no == calendar.employee_no}"> --%>
-								<%-- </c:if> --%>
-								<tr>
-									<td height="35" colspan="6" align="right"><input
-										id="delete_btn" type="button" value="글삭제"
-										onclick="fn_Delete()"> <input type="button"
-										value="글쓰기" onclick="document.location.href='write.do'"></td>
-								</tr>
-
 							</table>
 						</c:if>
-					</form>
 
-					<form align="center">
+						<div id="listButton">   
+							
+							<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='write.do'">
+							<%-- <c:if test="${authority && board.authority == 3}"> --%>
+							<input id="delete_btn" type="button" value="글삭제" onclick="fn_Delete()">
+							<%-- </c:if> --%>
+						
+						</div>
+						
+						<br>
+						
+						
+						<div id="page">
 						<c:if test="${list.count > 0}">
 							<c:if test="${list.p.beginPageNumber > 10}">
-								<a href="blist.do?p=${list.p.beginPageNumber-1}">이전</a>
+								<a href="list.do?p=${list.p.beginPageNumber-1}">이전</a>
 							</c:if>
 							<c:forEach var="pno" begin="${list.p.beginPageNumber}"
 								end="${list.p.endPageNumber}">
-								<a href="blist.do?p=${pno}">[${pno}]</a>
+								<a href="list.do?p=${pno}">[${pno}]</a>
 							</c:forEach>
 							<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-								<a href="blist.do?p=${list.p.endPageNumber + 1}">다음</a>
+								<a href="list.do?p=${list.p.endPageNumber + 1}">다음</a>
 							</c:if>
 						</c:if>
-					</form>
-					<br>
-
-
-
-					<div id="filter" align="center">
+						</div>
+						<br>
+						<div id="filter" align="center">
 						<select name="searchType" id="searchType"
 							style="padding: 1px 2px 3px 1px;">
 							<option value="subject" ${searchType == "subject"?"selected":""}>제목</option>
@@ -206,11 +206,9 @@ $(document).ready(function(){
 						</select> <input name="keyword" id="keyword" type="text"> 
 						<input name="btnSearch" id="btnSearch" type="button" value="검색">
 						<br>
-
-					</div>
-
-
-				</div>
+						</div>
+					</form>
+			</div>
 		
 		</section>
 		 <jsp:include page="/WEB-INF/view/foot.jsp"  flush="false"/>

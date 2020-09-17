@@ -1,0 +1,40 @@
+#update_btn, #delete_btn, #write_btn, #list_btn {
+	float: right;
+	background-color: #8EA8DB;
+	border: 0px solid;
+	border-radius: 3px;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff; 
+	padding: 5px 10px;
+	text-decoration: none;
+	margin: 14px 0px 0px 5px;
+	font-weight: bold;
+}
+
+#btnSearch:hover, #update_btn:hover, #delete_btn:hover, #write_btn:hover,#list_btn:hover {
+	background-color: #6A84B7;
+	border: 0px solid;
+	
+}
+
+#btnSearch:active, #update_btn:active, #delete_btn:active, #write_btn:active, #list_btn:active {
+	position: relative;
+	top: 2px;	
+		
+}
+
+#btnSearch:focus, #update_btn:focus, #delete_btn:focus, #write_btn:focus, #list_btn:focus {outline: 0;}
+
+
+#btnSearch { background-color: #8EA8DB; border: 0px solid; border-radius: 3px; display: inline-block; cursor: pointer; color: #ffffff; padding: 5px 10px; text-decoration: none; margin: 14px 0px 0px 0px; font-weight: bold; }
+
+
+
+#page {
+	clear: both;
+	width: 100%;
+	align: center;
+	text-align: center;
+	
+}

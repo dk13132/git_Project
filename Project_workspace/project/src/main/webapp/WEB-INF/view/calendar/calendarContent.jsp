@@ -16,15 +16,12 @@ a:link {
 	color: black;
 	text-decoration: none;
 }
-
 a:visited {
 	
 }
-
 a:active {
 	text-decoration: underline;
 }
-
 a:hover {
 	text-decoration: underline;
 	background-image: url('text_dottdeline.gif');
@@ -39,7 +36,6 @@ a:hover {
 	font-family: 굴림;
 	src: url();
 }
-
 body, td, a, div, p, pre, input, textarea {
 	font-family: 굴림;
 	font-size: 9pt;
@@ -51,7 +47,6 @@ body, td, a, div, p, pre, input, textarea {
 <script type="text/javascript">
 	$(document).ready(function() {
 		var formObj = $("form[name='readForm']");
-
 		// 삭제
 		$(".delete_btn").on("click", function() {
 			var calendar_no = $("#calendar_no").val();
@@ -63,7 +58,6 @@ body, td, a, div, p, pre, input, textarea {
 			}
 		})
 	});
-
 	function fn_fileDown(file_no) {
 		var formObj = $("form[name='readForm']");
 		$("#file_no").attr("value", file_no);
@@ -71,7 +65,6 @@ body, td, a, div, p, pre, input, textarea {
 		formObj.submit();
 	}
 </script>
-
 <body>
 	<b>일정 상세 보기</b>
 	<br>
@@ -90,14 +83,12 @@ body, td, a, div, p, pre, input, textarea {
 					<td align="left" width="185">&nbsp;${calendar.subject}</td>
 					<td align="center" width="185">작성자</td>
 					<td align="left" width="185">&nbsp;${calendar.name}</td>
-
 				</tr>
 				<tr height="30">
 					<td align="center" width="185">작성일</td>
 					<td align="left" width="555" colspan="4">&nbsp;<fmt:formatDate
 							value="${calendar.start_time}" pattern="yyyy-MM-dd (E) HH:mm" />&nbsp;~&nbsp;<fmt:formatDate
 							value="${calendar.end_time}" pattern="yyyy-MM-dd (E) HH:mm" /></td>
-
 				</tr>
 				<tr height="30">
 					<td align="center" width="185">장 소</td>
@@ -124,12 +115,9 @@ body, td, a, div, p, pre, input, textarea {
 				</c:if> <input type="button" value="닫기"
 						onclick="self.close()">&nbsp;
 					</td>
-
 				</tr>
 			</table>
 		</form>
-
 	</section>
-
 </body>
 </html>

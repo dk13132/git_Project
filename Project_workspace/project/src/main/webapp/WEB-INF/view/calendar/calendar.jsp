@@ -84,12 +84,10 @@ body {
 	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 	font-size: 14px;
 }
-
 #calendar {
 	max-width: 1100px;
 	margin: 0 auto;
 }
-
 .add-button {
 	background-color:#2C3E50;
 	border-radius:3px;
@@ -100,11 +98,9 @@ body {
 	text-decoration:none;
 	margin: 14px 0px 0px 0px;
 }
-
 .fc-day-sun {
 	color: #FF0000;
 }
-
 .fc-day-sat {
 	color: #0000FF;
 }

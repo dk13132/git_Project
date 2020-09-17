@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/file.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/tablebtn.css'/>" />
 <head>
 <title>공지사항 게시판</title>
 <script type="text/javascript"></script>
@@ -15,20 +17,20 @@
 <script>
 	function writeSave() {
 
-		if (document.update.reg_date.value == "") {
+		if (document.boardUpdate.reg_date.value == "") {
 			alert("날짜를 입력하십시요.");
-			document.update.reg_date.focus();
+			document.boardUpdate.reg_date.focus();
 			return false;
 		}
-		if (document.update.subject.value == "") {
+		if (document.boardUpdate.subject.value == "") {
 			alert("제목을 입력하십시요.");
-			document.update.subject.focus();
+			document.boardUpdate.subject.focus();
 			return false;
 		}
 
-		if (document.update.contents.value == "") {
+		if (document.boardUpdate.contents.value == "") {
 			alert("내용을 입력하십시요.");
-			document.update.contents.focus();
+			document.boardUpdate.contents.focus();
 			return false;
 		}
 
@@ -55,7 +57,7 @@
 											function() {
 												$("#fileIndex")
 														.append(
-																"<div>&nbsp;<input type='file' style='float:left;' name='file_"
+																"<div style='clear:both;'><input type='file' style='float:left;' name='file_"
 																		+ (fileIndex++)
 																		+ "'>"
 																		+ "<button type='button' style='float:left;' id='fileDelBtn'>"
@@ -89,24 +91,23 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
-					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="list.do">공지사항 게시판</a></li>
+					<li><a href="deptList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
 
-			<div id="rightcontent">
-				<b>글수정</b> <br>
+			<div id="rightcontent"><br>
+				<b>글수정</b> <br><br>
 				<form method="post" name="boardUpdate" action="deptUpdate2.do"
 					onsubmit="return writeSave()" enctype="multipart/form-data">
 					<input type="hidden" name="type" value="2"> <input
 						type="hidden" name="board_no" value="${board.board_no}"> <input
-						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
+						type="hidden" name="employee_no" value="${employee_no}"> <input
 						type="hidden" id="fileNoDel" name="fileNoDel[]" value="">
 					<input type="hidden" id="fileNameDel" name="fileNameDel[]" value="">
 
-					<table width="740" border="1" cellspacing="0" cellpadding="0"
-						align="center">
+					<table cellspacing="0" cellpadding="0" align="center">
 						<tr>
 
 							<td width="185" align="center">제 목</td>
@@ -159,12 +160,13 @@
 							</td>
 						</tr>
 
-						<tr>
-							<td colspan=2 align="center"><input type="submit"
-								value="글수정"> <input type="button" value="목록보기"
-								onclick="document.location.href='deptBoardList.do?p=${pageNum}'"></td>
-						</tr>
 					</table>
+					<div id="listButton"> 
+					<input id="list_btn" type="button" value="글목록"
+								onclick="document.location.href='deptList.do?p=${pageNum}'">
+					<input id="update_btn" type="submit"
+								value="글수정"> 
+					</div>
 				</form>
 			</div>
 		</section>

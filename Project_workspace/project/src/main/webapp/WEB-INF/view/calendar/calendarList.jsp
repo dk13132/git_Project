@@ -26,10 +26,8 @@
 		var keyword = document.getElementsByName("keyword")[0].value;
 		console.log(searchType)
 		console.log(keyword)
-
 		location.href = "searchList?p=1" + "&type=" + type + "&searchType="
 				+ searchType + "&keyword=" + keyword;
-
 	};
 </script>
 

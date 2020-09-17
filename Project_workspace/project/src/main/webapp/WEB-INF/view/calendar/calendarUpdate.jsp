@@ -42,26 +42,20 @@
 			document.calendarWrite.subject.focus();
 			return false;
 		}
-
 		if (document.calendarWrite.contents.value == "") {
 			alert("내용을 입력하세요.");
 			document.calendarWrite.contents.focus();
 			return false;
 		}
 	}
-
 	$(document)
 			.ready(
 					function() {
 						var formObj = $("form[name='updateForm']");
-
 						$(document).on("click", "#fileDel", function() {
 							$(this).parent().remove();
-
 						});
-
 						fn_addFile();
-
 						function fn_addFile() {
 							var fileIndex = 1;
 							//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
@@ -85,7 +79,6 @@
 					});
 	var fileNoArry = new Array();
 	var fileNameArry = new Array();
-
 	function fn_del(value, name) {
 		fileNoArry.push(value);
 		fileNameArry.push(name);

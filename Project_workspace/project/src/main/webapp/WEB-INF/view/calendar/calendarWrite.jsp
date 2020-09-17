@@ -48,7 +48,6 @@
 			document.calendarWrite.subject.focus();
 			return false;
 		}
-
 		if (document.calendarWrite.contents.value == "") {
 			alert("내용을 입력하세요.");
 			document.calendarWrite.contents.focus();
@@ -61,9 +60,7 @@
 			.ready(
 					function() {
 						var formObj = $("form[name='calendarWrite']");
-
 						fn_addFile();
-
 						function fn_addFile() {
 							var fileIndex = 1;
 							//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
@@ -83,7 +80,6 @@
 											});
 							$(document).on("click", "#fileDelBtn", function() {
 								$(this).parent().remove();
-
 							});
 						}
 					});

@@ -4,9 +4,10 @@
 
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/file.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/tablebtn.css'/>" />
 <head>
 <title>공지사항 게시판</title>
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -16,20 +17,20 @@
 <script>
 	function writeSave() {
 
-		if (document.write.reg_date.value == "") {
+		if (document.boardWrite.reg_date.value == "") {
 			alert("날짜를 입력하십시요.");
-			document.write.reg_date.focus();
+			document.boardWrite.reg_date.focus();
 			return false;
 		}
-		if (document.write.subject.value == "") {
+		if (document.boardWrite.subject.value == "") {
 			alert("제목을 입력하십시요.");
-			document.write.subject.focus();
+			document.boardWrite.subject.focus();
 			return false;
 		}
 
-		if (document.write.contents.value == "") {
+		if (document.boardWrite.contents.value == "") {
 			alert("내용을 입력하십시요.");
-			document.write.contents.focus();
+			document.boardWrite.contents.focus();
 			return false;
 		}
 	}
@@ -51,7 +52,7 @@
 											function() {
 												$("#fileIndex")
 														.append(
-																"<div><input type='file' style='float:left;' name='file_"
+																"<div style='clear:both;'><input type='file' style='float:left;' name='file_"
 																		+ (fileIndex++)
 																		+ "'>"
 																		+ "<button type='button' style='float:left;' id='fileDelBtn'>"
@@ -76,33 +77,32 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
-					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="list.do">공지사항 게시판</a></li>
+					<li><a href="deptList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
 
 			<div id="rightcontent">
-				<b>글쓰기</b> <br>
-				<form method="POST" name="boardWrite" action="write2.do"
-					enctype="multipart/form-data" onsubmit="return writeSave()">
-					<input type="hidden" name="type" value="1"> <input
-						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
-						type="hidden" name="board_no" value="${dto.board_no}"> <input
-						type="hidden" name="board_no" value="${dto.readcount}">
+				<br> <b>글쓰기</b> <br><br>
+				<form method="POST" name="boardWrite" action="write2.do" enctype="multipart/form-data" onsubmit="return writeSave()">
+				
+					<input type="hidden" name="type" value="1"> 
+					
+					<input type="hidden" name="employee_no" value="${employee_no}"> 
+						<input type="hidden" name="board_no" value="${dto.board_no}"> 
+						<input type="hidden" name="readcount" value="${dto.readcount}">
 
-					<table width="740" border="1" cellspacing="0" cellpadding="0"
+					<table cellspacing="0" cellpadding="0"
 						align="center">
 
 						<tr>
 							<td width="185" align="center">제 목</td>
-							<td width="555"><input type="text" size="40" maxlength="50"
-								name="subject"></td>
-							<%-- <td width="185" align="center">작성자</td>
-				<td align="left" width="555">${board.name} --%>
-							<td><input type="hidden" name="employee_no"
-								value="${mc_employee_no}"></td>
+							<td width="555"><input type="text" size="40" maxlength="50" name="subject"></td>
+							
+							
 						</tr>
+						
 
 						<tr>
 							<td width="185" align="center">날 짜</td>
@@ -120,16 +120,17 @@
 						<tr>
 							<td width="185" align="center">첨부파일</td>
 							<td align="left" width="555" id="fileIndex">&nbsp;
-								<button type="button" class="fileAdd_btn">파일추가</button>
+								<button type="button" class="fileAdd_btn" style="padding: .1em .5em;">파일 추가</button>
 								<br>
 							</td>
 						</tr>
-						<tr>
-							<td colspan=2 align="center"><input type="submit" value="확인">
-								<input type="button" value="취소"
-								OnClick="window.location='blist.do'"></td>
-						</tr>
+						
 					</table>
+					<div id="listButton">
+					<input type="submit" id="write_btn" value="확인">
+								<input id="list_btn" type="button" value="취소"
+								OnClick="window.location='list.do'">
+					</div>
 				</form>
 			</div>
 		</section>
