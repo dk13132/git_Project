@@ -19,7 +19,7 @@ h4 {margin:10px 0px 5px 0px;}
 .naversm{width: 98%;}
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/smarteditor/js/service/HuskyEZCreator.js"></script>
+<script src="<%=request.getContextPath()%>/resources/smarteditor/js/service/HuskyEZCreator.js"></script>
 
 <script type="text/javascript">
 	function winOpen() {
@@ -110,7 +110,7 @@ $(document).ready(function() {
             oAppRef: oEditors,
             elPlaceHolder: "naversm", //textarea에서 지정한 id와 일치해야 합니다. 
             //SmartEditor2Skin.html 파일이 존재하는 경로
-            sSkinURI : "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
+            sSkinURI : "<%=request.getContextPath()%>/resources/smarteditor/SmartEditor2Skin.html",
             htParams: {
                 // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
                 bUseToolbar: true,
