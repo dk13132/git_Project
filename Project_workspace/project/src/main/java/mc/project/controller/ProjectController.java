@@ -3,6 +3,8 @@ package mc.project.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,6 @@ public class ProjectController {
 	@Autowired
 	ProjectService service;
 
-	// 게시물 목록 + 페이징 추가 + 검색
 	@RequestMapping(value = "/projectSearch.do")
 	public String proList(ProjectDto dto,
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
@@ -46,15 +47,12 @@ public class ProjectController {
 		return "project/projectSearch";
 	}
 	
-	
-	//게시판 글 작성.. 뷰에서 작성한 글 가지고 리스트로 이동
 	@RequestMapping(value = "/proWrite.do")
 	public String proWrite(ProjectDto dto) throws Exception {
 		service.write(dto);
 		return "redirect:projectSearch.do";
 	}
 	
-	//뷰 -> 컨트롤러로 보내줌
 	@RequestMapping(value = "/projectWrite.do")
 	public String writeFrom(Model m) throws Exception {
 		List<Map<String, Object>> list = service.getNameList();
@@ -75,7 +73,6 @@ public class ProjectController {
 		return "redirect:projectList.do";
 	}
 	
-	// 체크박스 선택, 삭제
 	@ResponseBody
 	@RequestMapping(value = "/checkBoxDelete.do")
 	public void checkBoxDelete(@RequestParam(value = "project_no") int project_no) throws Exception {

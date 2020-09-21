@@ -2,6 +2,7 @@ package mc.employee.Service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,38 +23,49 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeDao dao;
-
+	
 	// �궗�썝 �젙蹂� 議고쉶
+	
 	public List<Object> sltEmp(EmployeeDto dto) throws Exception {
-		List<Object> list = null;
-
-		if (dto.getDept_no() != null || dto.getPosition() != null) {
-			if (dto.getDept_no() != null && dto.getPosition() == null || dto.getPosition() == "") {
-				list = dao.sltDptFlt(dto);
-			} else if (dto.getDept_no() == null && dto.getPosition() != null || dto.getPosition() != "") {
-				list = dao.sltPstFlt(dto);
-			} else if (dto.getDept_no() != null && dto.getPosition() != null || dto.getPosition() != "") {
+		
+		List<Object> list = new ArrayList<Object>();
+		
+		if(dto.getDept_no() != null) {
+			if(dto.getPosition() != null || dto.getPosition() != "") {
 				list = dao.sltAllFlt(dto);
 			}
-		} else {
-			list = dao.sltEmp(dto);
+			if(dto.getPosition() == null || dto.getPosition() == ""){
+				list = dao.sltDptFlt(dto);
+			}
 		}
+		if(dto.getDept_no() == null) {
+			if(dto.getPosition() != null ||  dto.getPosition() != "") {
+				list = dao.sltPstFlt(dto);
+			}
+			if(dto.getPosition() == null || dto.getPosition() == ""){
+				list = dao.sltEmp();
+			}
+		}
+		
+		
 		return list;
 	}
+
+
 
 	// �궗�썝 �젙蹂� �긽�꽭 議고쉶
 	public EmployeeDto sltDtlEmp(EmployeeDto dto) throws Exception {
 		return dao.sltEmpDtl(dto);
 	}
 
-	// �궗�썝 �젙蹂� �긽�꽭 議고쉶 - 遺��꽌 �젙蹂�
+	// �궗�썝 �젙蹂� 議고쉶 - 遺��꽌 �젙蹂�
 	public List<Map<String, EmployeeDto>> sltbxDno() throws Exception {
 		return dao.sltbxDno();
 	}
 
 	// �궗�썝 �젙蹂� �닔�젙
 	public void udtEmp(EmployeeDto dto, MultipartHttpServletRequest request) throws Exception {
-
+		// �몢媛� 蹂�寃쏀븯�뒗 遺�遺� 以묒뿉 �븯�굹媛� �뾾嫄곕굹 �븯硫댁� �뾾�뒗嫄� �떎�뻾 �븞�릺寃뚮걫.
 		dao.udtEmp(dto);
 
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/employee/");
@@ -70,8 +82,9 @@ public class EmployeeService {
 				mf.transferTo(new File(path));
 			}
 
-			dao.udtEmpPt(dto);
-
+			{
+				dao.udtEmpPt(dto);
+			}
 		}
 	}
 
@@ -94,7 +107,7 @@ public class EmployeeService {
 
 	// �궗�썝 �벑濡�
 	public void istEmp(EmployeeDto dto) throws Exception {
-
+		
 		Random rand = new Random();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
@@ -117,7 +130,7 @@ public class EmployeeService {
 
 	// �궗�썝 �궗吏� �벑濡�
 	public void istEmpPt(EmployeeDto dto, MultipartHttpServletRequest request) throws Exception {
-
+		
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/employee/");
 		List<MultipartFile> fileList = request.getFiles("photo");
 
@@ -131,7 +144,6 @@ public class EmployeeService {
 				String path = rootPath + mf.getOriginalFilename();
 				mf.transferTo(new File(path));
 			}
-
 			dao.istEmpPt(dto);
 		}
 	}
@@ -139,4 +151,5 @@ public class EmployeeService {
 	public EmployeeDto deptInfo(EmployeeDto dto) {
 		return dao.deptInfo(dto);
 	}
+	
 }

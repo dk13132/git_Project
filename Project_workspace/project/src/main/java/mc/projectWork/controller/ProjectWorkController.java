@@ -29,7 +29,6 @@ public class ProjectWorkController {
 	@Autowired
 	ProjectWorkService service;
 
-	// 寃뚯떆臾� 紐⑸줉 + �럹�씠吏� 異붽� + 寃��깋 + �뙆�씪
 	@RequestMapping(value = "/wlist.do")
 	public String list(ProjectWorkDto dto,
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
@@ -45,35 +44,30 @@ public class ProjectWorkController {
 		
 		m.addAttribute("employee_no", dto.getEmployee_no());
 		m.addAttribute("name", dto.getName());
-		m.addAttribute("list", list);	//list�뿉 �떞湲� �뜲�씠�꽣瑜� "list"�씪�뒗 �씠由꾩쑝濡� �떞�뒗�떎.
+		m.addAttribute("list", list);
 		m.addAttribute("searchType", searchType);
 		m.addAttribute("keyword", keyword);
 		m.addAttribute("number", number);
 				
-		//�뙆�씪 selectFileList�뿉 �뙆�씪誘명꽣媛�(寃뚯떆湲� 議고쉶�븳 踰덊샇)�쓣 �꽔�뼱二쇨퀬 Map���엯�쓽 List���엯 fileList�뿉 �꽔�뼱以띾땲�떎.
-		//model.addAttribute瑜� �씠�슜�븯�뿬 fileList瑜� file�씠�씪�뒗 �씠由꾩쑝濡� jsp�뿉 媛믪쓣 蹂대궪以�鍮꾨�� �빀�땲�떎.
 		List<Map<String, Object>> fileList = service.selectFileList(dto.getWork_no());
 		m.addAttribute("file", fileList);
 			
 		return "projectWork/projectWorkSearch";
 	}
 
-	//湲� �옉�꽦履쎌뿉 泥⑤��뙆�씪�쓽 �뙆�씪誘명꽣媛믪쓣 諛쏆쓣�닔 �엳�뒗 MultipartHttpServlertRequest mpRequest瑜� 異붽�,
-	@RequestMapping(value = "/write.do")
+	@RequestMapping(value = "/proWorkWrite.do")
 	public String write(Model m, ProjectWorkDto dto, MultipartHttpServletRequest mpRequest) throws Exception{
-		service.write(dto, mpRequest);//�꽌鍮꾩뒪瑜� �떎�뻾�븷�븣�뿉 諛쏅뒗 �뙆�씪誘명꽣(mpRequest)�룄 異붽��빐以띾땲�떎.
-		return "redirect:list.do";
+		service.write(dto, mpRequest);
+		return "redirect:wlist.do";
 	}
 	
 	@RequestMapping(value = "/projectWorkWrite.do")
 	public String projectWorkWrite(Model m) throws Exception{
-		//�떞�떦�옄 由ъ뒪�듃 - 紐⑤뜽 異붽�
 		List<Map<String, Object>> list = service.getNameList();
 		m.addAttribute("list", list);
 		return "projectWork/projectWorkWrite";
 	}
 	
-	// 寃뚯떆�뙋 �닔�젙
 	@RequestMapping(value = "/projectWorkUpdate.do")
 	public String projectWorkUpdate(int work_no, int p, Model m, ProjectWorkDto dto) throws Exception{
 		//session.setAttribute("employee_no", 2);
@@ -91,7 +85,7 @@ public class ProjectWorkController {
 		return "projectWork/projectWorkUpdate";
 	}
 	
-	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/proWorkUpdate.do", method = RequestMethod.POST)
 	public String update(ProjectWorkDto dto, 
 						@ModelAttribute("search") Search search, 
 						RedirectAttributes rttr,
@@ -103,9 +97,7 @@ public class ProjectWorkController {
 		rttr.addAttribute("searchType", search.getSearchType());
 		rttr.addAttribute("keyword", search.getKeyword());
 
-		System.out.println("#### Cont2 : update");
-		
-		return "redirect:list.do";
+		return "redirect:wlist.do";
 	}
 	
 	@RequestMapping(value = "/wcontent.do")
@@ -121,7 +113,7 @@ public class ProjectWorkController {
 		return "projectWork/projectWorkContent";
 	}
 	
-	@RequestMapping(value="/fileDown.do")
+	@RequestMapping(value="/proFileDown.do")
 	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
 		Map<String, Object> resultMap = service.selectFileInfo(map);
 		String storedFileName = (String) resultMap.get("stored_file_name");
@@ -137,13 +129,12 @@ public class ProjectWorkController {
 		response.getOutputStream().close();
 	}
 	
-	@RequestMapping(value = "/delete.do")
+	@RequestMapping(value = "/proWorkDelete.do")
 	public String deleteForm(@RequestParam(value ="work_no") int work_no) {
 		service.delete(work_no);
-		return "redirect:list.do"; 
+		return "redirect:wlist.do"; 
 	}
 	
-	// 泥댄겕諛뺤뒪 �꽑�깮, �궘�젣
 	@ResponseBody
 	@RequestMapping(value = "/checkDelete.do")
 	public void checkDelete(@RequestParam(value = "work_no") int work_no) throws Exception {

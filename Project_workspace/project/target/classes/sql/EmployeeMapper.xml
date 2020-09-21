@@ -6,29 +6,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "employee">
 
 	<!-- 전체 사원 정보 조회 -->
-	<select id = "sltEmp" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
+	<select id = "sltEmp" resultType = "mc.employee.Dto.EmployeeDto">
 		select * from employee e, department d where e.dept_no = d.dept_no
 	</select>
 	
 	<!-- 사원 조회 부서 필터 -->
 	<select id = "sltDptFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
 		select * 
-		from employee e natural join department d 
-		where d.dept_no = #{dept_no}
+		from employee e, department d 
+		where e.dept_no = d.dept_no and e.dept_no = #{dept_no}
 	</select>
 
 	<!-- 사원 조회 직급 필터 -->
 	<select id = "sltPstFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
 		select * 
-		from employee e natural join department d 
-		where e.position = #{position}
+		from employee e, department d 
+		where e.dept_no = d.dept_no and e.position = #{position}
 	</select>
 	
 	<!-- 조회 둘다 했을 때 -->
 	<select id = "sltAllFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
 		select * 
-		from employee e natural join department d
-		where e.position = #{position} and d.dept_no = #{dept_no}
+		from employee e, department d 
+		where e.dept_no = d.dept_no and e.position = #{position} and d.dept_no = #{dept_no}
 	</select>
 	
 	

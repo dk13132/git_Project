@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="write" parameterType="mc.project.model.ProjectDto" useGeneratedKeys="true" keyProperty="project_no">	
 		insert into
 		project(employee_no, subject, start_time, end_time, contents, progress)
-			values(1, #{subject}, #{start_time}, #{end_time}, #{contents}, #{progress})
+			values(#{employee_no}, #{subject}, #{start_time}, #{end_time}, #{contents}, #{progress})
 	</insert>
 	<!-- 2. 프로젝트 수정 -->
 	<update id="update" parameterType="mc.project.model.ProjectDto">
