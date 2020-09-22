@@ -230,7 +230,7 @@
 			return false;
 		}
 		window.open('updateForm.do?delete_dept=' + update_dept, 'update_dept',
-				'width=560,height=300,location=no,status=no,scrollbars=yes');
+				'width=660,height=300,location=no,status=no,scrollbars=yes');
 
 	}
 </script>

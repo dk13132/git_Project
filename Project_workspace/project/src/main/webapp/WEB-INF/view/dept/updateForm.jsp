@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css?ver=1'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css?ver=1'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/deptcs.css?ver=1'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/deptcs.css'/>" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 </head>
