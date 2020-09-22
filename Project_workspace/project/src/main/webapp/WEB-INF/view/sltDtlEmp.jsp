@@ -29,8 +29,7 @@
 			<div id="leftcontent">
 
 				<ul>
-					<li><a class="active" href="conPw.do">내 정보 조회</a></li>
-					<li><a href="">내 근태 조회</a></li>
+					<li><a class="active" href="sltEmp.do">사원 정보 조회</a></li>
 				</ul>
 			</div>
 			<div id="rightcontent" style="padding-top:3%; border-left:2px solid #f0f0f0; padding-left:10%; padding-bottom:10%;width: 750px; background: white;min-height: 600px;">

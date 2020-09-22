@@ -19,68 +19,69 @@ import mc.myInfo.Service.MyInfoService;
 @Controller
 public class MyInfoController {
 
-	@Autowired
-	private MyInfoService myInfoService;
+   @Autowired
+   private MyInfoService myInfoService;
 
-	// 메인 > 내 정보 확인
-	@GetMapping("/conPw.do")
-	public String goConPw(MyInfoDto dto) throws Exception {
-		return "conPw";
-	}
+   // 메인 > 내 정보 확인
+   @GetMapping("/conPw.do")
+   public String goConPw(MyInfoDto dto) throws Exception {
+      return "conPw";
+   }
 
-	// 내 정보 확인 > 내 정보 조회
-	@PostMapping("/conPw.do")
-	public String confirm(Model model,HttpSession hs, @ModelAttribute MyInfoDto dto) throws Exception {
+   // 내 정보 확인 > 내 정보 조회
+   @PostMapping("/conPw.do")
+   public String confirm(Model model,HttpSession hs, @ModelAttribute MyInfoDto dto) throws Exception {
+      
+       dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
+       
+      
+      MyInfoDto vDto = myInfoService.confirmPw(dto);
 
-		dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
-		
-		MyInfoDto vDto = myInfoService.confirmPw(dto);
+      model.addAttribute("myInfo", vDto);
 
-		model.addAttribute("myInfo", vDto);
+      int rsint;
+      if (vDto == null) {
+         rsint = 1;
+         model.addAttribute("rsint", rsint);
+         return "conPw"; // 비밀번호 다를 경우 같은 페이지.
+      } else {
+         return "myPage"; // 비밀번호 같을 경우 정보 조회 페이지 이동
+      }
+   }
 
-		int rsint;
-		if (vDto == null) {
-			rsint = 1;
-			model.addAttribute("rsint", rsint);
-			return "conPw"; // 비밀번호 다를 경우 같은 페이지.
-		} else {
-			return "myPage"; // 비밀번호 같을 경우 정보 조회 페이지 이동
-		}
-	}
+   // 비밀번호 재조회
+   @PostMapping("/reSltPw.do")
+   public String reSltPw(Model model,HttpSession hs, @ModelAttribute MyInfoDto dto) throws Exception {
+      
+      dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
 
-	// 비밀번호 재조회
-	@PostMapping("/reSltPw.do")
-	public String reSltPw(Model model, HttpSession hs, @ModelAttribute MyInfoDto dto) throws Exception {
-		
-		dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
+      MyInfoDto vDto = myInfoService.sltInfo(dto);
+      model.addAttribute("myInfo", vDto);
 
-		MyInfoDto vDto = myInfoService.sltInfo(dto);
-		model.addAttribute("myInfo", vDto);
+      return "udtPw";
+   }
 
-		return "udtPw";
-	}
+   // 비밀번호 변경
+   @ResponseBody
+   @PostMapping("/udtPw.do")
+   public Map<String, Object> udtPw(HttpSession hs, @ModelAttribute MyInfoDto dto) throws Exception {
+      dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
+      Map<String, Object> resultMap = myInfoService.chgPw(dto);
+      return resultMap;
 
-	// 비밀번호 변경
-	@ResponseBody
-	@PostMapping("/udtPw.do")
-	public Map<String, Object> udtPw(@ModelAttribute MyInfoDto dto, HttpSession hs) throws Exception {
-		dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
-		Map<String, Object> resultMap = myInfoService.chgPw(dto);
-		return resultMap;
+   }
 
-	}
+   // 내 정보 수정
+   @PostMapping("/myPage.do")
+   public String updInfo(Model model,HttpSession hs, MultipartHttpServletRequest request, @ModelAttribute MyInfoDto dto)
+         throws Exception {
+      dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
 
-	// 내 정보 수정
-	@PostMapping("/myPage.do")
-	public String updInfo(Model model, HttpSession hs, MultipartHttpServletRequest request, @ModelAttribute MyInfoDto dto)
-			throws Exception {
-		dto.setEmployee_no(Integer.parseInt((String)hs.getAttribute("mc_employee_no")));
+      myInfoService.udtInfo(dto, request);
+      MyInfoDto vDto = myInfoService.sltInfo(dto);
+      model.addAttribute("myInfo", vDto);
 
-		myInfoService.udtInfo(dto, request);
-		MyInfoDto vDto = myInfoService.sltInfo(dto);
-		model.addAttribute("myInfo", vDto);
-
-		return "myPage";
-	}
+      return "myPage";
+   }
 
 }

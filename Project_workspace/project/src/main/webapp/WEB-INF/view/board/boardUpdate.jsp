@@ -95,8 +95,8 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -172,7 +172,7 @@
 					
 					<div id="listButton">
 					<input id="list_btn" type="button" value="글목록"
-								onclick="document.location.href='list.do?p=${pageNum}'">
+								onclick="document.location.href='blist.do?p=${pageNum}'">
 					<input id="update_btn" type="submit"
 								value="글수정"> 
 					</div>

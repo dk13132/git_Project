@@ -65,9 +65,12 @@
 				empSelectItem[i].selected = true;
 			}
 		}
+
+		function cancel(){
+			self.close();
+		}
 	</script>
 	<h1>채팅방 생성</h1>
-	<h2>취소는 F5키를 누르시면 됩니다. ^^</h2>
 	<input type="hidden" id="myNo" value="${mc_employee_no}">
 	<form name="form" method="post" onsubmit="onSubmit()">
 		채팅방 이름 : <input type="text" name="chat_name"> <br> 부서 선택:
@@ -80,6 +83,7 @@
 		</select> <input type="button" value=">>" onclick="addBtn()"> <select size="6"  style="width:100px;height:100px;" id="empSelect" name="empSelect" multiple="multiple">
 		</select> <br>
 		<input type="submit" value="등록" />
+		<input type="button" value="취소" onclick="cancel()" />
 	</form>
 </body>
 </html>

@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<style>
+th, td { text-align: center; padding: 7px;}
+</style>
 <head>
 <link rel="icon" href="data:;base64">
 <title>마이페이지 입니다.</title>
@@ -23,7 +26,7 @@
 					<li><a href="">내 근태 조회</a></li>
 				</ul>
 			</div>
-		<div id="rightcontent" style="padding-top:3%; border-left:2px solid #f0f0f0; padding-left:10%; padding-bottom:10%;width: 750px; background: white;min-height: 600px;">
+		<div id="rightcontent" style="text-align: center; padding-top:3%; border-left:2px solid #f0f0f0; padding-left:10%; padding-bottom:10%;width: 750px; background: white;min-height: 600px;">
 			
 		<form id="Info"  enctype="multipart/form-data" >
 		<input type="hidden" id="employee_no" name = "employee_no" value="${myInfo.employee_no}" > 
@@ -65,15 +68,15 @@
 			</tr>
 			<tr>
 				<td width="200" height="50" align="center">부서 주소</td>
-				<td width="400" colspan="2" height="50" align="left" id="dept_addr">${myInfo.dept_addr}</td>
+				<td width="400" colspan="2" height="50" style="text-align:left;" id="dept_addr">${myInfo.dept_addr}</td>
 			</tr>
 			<tr>
 				<td width="200" height="50" align="center">부서 전화번호</td>
-				<td width="400" height="50" colspan="2" align="left" id="dept_phoneNum">${myInfo.dept_phoneNum}</td>
+				<td width="400" height="50" colspan="2" style="text-align:left;" id="dept_phoneNum">${myInfo.dept_phoneNum}</td>
 			</tr>
 			<tr>
 				<td width="200" height="50" align="center">부서 팩스번호</td>
-				<td width="400" height="50" width="150" colspan="2" align="left" id="dept_fax">${myInfo.fax}</td>
+				<td width="400" height="50" width="150" colspan="2" style="text-align:left;" id="dept_fax">${myInfo.fax}</td>
 			</tr>
 			<tr>
 				<td width="200" height="50" align="center">E-Mail</td>

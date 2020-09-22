@@ -77,8 +77,8 @@
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -129,7 +129,7 @@
 					<div id="listButton">
 					<input type="submit" id="write_btn" value="확인">
 								<input id="list_btn" type="button" value="취소"
-								OnClick="window.location='list.do'">
+								OnClick="window.location='blist.do'">
 					</div>
 				</form>
 			</div>

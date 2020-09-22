@@ -70,8 +70,8 @@ a:hover {
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -115,7 +115,7 @@ a:hover {
 					</table>
 					<div id="listButton"> 
 						<input id="list_btn" type="button" value="글목록"
-							onclick="document.location.href='deptList.do?type=${board.type}&p=${pageNum}'">
+							onclick="document.location.href='deptBoardList.do?type=${board.type}&p=${pageNum}'">
 						<c:if test="${employee_no == board.employee_no}">
 							<input id="update_btn" type="button" value="글수정"
 								onclick="document.location.href='deptUpdate.do?board_no=${board.board_no}&p=${pageNum}'">

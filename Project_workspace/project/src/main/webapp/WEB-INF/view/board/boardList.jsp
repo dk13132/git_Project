@@ -108,8 +108,8 @@ $(document).ready(function(){
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -186,14 +186,14 @@ $(document).ready(function(){
 						<div id="page">
 						<c:if test="${list.count > 0}">
 							<c:if test="${list.p.beginPageNumber > 10}">
-								<a href="list.do?p=${list.p.beginPageNumber-1}">이전</a>
+								<a href="blist.do?p=${list.p.beginPageNumber-1}">이전</a>
 							</c:if>
 							<c:forEach var="pno" begin="${list.p.beginPageNumber}"
 								end="${list.p.endPageNumber}">
-								<a href="list.do?p=${pno}">[${pno}]</a>
+								<a href="blist.do?p=${pno}">[${pno}]</a>
 							</c:forEach>
 							<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-								<a href="list.do?p=${list.p.endPageNumber + 1}">다음</a>
+								<a href="blist.do?p=${list.p.endPageNumber + 1}">다음</a>
 							</c:if>
 						</c:if>
 						</div>

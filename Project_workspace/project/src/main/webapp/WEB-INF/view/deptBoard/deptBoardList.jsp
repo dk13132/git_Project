@@ -104,8 +104,8 @@ $(document).ready(function(){
 
 			<div id="leftcontent">
 				<ul>
-					<li><a class="active" href="list.do">공지사항 게시판</a></li>
-					<li><a href="deptList.do?type=2">부서 게시판</a></li>
+					<li><a class="active" href="blist.do">공지사항 게시판</a></li>
+					<li><a href="deptBoardList.do?type=2">부서 게시판</a></li>
 				</ul>
 			</div>
 
@@ -174,25 +174,25 @@ $(document).ready(function(){
 							</c:forEach>
 							
 					</table>
-					</c:if>
 					<div id="listButton"> 
 						<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='write.do'">
 						<c:if test="${authority && board.authority == 3}">
 						<input id="delete_btn" type="button" value="글삭제" onclick="fn_Delete()">
 						</c:if>
 					</div>
+					</c:if>
 					<br>
 					<div id="page">
 					<c:if test="${list.count > 0}">
 						<c:if test="${list.p.beginPageNumber > 10}">
-							<a href="deptList.do?p=${list.p.beginPageNumber-1}">이전</a>
+							<a href="deptBoardList.do?p=${list.p.beginPageNumber-1}">이전</a>
 						</c:if>
 						<c:forEach var="pno" begin="${list.p.beginPageNumber}"
 							end="${list.p.endPageNumber}">
-							<a href="deptList.do?p=${pno}">[${pno}]</a>
+							<a href="deptBoardList.do?p=${pno}">[${pno}]</a>
 						</c:forEach>
 						<c:if test="${list.p.endPageNumber < list.p.totalPageCount}">
-							<a href="deptList.do?p=${list.p.endPageNumber + 1}">다음</a>
+							<a href="deptBoardList.do?p=${list.p.endPageNumber + 1}">다음</a>
 						</c:if>
 					</c:if>
 					</div>
