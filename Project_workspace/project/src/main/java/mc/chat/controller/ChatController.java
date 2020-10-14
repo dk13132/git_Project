@@ -87,12 +87,22 @@ public class ChatController {
 		return json.toJson(messageList);
 	}
 	
+	/*
+	 * @GetMapping(value = "/chat_invitation.do" ,produces =
+	 * "text/plain;charset=UTF-8")
+	 * 
+	 * @ResponseBody public String chat_invitationForm(int chat_no) { List<DeptDto>
+	 * deptList = service.deptList(); Gson json = new Gson(); return
+	 * json.toJson(deptList); }
+	 */
+	
 	@GetMapping(value = "/chat_invitation.do" ,produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String chat_invitationForm(int chat_no) {
+	public ModelAndView chat_invitationForm(int chat_no) {
+		ModelAndView mav = new ModelAndView("chat_invitation");
 		List<DeptDto> deptList = service.deptList();
-		Gson json = new Gson();
-		return json.toJson(deptList);
+		mav.addObject("chat_no", chat_no);
+		mav.addObject("deptList", deptList);
+		return mav;
 	}
 	
 	@PostMapping(value = "/chat_invitation.do", produces = "text/plain;charset=UTF-8")

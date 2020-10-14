@@ -4,6 +4,12 @@
 <html>
 <head>
 <title>채팅방 초대</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/depinfo.css'/>" />
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 	function selectDept() {
@@ -75,8 +81,9 @@
 		</select><br> 채팅방 초대 사원 추가 <br> <select size="6"
 			style="width: 100px; height: 100px;" id="emp" name="emp"
 			multiple="multiple">
-		</select> <input type="button" value=">>" onclick="addBtn()"> <select
-			size="6" style="width: 100px; height: 100px;" id="empSelect"
+		</select> <input type="button" value=">>" onclick="addBtn()"
+		style="position: absolute; top: 140px;"> <select
+			size="6" style="width: 100px; height: 100px; margin-left: 50px;" id="empSelect"
 			name="empSelect" multiple="multiple">
 		</select> <br> <input type="submit" value="초대" />
 	</form>

@@ -77,10 +77,6 @@ public class Meeting_roomService {
 
 		Timestamp start_time = Timestamp.valueOf(start);
 		Timestamp end_time = Timestamp.valueOf(end);
-		System.out.println(data.getRoom_no());
-		System.out.println(data.getEmployee_no());
-		System.out.println(data.getPersonnel());
-		System.out.println(data.getPurpose());
 		data.setReservation_no(dao.getLastNo());
 		data.setStart_time(start_time);
 		data.setEnd_time(end_time);

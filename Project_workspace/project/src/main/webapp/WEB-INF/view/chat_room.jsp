@@ -41,23 +41,12 @@ th:last-child { background-color: #767676; color: white; border-radius: 0px 3px 
 	<table id="headCount" border="1"
 		style="width: 180px; border-collapse: collapse; margin-bottom: 5px;">
 	</table>
-	<table border="1" style="width: 180px; border-collapse: collapse;">
-		<tr>
-			<th>채팅초대</th>
-		</tr>
-		<tr>
-			<td height="210" valign="top">
-				<div id="dept"></div>
-			</td>
-		</tr>
-		<tr>
-			<td align="center"><input type=button id="addEmp"
-				value="선택한 상대 초대" onclick="openWindowInvitation()"></td>
-		</tr>
-	</table>
+	<input type=button id="addEmp"
+		value="선택한 상대 초대" onclick="openWindowInvitation()">
+
 </body>
 <script type="text/javascript">
-	let sock = new SockJS("http://localhost:8080/mc/echo");
+	let sock = new SockJS("echo");
 	sock.onopen = function() {
 		sendMessage(0);
 	};
@@ -102,8 +91,13 @@ th:last-child { background-color: #767676; color: white; border-radius: 0px 3px 
 			alert(e.responseText);
 		})
 		peopleList();
-		loadDept();
 	})
+	
+	function openWindowInvitation(){
+		var chat_no = $('#chat_no').val();
+		var url = "chat_invitation.do?chat_no=" + chat_no;
+		window.open(url, "", "width=400,height=400,left=600");
+	}
 	
 	function deptClick(dept_no){
 		var url = "empInvitationList.do";

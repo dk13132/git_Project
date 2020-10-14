@@ -4,6 +4,12 @@
 <html>
 <head>
 <title>채팅방 생성</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/depinfo.css'/>" />
 </head>
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -66,7 +72,7 @@
 			}
 		}
 
-		function cancel(){
+		function cancel() {
 			self.close();
 		}
 	</script>
@@ -79,11 +85,15 @@
 			<c:forEach var="item" items="${deptList}">
 				<option value="${item.dept_no}">${item.dept_name}</option>
 			</c:forEach>
-		</select> <br> 채팅방 초대 사원 추가 <br><select size="6" style="width:100px;height:100px;" id="emp" name="emp" multiple="multiple">
-		</select> <input type="button" value=">>" onclick="addBtn()"> <select size="6"  style="width:100px;height:100px;" id="empSelect" name="empSelect" multiple="multiple">
-		</select> <br>
-		<input type="submit" value="등록" />
-		<input type="button" value="취소" onclick="cancel()" />
+		</select> <br> 채팅방 초대 사원 추가 <br>
+		<select size="6" style="width: 100px; height: 100px;" id="emp"
+			name="emp" multiple="multiple">
+		</select> <input type="button" value=">>"
+			style="position: absolute; top: 166px;" onclick="addBtn()"> <select
+			size="6" style="width: 100px; height: 100px; margin-left: 50px;"
+			id="empSelect" name="empSelect" multiple="multiple">
+		</select> <br> <input type="submit" value="등록" /> <input type="button"
+			value="취소" onclick="cancel()" />
 	</form>
 </body>
 </html>
