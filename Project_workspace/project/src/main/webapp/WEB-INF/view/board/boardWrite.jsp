@@ -89,7 +89,7 @@
 				
 					<input type="hidden" name="type" value="1"> 
 					
-					<input type="hidden" name="employee_no" value="${employee_no}"> 
+					<input type="hidden" name="employee_no" value="${mc_employee_no}"> 
 						<input type="hidden" name="board_no" value="${dto.board_no}"> 
 						<input type="hidden" name="readcount" value="${dto.readcount}">
 

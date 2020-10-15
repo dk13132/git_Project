@@ -109,7 +109,7 @@
 					 <input type="hidden" name="type"
 						value="1"> <input type="hidden" name="board_no"
 						value="${board.board_no}"> <input type="hidden"
-						name="employee_no" value="${employee_no}"> <input
+						name="employee_no" value="${mc_employee_no}"> <input
 						type="hidden" id="fileNoDel" name="fileNoDel[]" value="">
 					<input type="hidden" id="fileNameDel" name="fileNameDel[]" value="">
 					<!-- <input type="hidden" name="_method" value="put" /> -->

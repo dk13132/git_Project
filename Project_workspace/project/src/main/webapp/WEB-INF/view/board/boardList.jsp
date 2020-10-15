@@ -131,9 +131,7 @@ $(document).ready(function(){
 								</tr>
 								
 							</table>
-							<div id="listButton">
-								<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='write.do'">
-							</div>
+							
 						</c:if>
 
 						<c:if test="${list.count > 0}">

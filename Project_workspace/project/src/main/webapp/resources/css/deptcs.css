@@ -71,9 +71,10 @@ th:last-child { background-color: #7}
 
 #resi1 tr{background: none;}
 #resi1 td{text-align: left;}
-#resi1 tr:nth-child(2) td:nth-child(1){text-align: right;}
+#resi1 tr:nth-child(2) td:nth-child(1){text-align: left;}
 #resi1 tr:nth-child(4) td input{width:450px;}
 
+.alin{text-align: left;}
 
 #bttbl{
 	

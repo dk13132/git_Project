@@ -59,7 +59,7 @@ a:hover {
 	function fn_fileDown(file_no) {
 		var formObj = $("form[name='readForm']");
 		$("#file_no").attr("value", file_no);
-		formObj.attr("action", "fileDown.do");
+		formObj.attr("action", "DeptBoardFileDown.do");
 		formObj.submit();
 	}
 </script>

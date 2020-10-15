@@ -115,6 +115,7 @@ public class BoardController {
 	//�뙆�씪 �떎�슫
 		@RequestMapping(value="BoardFileDown.do")
 		public void BoardFileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+			System.out.println("file_no : " + map.get("file_no"));
 			Map<String, Object> resultMap = service.selectFileInfo(map);
 			String storedFileName = (String) resultMap.get("stored_file_name");
 			String originalFileName = (String) resultMap.get("file_name");

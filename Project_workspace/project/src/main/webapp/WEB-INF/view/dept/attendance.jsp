@@ -55,7 +55,7 @@ $(function(){
 
 				<div class="bttbl1">
 				
-				<form action="attenList.do" method="get" onsubmit="return checkVal();">
+				<form class="alin" action="attenList.do" method="get" onsubmit="return checkVal();">
 				<label for="start_time"><b>조회일자</b></label>&nbsp;&nbsp;
 				<input type="date" name="start_time" id="start_time">
 				

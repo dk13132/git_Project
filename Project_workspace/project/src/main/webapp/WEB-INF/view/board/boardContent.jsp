@@ -56,8 +56,8 @@ a:hover {
 
 	function fn_fileDown(file_no) {
 		var formObj = $("form[name='readForm']");
-		$("#file_no").attr("value", file_no);
-		formObj.attr("action", "fileDown.do");
+		$("#file_no").attr("value", file_no); 
+		formObj.attr("action", "BoardFileDown.do");
 		formObj.submit();
 	}
 </script>
@@ -84,6 +84,7 @@ a:hover {
 							type="hidden" name="employee_no" value="${employee_no}">
 						<input type="hidden" name="board_no" value="${board_no}">
 						<input type="hidden" name="board_no" value="${board.readcount}">
+						<input type="hidden" id="file_no" name="file_no" value="">
 						<table cellspacing="0" cellpadding="0" align="center">
 							<tr height="30">
 								<td align="center" width="185">제 목</td>
@@ -117,7 +118,7 @@ a:hover {
 						
 						<div id="listButton"> 
 						<input type="button" id="list_btn" value="글목록" onclick="document.location.href='blist.do?p=${pageNum}'">
-								<c:if test="${employee_no == board.employee_no}">
+								<c:if test="${mc_employee_no == board.employee_no}">
 										<input id="update_btn" type="button" value="글수정" onclick="document.location.href='update.do?board_no=${board.board_no}&p=${pageNum}'">
 					 			<input id="delete_btn" type="button" value="글삭제"
 											onclick="document.location.href='delete.do?board_no=${board.board_no}&p=${pageNum}'">
