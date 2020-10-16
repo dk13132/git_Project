@@ -79,9 +79,10 @@ a:hover {
 			<div id="rightcontent">
 				<br> <b>글내용 보기</b> <br> <br>
 				<form method="post" name="readForm">
-					<input type="hidden" name="type" value="2"> <input
-						type="hidden" name="employee_no" value="${employee_no}"> <input
-						type="hidden" name="board_no" value="${board_no}">
+					<input type="hidden" name="type" value="2"> 
+					<input type="hidden" name="employee_no" value="${mc_employee_no}"> 
+					<input type="hidden" name="board_no" value="${board_no}">
+					<input type="hidden" id="file_no" name="file_no" value="">
 					<table cellspacing="0" cellpadding="0" align="center">
 						<tr height="30">
 							<td align="center" width="185">제 목</td>
@@ -116,7 +117,7 @@ a:hover {
 					<div id="listButton"> 
 						<input id="list_btn" type="button" value="글목록"
 							onclick="document.location.href='deptBoardList.do?type=${board.type}&p=${pageNum}'">
-						<c:if test="${employee_no == board.employee_no}">
+						<c:if test="${mc_employee_no == board.employee_no}">
 							<input id="update_btn" type="button" value="글수정"
 								onclick="document.location.href='deptUpdate.do?board_no=${board.board_no}&p=${pageNum}'">
 							<input id="delete_btn" type="button" value="글삭제"
