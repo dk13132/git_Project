@@ -20,6 +20,7 @@
 	letter-spacing: 0.05em;
 	cursor: pointer;
 }
+th, td { text-align: center; padding: 7px;}
 </style>
 </head>
 <body>
@@ -86,33 +87,33 @@
 								<input type="file" id="photo" name="photo" accept="image/*"></td>
 						</tr>
 						<tr>
-							<td width="200" height="50" align="center">부서 주소</td>
-							<td width="400" colspan="2" height="50" align="left" id="dept_addr">${employee.dept_addr}</td>
+							<td width="200" height="50" >부서 주소</td>
+							<td width="400" colspan="2" height="50" style="text-align:left;" id="dept_addr">${employee.dept_addr}</td>
 						</tr>
 						<tr>
 							<td width="200" height="50" align="center">부서 전화번호</td>
-							<td width="400" height="50" colspan="2" align="left" id="dept_phoneNum">${employee.dept_phoneNum}</td>
+							<td width="400" height="50" colspan="2" style="text-align:left;" id="dept_phoneNum">${employee.dept_phoneNum}</td>
 						</tr>
 						<tr>
 							<td width="200" height="50" align="center">부서 팩스번호</td>
-							<td width="400" height="50" width="150" colspan="2" align="left" id="dept_fax">${employee.fax}</td>
+							<td width="400" height="50" width="150" colspan="2" style="text-align:left;" id="dept_fax">${employee.fax}</td>
 						</tr>
 						<tr>
 							<td width="200" height="50" align="center">E-Mail</td>
-							<td width="400" height="50" width="150" colspan="2" align="left">${employee.email}</td>
+							<td width="400" height="50" width="150" colspan="2" style="text-align:left;">${employee.email}</td>
 						</tr>
 						<tr>
 							<td width="200" height="50" align="center">휴대폰 번호</td>
-							<td width="400" height="50" colspan="2"  align="left">${employee.phone}</td>
+							<td width="400" height="50" colspan="2" style="text-align:left;">${employee.phone}</td>
 						
 						</tr>
 						<tr>
 							<td width="200" height="50" align="center">직    무</td>
-							<td width="400" colspan="2" height="50" align="left">${employee.job}</td>							
+							<td width="400" colspan="2" height="50" style="text-align:left;">${employee.job}</td>							
 						</tr>
 						<tr>
 							<td width="200" height="50" align="center">내  주소</td>
-							<td width="400" colspan="2" width="450" height="50" align="left">${employee.address}</td>
+							<td width="400" colspan="2" width="450" height="50" style="text-align:left;">${employee.address}</td>
 						</tr>
 						<tr>
 						</tr>

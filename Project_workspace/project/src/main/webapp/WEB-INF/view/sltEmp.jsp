@@ -35,6 +35,9 @@ table.tableBodyScroll thead, table.tableBodyScroll tbody tr {
   width: 100%;
   table-layout: fixed;
 }
+.tableBodyScroll tr td{
+     text-align: center;
+}
 </style>
 
 </head>

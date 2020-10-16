@@ -149,7 +149,6 @@ th, td { text-align: center; padding: 7px;}
 			
 			if($('#photo').val() != "" && $('#photo').val() != null) {
 				fileSize = document.getElementById("photo").files[0].size;
-			    alert(fileSize);
 			    if(!$('#photo').val().match(fileForm)) {
 			    	alert("이미지 파일만 업로드 가능");
 			        return;
