@@ -115,7 +115,7 @@ $(document).ready(function(){
 				<form>
 					<input type="hidden" name="type" value="2"> 
 					<input type="hidden" name="dept_no" value="${board.dept_no}"> 
-					<input type="hidden" name="employee_no" value="${employee_no}"> 
+					<input type="hidden" name="employee_no" value="${mc_employee_no}"> 
 					
 					<input type="hidden" name="authority" value="3">
 						<input type="hidden" name="board_no" value="${ board_no }"> 
@@ -132,9 +132,7 @@ $(document).ready(function(){
 							</tr>
 							
 						</table>
-						<div id="listButton">
-						<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='deptWrite.do'">
-						</div>
+					
 					</c:if>
 
 					<c:if test="${list.count > 0}">
@@ -175,7 +173,7 @@ $(document).ready(function(){
 							
 					</table>
 					<div id="listButton"> 
-						<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='write.do'">
+						<input id="write_btn" type="button" value="글쓰기" onclick="document.location.href='deptWrite.do'">
 						<c:if test="${authority && board.authority == 3}">
 						<input id="delete_btn" type="button" value="글삭제" onclick="fn_Delete()">
 						</c:if>

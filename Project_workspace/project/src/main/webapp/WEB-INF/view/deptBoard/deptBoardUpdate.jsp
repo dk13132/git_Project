@@ -103,7 +103,7 @@
 					onsubmit="return writeSave()" enctype="multipart/form-data">
 					<input type="hidden" name="type" value="2"> <input
 						type="hidden" name="board_no" value="${board.board_no}"> <input
-						type="hidden" name="employee_no" value="${employee_no}"> <input
+						type="hidden" name="employee_no" value="${mc_employee_no}"> <input
 						type="hidden" id="fileNoDel" name="fileNoDel[]" value="">
 					<input type="hidden" id="fileNameDel" name="fileNameDel[]" value="">
 

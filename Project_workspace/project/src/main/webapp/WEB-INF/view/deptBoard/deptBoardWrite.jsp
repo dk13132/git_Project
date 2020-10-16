@@ -96,7 +96,7 @@
 							<td width="185" align="center">제 목</td>
 							<td width="555"><input type="text" size="40" maxlength="50"
 								name="subject"><input type="hidden" name="employee_no"
-								value="${employee_no}"></td>							
+								value="${mc_employee_no}"></td>							
 						
 						</tr>
 
