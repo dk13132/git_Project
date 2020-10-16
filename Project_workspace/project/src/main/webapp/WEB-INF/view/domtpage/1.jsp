@@ -6,18 +6,17 @@
 <html>
 <head>
 <title>휴가신청서</title>
-<style type="text/css">
-#appwarp {width: 720px;margin: 0 auto; margin-top: 30px;}
-table{	border-collapse: collapse;}
-tr, td {border: solid 1px #7A7A7A; text-align: center; }
-input, button {border: solid 1px #7A7A7A;}
-h2 {text-align: center;	margin-bottom: 60px;}
-#domtinfortable {width: 98%;}
-#apptable{margin: auto;margin-right: 0px; padding: 10px;font-size: 12px;}
-h4 {margin:10px 0px 5px 0px;}
-.subject{width: 98%; font-size: 16px; padding: 3px;}
-.naversm{width: 98%;}
+<link rel="stylesheet" href="<c:url value='/resources/css/reset.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/deptdomlist.css'/>" />
+<style>
+	.textar{width: 100%;}
+	h2 {text-align: center;}
+	h4 {margin-bottom: 10px; text-align: left;}
+	#apptable{margin-bottom: 40px;}
 </style>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/smarteditor/js/service/HuskyEZCreator.js"></script>
 
@@ -29,16 +28,15 @@ h4 {margin:10px 0px 5px 0px;}
 </script>
 
 <script type="text/javascript">
-	// 자식창 window 객체를 저장할 변수
 	var windowObj;
 	function openChildWindow() {
-		// 자식창을 열고 자식창의 window 객체를 windowObj 변수에 저장
 		windowObj = window.open("../emplist_selectAdd.do", "",
 				"width=500,height=400,left=700");
-		// 자식창의 childText라는 id를 가진 태그 요소의 값에 부모창의 값을 넣음
-		//windowObj.document.getElementById("empmove").name/*  = document.getElementById('parentText').value */;
 	}
 </script>
+
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 	var date = new Date(); 
@@ -52,7 +50,18 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<div id="appwarp">
+	<div id="wrap">
+		<jsp:include page="/WEB-INF/view/head.jsp" flush="false" />
+		<section id="content">
+			<div id="leftcontent">
+				<ul>
+					<li><a href="appdomt.do">결재진행함</a></li>
+					<li><a href="domt_imok_list.do">결재완료함</a></li>
+				</ul>
+			</div>
+
+			<div id="rightcontent">
+				<div id="appwarp">
 	<table id=apptable>
 		<tr id="first">
 			<td style="background-color: #ccc;" rowspan="2">결<br>제
@@ -63,7 +72,7 @@ $(document).ready(function() {
 			<td>${name}</td>
 		</tr>
 	</table>
-	<h2>휴가신청서</h2>
+	<h2>  휴가신청서</h2>
 	<table id="domtinfortable">
 		<tr style="font-weight: bold;">
 			<td>문서번호</td>
@@ -81,20 +90,23 @@ $(document).ready(function() {
 	<br>
 	
 	<form action="../insert_App_And_Domt.do" method="POST" id="app_line_add_input">
-		
+
 		<input    name="document_no" type="hidden" value="${document_no}"  >
 		<input    name="employee_no1" type="hidden" value="${employee_no}"  >
-		<h4>제목</h4>
-		<input    name="subject" class="subject" type="text"  ><br>
+		<input class="textar"    name="subject" class="subject" type="text" placeholder="제목을 입력하세요"><br>
 		<h4>내용</h4>
-		<textarea name="contents" id="naversm" class="naversm" ></textarea>
+		
+		<textarea class="textar" name="contents" id="naversm" class="naversm"></textarea>
+		
+		
+		
 		<input    name="reg_date"    type="hidden" class="now_date2" >
 		<input    name="type"        type="hidden" value="1" >
 		
 		<input    name="approval_no" 	type="hidden"  value="${approval_no}" >
 		<input    name="approval_date"  type="hidden"  class="now_date2" >
 		<input    name="state"      	type="hidden"  value="0">
-		
+		<br><br>
 		<input type="button" onclick="history.go(-1)" value="취소">
  		<input type="button" onclick="openChildWindow()"value="결재선"/>
 		<input type="submit" id="save" value="결재요청">
@@ -102,38 +114,65 @@ $(document).ready(function() {
 	
 	
 	</div>
+
+			</div>
+
+		</section>
+		<jsp:include page="/WEB-INF/view/foot.jsp" flush="false" />
+	</div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
     var oEditors = [];
     $(function() {
         nhn.husky.EZCreator.createInIFrame({
             oAppRef: oEditors,
-            elPlaceHolder: "naversm", //textarea에서 지정한 id와 일치해야 합니다. 
-            //SmartEditor2Skin.html 파일이 존재하는 경로
+            elPlaceHolder: "naversm", 
             sSkinURI : "<%=request.getContextPath()%>/resources/smarteditor/SmartEditor2Skin.html",
-            htParams: {
-                // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-                bUseToolbar: true,
-                // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-                bUseVerticalResizer: true,
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-                bUseModeChanger: true,
-                fOnBeforeUnload: function() {
-
-                }
-            },
-            fOnAppLoad: function() {
-                //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-                oEditors.getById["naversm"].exec("PASTE_HTML",[contents]);
-            },
-            fCreator: "createSEditor2"
-        });
-
-        //저장버튼 클릭시 form 전송
-        $("#save").click(function() {
-            oEditors.getById["naversm"].exec("UPDATE_CONTENTS_FIELD", []);
-            /* $("#write_b").submit(); */
-        });
-    });
+					htParams : {
+						bUseToolbar : true, // 툴바 사용 여부
+						bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부
+						bUseModeChanger : true, // 모드 탭(Editor | HTML | TEXT) 사용 여부
+						fOnBeforeUnload : function() {
+						}
+					},
+					fOnAppLoad : function() {
+						oEditors.getById["naversm"].exec("PASTE_HTML",
+								[ contents ]);
+					},
+					fCreator : "createSEditor2"
+				});
+		$("#save").click(function() {
+			oEditors.getById["naversm"].exec("UPDATE_CONTENTS_FIELD", []);
+		});
+	});
 </script>
 </html>

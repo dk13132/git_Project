@@ -11,7 +11,14 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/component.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/table.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/depinfo.css'/>" />
+<style type="text/css">
+.iframebox {
+ position: relative; top:0px; left: 0px; }
 
+.iframebox iframe { position: absolute; width: 100%; height: 100%;
+}​
+
+</style>
 </head>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -79,20 +86,8 @@ $(function(){
          	</div>
         </div>
         <div id=rightcontent>
-      
-				<div class="post">
+        
 			
-				<h2 class="title"><a href="#">공지사항</a></h2>
-				<div class="entry" style="background-color:red; height: 200px;">
-					
-					<table id="notice" border="1">
-			
-					</table>
-				</div>
-				
-			  
-			</div>
-   
         </div>
         
         </section>

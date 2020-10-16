@@ -50,13 +50,13 @@
 					<div class="nemberbtncss">
 					<c:if test="${domt_list3.count > 0}">
 						<c:if test="${domt_list3.p.beginPageNumber > 5}">
-							<a href="appdomt.do?p=${domt_list3.p.beginPageNumber-1}"><<</a>&nbsp;
+							<a href="appdomt.do?p=${domt_list3.p.beginPageNumber-1}"><</a>&nbsp;
 						</c:if>
 						<c:forEach var="pno" begin="${domt_list3.p.beginPageNumber}" end="${domt_list3.p.endPageNumber}">
 							<a href="appdomt.do?p=${pno}">${pno}</a>
 						</c:forEach>
 						<c:if test="${domt_list3.p.endPageNumber < domt_list3.p.totalPageCount}">&nbsp;
-							<a href="appdomt.do?p=${domt_list3.p.endPageNumber + 1}">>></a>
+							<a href="appdomt.do?p=${domt_list3.p.endPageNumber + 1}">></a>
 						</c:if>
 					</c:if>
 					</div>

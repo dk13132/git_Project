@@ -17,7 +17,7 @@
 		<section id="content">
 			<div id="leftcontent">
 				<ul>
-					<li><a>결재진행함</a></li>
+					<li><a href="appdomt.do">결재진행함</a></li>
 					<li><a href="domt_imok_list.do">결재완료함</a></li>
 				</ul>
 			</div>
