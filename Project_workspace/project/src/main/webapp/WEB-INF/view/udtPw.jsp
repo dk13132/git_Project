@@ -20,8 +20,8 @@
 	</div>
 </section>
 <section id="content" style="width:600;width: 100%;margin: 0 auto;max-width: 1200px;padding: 16px;">
-<div id="rightcontent" style="background: white;min-height: 600px;border-left: 0;width: 100%;">
-	<form id="updPw" style="max-width: 300px; width: 100%; margin: 0 auto;">
+<div id="rightcontent" style="text-align:center; padding-top:3%; border-left:2px solid #f0f0f0; padding-left:10%; padding-bottom:10%;width: 750px; background: white;min-height: 600px;">
+	<form id="updPw" style="text-align:center; max-width: 300px; width: 100%; margin: 0 auto;">
 	<br>
 		<font size="5" color="gray">비밀번호 변경</font></b><br><br>
 			<input type="password" name="password" id="password" placeholder="현재 비밀번호" style="border:1px solid #ced4da;border-radius:.25rem;color:#495057;background-color:#fff;width: 100%;" required><br><br>

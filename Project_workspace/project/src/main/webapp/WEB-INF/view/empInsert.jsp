@@ -11,6 +11,9 @@
 <title>사원 등록</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<style>
+th, td { text-align: center; padding: 7px;}
+</style>
 
 </head>
 <body>
@@ -32,7 +35,7 @@
 			<tr>
 				<td width="150" height="50">이  름</td>
 				<td width="150" height="50" colspan="2" align="center">
-					<input class="form-control" style="width:55%; padding-height:10px;" type="text" name="name" id="name"></td>
+					<input class="form-control" style="width:40%; padding-height:10px;" type="text" name="name" id="name"></td>
 				<td width="250" height="50" rowspan="4">
 					<div class="udt_Pt">
 						<img src="" id="imgEmployee" width="150" height="200">
@@ -41,12 +44,12 @@
 			</tr>
 			<tr>
 				<td width="150" height="50">생년월일</td>
-				<td width="150" height="50" colspan="2" align="center"><input class="form-control" style="width:55%; padding-height:10px;" type="date" name="birth" id="birth"></td>
+				<td width="150" height="50" colspan="2" align="center"><input class="form-control" style="width:60%; padding-height:10px;" type="date" name="birth" id="birth"></td>
 			</tr>
 			<tr>
 				<td width="150" height="50">직  급</td>
 				<td width="150" height="50" colspan="2" align="center">
-					<select class="form-control" style="width:55%; padding-height:10px;" name="position" id="position">
+					<select class="form-control" style="width:40%; padding-height:10px;" name="position" id="position">
 					 		<option value="" id="position_name">직급명</option>
 							<option value="주임">주임</option>
 							<option value="대리">대리</option>
@@ -60,7 +63,7 @@
 			<tr>
 				<td width="150" height="50">연  차</td>
 				<td width="150" height="50" colspan="2" align="center">
-					<input class="form-control" style="width:55%; padding-height:10px;" type="text" name="annual_leave" id="annual_leave" value="${employee.annual_leave}"></td>
+					<input class="form-control" style="width:40%; padding-height:10px;" type="text" name="annual_leave" id="annual_leave" value="${employee.annual_leave}"></td>
 				
 			</tr>
 			<tr>
