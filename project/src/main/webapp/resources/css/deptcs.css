@@ -1,0 +1,97 @@
+@charset "UTF-8";
+.myButt {
+	background:linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
+	background-color:#8c9ebd;
+	border-radius:3px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 10px;
+	text-decoration:none;
+	margin: 14px 0px 0px 0px;
+}
+.myButt1 {
+	background:linear-gradient(to bottom, #8c9ebd 5%, #578ac7 100%);
+	background-color:#8c9ebd;
+	border-radius:3px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 7px;
+	text-decoration:none;
+	margin: 0px 0px 0px 0px;
+}
+
+.relbut{
+	float:right;
+}
+.relbut1{
+	float:right;
+	position: relative;
+  	top: -26px;
+}
+
+.btncenter input{
+	
+	display : block;
+	margin : 0 auto;
+}
+.btncenter button{
+	
+	display : block;
+	margin : 25px auto;
+}
+
+table {text-align: center; font-family: 'Noto Sans KR', sans-serif; border-collapse: collapse; width: 100%; text-decoration:none}
+th, td {padding: 7px; width: 100px;}
+tr:nth-child(even){background-color: #f2f2f2}
+th { background-color: #767676; color: white;}
+th:first-child { background-color: #767676; color: white; border-radius: 3px 0px 0px 0px }
+th:last-child { background-color: #7}
+
+#wrap h4{text-align:center;}
+
+#empSty td:nth-child(1){ width:25px;}
+#empSty td:nth-child(2){ width:30px;}
+#empSty td:nth-child(3){ width:160px;}
+#empSty td:nth-child(4){ width:620px;}
+#empSty td:nth-child(5){ width:175px;}
+#empSty td:nth-child(6){ width:175px;}
+#empSty td:nth-child(7){ width:15px;}
+
+.paging{margin-top:12px;}
+.paging1{margin-top:-12px;}
+.register{margin-top:50px; margin-bottom:50px;}
+.register p{font-weight:bold; text-align:center;}
+
+#resi tr{background: none;}
+#resi td{text-align: left;}
+#resi tr:nth-child(3) td input{width:493px;}
+#empSty1 p{font-weight:bold; text-align:center;}
+
+#resi1 tr{background: none;}
+#resi1 td{text-align: left;}
+#resi1 tr:nth-child(2) td:nth-child(1){text-align: left;}
+#resi1 tr:nth-child(4) td input{width:450px;}
+
+.alin{text-align: left;}
+
+#bttbl{
+	
+	margin-top: 75px;
+}
+
+.bttbl1{
+	
+	margin-top:40px;	
+}
+
+#empList th:nth-child(2){
+	
+	width:150px;
+	padding:0px
+	
+}
+
+	
+

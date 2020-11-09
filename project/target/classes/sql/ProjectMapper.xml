@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjectMapper">
+	<!-- 1. 프로젝트 등록 -->
+	<insert id="write" parameterType="mc.project.model.ProjectDto" useGeneratedKeys="true" keyProperty="project_no">	
+		insert into
+		project(employee_no, subject, start_time, end_time, contents, progress)
+			values(#{employee_no}, #{subject}, #{start_time}, #{end_time}, #{contents}, #{progress})
+	</insert>
+	<!-- 2. 프로젝트 수정 -->
+	<update id="update" parameterType="mc.project.model.ProjectDto">
+		update project 
+			set subject = #{subject}, contents = #{contents}, start_time = #{start_time},
+			 end_time = #{end_time}, employee_no = #{employee_no} where project_no=#{project_no}		 
+	</update>
+	<!-- 3. 프로젝트		프로젝트 no 가지고 일감 리스트를 호출해야함. -->
+	<select id="readOne" parameterType="int" resultType="mc.project.model.ProjectDto">
+		select * from project_work 
+		where project_no = #{project_no}
+	</select>	
+	<!-- 4. 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete project where project_no = #{project_no}
+	</delete>
+	<!-- 5. 마지막 게시글 번호 가져오기 -->
+	<select id="max" resultType="int">
+		select max(project_no) 
+		from project
+		where project_no = #{project_no}
+	</select>
+	<!-- 6. 마지막 게시글 번호 가져오기 -->
+	<select id="count" resultType="int">
+		select count(*) from project
+	</select>
+	
+	
+	
+	<!-- 7. 프로젝트 리스트 -->
+	<select id="list" parameterType="map" resultType="mc.project.model.ProjectDto">
+		select * from project 
+		order by project_no desc
+		limit #{start},#{per}
+	</select>
+	<!-- 전체 조회 -->
+	<select id="selectAll" resultType="mc.project.model.ProjectDto">
+		select p.project_no, e.name, p.subject, p.start_time, p.end_time, p.contents, p.progress
+		from project p join employee e on p.employee_no = e.employee_no
+		order by project_no desc
+	</select>
+	
+	<!-- 검색 // 게시판 리스트 가져오기 -->
+ 	<select id="getBoardList" resultType="mc.project.model.ProjectDto" parameterType="map">
+		select p.project_no, p.subject, p.contents, p.progress, p.start_time, p.end_time, e.name
+		from project p join employee e on p.employee_no = e.employee_no
+		<where>
+			<if	test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%',#{keyword},'%')
+			</if>
+			<if	test="searchType=='contents' and keyword != null and keyword != '' ">
+				AND contents like CONCAT('%',#{keyword},'%')
+			</if>
+		</where>
+		order by project_no desc limit #{start},#{per}
+	</select> 
+	<!-- 검색// 게시물 총 개수 -->
+ 	<select id="getBoardListCnt" resultType="int">
+		SELECT count(*) from project
+		<where>
+			<if test="keyword != null and keyword != '' ">
+
+				<if test="searchType=='subject'">
+					AND subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='contents'">
+					AND contents like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</where>
+	</select> 
+		
+	<!-- 부서선택으로 교직원목록 -->
+	<select id="getNameList" resultType="map">
+		select name, employee_no from employee
+	</select>
+	
+	<!-- 등록 / 삭제만 있으면 됨.. 어차피 수정은 db 올라가기 전이니께 -->
+	<insert id="participationSignUp" parameterType="mc.projectWork.model.ProjectWorkDto">
+		insert into project_participation values(#{participation_no}, #{project_no}, #{employee_no})
+	</insert>
+	<!-- 삭제. 특정 참여 사원만 삭제할 수 있게. -->
+	<delete id="participationDelete">
+		delete from project_participation where employee_no = #{employee_no}
+	</delete>
+	<!-- 리스트 -->
+	<select id="participationSelectAll" resultType="map">
+		select * from project_participation
+	</select>
+	<!-- 참여한 사람 수  -->
+	<select id="participationCount" resultType="int">
+		select count(*) from project_participation where project_no = #{project_no}
+	</select>
+</mapper>

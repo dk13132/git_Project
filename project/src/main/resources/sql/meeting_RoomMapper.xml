@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="meeting_room">
+	<select id="roomList"
+		resultType="mc.meeting_room.model.Meeting_roomDto">
+		select * from meeting_room
+	</select>
+
+	<select id="time" parameterType="hashMap"
+		resultType="mc.meeting_room.model.Time">
+		select name, hour(start_time)'start', hour(end_time)'end'
+		from room_reservation, employee
+		where date(start_time) = date(#{currentDate})
+		and room_no = #{room_no}
+		and
+		employee.employee_no = room_reservation.employee_no
+	</select>
+
+	<select id="myroom" parameterType="int"
+		resultType="mc.meeting_room.model.MyMeeting_room">
+		select reservation_no, room_name, start_time, end_time, personnel, purpose
+		from meeting_room, room_reservation
+		where meeting_room.room_no = room_reservation.room_no
+		and employee_no = #{employee_no};
+	</select>
+	
+	<insert id="reservation" parameterType="mc.meeting_room.model.ReservationDto">
+		insert into room_reservation values(#{reservation_no}, #{employee_no}, #{room_no}, #{start_time}, #{end_time}, #{personnel}, #{purpose})
+	</insert>
+	
+	<select id="lastNo" resultType="String">
+		select max(reservation_no) + 1 from room_reservation
+	</select>
+	
+	<delete id="reservationCancel" parameterType="int">
+		delete from room_reservation where reservation_no = #{reservation_no}
+	</delete>
+</mapper>

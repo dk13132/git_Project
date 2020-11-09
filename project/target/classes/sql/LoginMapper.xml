@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login">
+	<select id="login" parameterType="String" resultType="hashMap">
+		select
+		authority, password, name from employee where
+		employee_no=#{employee_no}
+	</select>
+
+	<select id="notice" resultType="map">
+		select date(reg_date),subject from board where type=1 order by board_no desc limit 0,6
+	</select>
+</mapper>

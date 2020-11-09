@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjectWorkMapper">
+	<!--게시판의 글을 등록하면 자동으로 시퀀스에의해 1씩 증가되게 만들었습니다. 그런데 파일첨부가 생기고나서 파일첨부 BNO컬럼에 
+		증가된 BNO를 받을수가 없습니다. 그래서 selectKey를 이용하여 따로 증가된 bno를 셋팅해주고 BoardServiceImpl에 
+		게시글작성쪽 메소드를 보면 게시글이 작성되고 나서 그 다음에 첨부파일이 되는것을 보실수 있는데요. 게시글이 작성되면 bno의 값은 
+		1이 증가된 상태에서 첨부파일업로드메소드에 증가된 bno를 넘겨주기 때문에 같은 bno의 값을 가질 수 있게 됩니다. -->
+
+	 <!-- 1. 일감 등록  --> 
+	<insert id="write" parameterType="mc.projectWork.model.ProjectWorkDto" useGeneratedKeys="true" keyProperty="work_no">
+		insert into project_work(project_no, subject, contents, priority, start_time, end_time, state, authority, employee_no)
+		values(#{project_no}, #{subject},#{contents},#{priority}, #{start_time}, #{end_time},#{state},#{authority}, 1) 
+	</insert>
+	<!-- 2. 글 수정 -->
+	<update id="update"	parameterType="mc.projectWork.model.ProjectWorkDto">
+		update project_work set employee_no = #{employee_no}, subject = #{subject}, contents = #{contents},
+		start_time = #{start_time}, end_time = #{end_time}, state = #{state}, authority = #{authority} where work_no=#{work_no}
+	</update>
+	<!-- 3. 글읽기 -->
+	<select id="readOne" parameterType="int" resultType="mc.projectWork.model.ProjectWorkDto">
+		<!-- select * from project_work where work_no = #{work_no} -->
+		select p.project_no, p.work_no, p.subject, p.contents, p.priority, p.start_time, p.end_time, p.state, p.authority, e.name
+		from project_work p join employee e on p.employee_no = e.employee_no where work_no = #{work_no}
+	</select>
+	<!-- 4. 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from project_work
+		where work_no = #{work_no} <!-- 유저권한 -->
+	</delete>
+	<!-- 5. 마지막 게시글 번호 가져오기 -->
+	<select id="max" resultType="int">
+		select max(work_no) from
+		project_work where project_no = #{project_no}
+	</select>
+	<!-- 6. 마지막 게시글 번호 가져오기 -->
+	<select id="count" resultType="int">
+		select count(*) from project_work
+	</select>
+	<!-- 7. 일감 게시판 끊어서 가져오기 -->
+	<select id="list" parameterType="map" resultType="mc.projectWork.model.ProjectWorkDto">
+		select * from project_work order by work_no desc limit #{start},#{per}
+	</select>
+	<!-- 필터 / 중요도 기준으로 나오게하고, 높은 숫자가 위로 가게 정렬 -->
+	<select id="workFilter"	resultType="mc.projectWork.model.ProjectWorkDto" parameterType="map">
+		select * from project_work where state=#{state} order by work_no desc
+	</select>
+
+	<!-- 검색 // 게시판 리스트 가져오기 -->
+	<select id="getBoardList"
+		resultType="mc.projectWork.model.ProjectWorkDto" parameterType="map">
+		select p.project_no, p.work_no, p.subject, p.contents, p.priority, p.start_time,
+		p.end_time, p.state, p.authority, e.name
+		from project_work p join employee e on p.employee_no = e.employee_no
+		<where>
+			<if	test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%',#{keyword},'%')
+			</if>
+			<if	test="searchType=='contents' and keyword != null and keyword != '' ">
+				AND contents like CONCAT('%',#{keyword},'%')
+			</if>
+		</where>
+		order by work_no desc limit #{start},#{per}
+	</select>
+	<!-- 검색// 게시물 총 개수 -->
+	<select id="getBoardListCnt" resultType="int">
+		SELECT count(*) from project_work
+		<where>
+			<if test="keyword != null and keyword != '' ">
+
+				<if test="searchType=='subject'">
+					AND subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='contents'">
+					AND contents like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<!-- 첨부 파일 목록 조회 -->
+	<select id="selectFileList" parameterType="int"	resultType="hashMap">
+		select file_no, file_name, round(filesize/1024,1)
+		as filesize, del_ch
+		from project_work_file
+		where work_no = #{work_no} and del_ch = 'N'
+		order by file_no asc
+	</select>
+	<!-- 첨부 파일 목록 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap"	resultType="hashMap">
+		select stored_file_name, file_name
+		from project_work_file
+		where file_no = #{file_no}
+	</select>
+	<!-- 파일 조회 -->
+	<insert id="insertFile" parameterType="hashMap">
+		insert into
+		project_work_file(work_no, file_name, stored_file_name, file_path, filesize, del_ch)
+		values(#{work_no}, #{file_name}, #{stored_file_name}, #{file_path}, #{filesize}, 'N')
+	</insert>
+	<!-- 첨부 파일 수정 -->
+	<update id="updateFile" parameterType="hashMap">
+		update project_work_file
+		set del_ch = 'Y'
+		where file_no = #{file_no}
+	</update>
+
+	<delete id="deleteFile" parameterType="int">
+		delete from project_work_file
+		where file_no = #{file_no}
+	</delete>
+	
+	<!-- 부서선택으로 교직원목록 -->
+	<select id="getNameList" resultType="map">
+		select name, employee_no from employee
+	</select>
+</mapper>

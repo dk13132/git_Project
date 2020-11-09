@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	
+	<select id="list" resultType="mc.admin.model.DeptDto" parameterType="map">
+		select * from department order by dept_no desc limit #{start},#{per}
+	</select>
+	
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id = "count" resultType="int">
+		select count(*) from department
+	</select>
+	
+	<select id = "delete" resultType="int" parameterType="map">
+		delete from department where dept_no = #{dept_no}
+	</select>
+	
+	<insert id="insert" parameterType="mc.admin.model.DeptDto">
+		
+		insert into department(dept_no, dept_name
+		<if test="dept_addr!=null">,dept_addr</if>
+		<if test="zipcode !=null ">,zipcode</if>
+		<if test="fax !=null ">,fax</if>
+		<if test="dept_phoneNum !=null ">,dept_phoneNum</if>)
+		values(#{dept_no},#{dept_name}
+		<if test="dept_addr!=null ">,#{dept_addr}</if>
+		<if test="zipcode !=null ">,#{zipcode}</if>
+		<if test="fax !=null ">,#{fax}</if>
+		<if test="dept_phoneNum !=null ">,#{dept_phoneNum}</if>)
+		
+	<!-- 	insert into department(dept_no, dept_name
+		<if test="dept_addr!=null and dept_addr!=''">,dept_addr</if>
+		<if test="zipcode !=null and zipcode !=''">,zipcode</if>
+		<if test="fax !=null and fax !=''">,fax</if>
+		<if test="dept_phoneNum !=null and dept_phoneNum !=''">,dept_phoneNum</if>)
+		values(#{dept_no},#{dept_name}
+		<if test="dept_addr!=null and dept_addr!=''">,#{dept_addr}</if>
+		<if test="zipcode !=null and zipcode !=''">,#{zipcode}</if>
+		<if test="fax !=null and fax !=''">,#{fax}</if>
+		<if test="dept_phoneNum !=null and dept_phoneNum !=''">,#{dept_phoneNum}</if>) -->
+		
+	<!-- 	insert into department values
+		(#{dept_no},#{dept_name},#{dept_addr},#{zipcode},#{fax},#{dept_phoneNum}) -->
+		
+	</insert>
+	
+	
+	<select id = "dept_info" parameterType="string" resultType="map">
+	
+	select name, dept_name, position, phone, email from employee 
+	natural join department where dept_name = #{dept_name} order by employee_no;
+	
+	</select>
+	
+	<select id = "dept_user" parameterType="int" resultType="mc.admin.model.DeptDto">
+	
+	select * from department where dept_no = #{dept_no}
+	
+	</select>
+	
+	<update id = "update" parameterType="mc.admin.model.DeptDto">
+		
+		update department 
+		<set>
+		<if test="dept_addr!=null">dept_addr=#{dept_addr},</if>
+		<if test="zipcode !=null">zipcode=#{zipcode},</if>
+		<if test="fax !=null ">fax=#{fax},</if>
+		<if test="dept_phoneNum !=null ">dept_phoneNum=#{dept_phoneNum}</if>
+		</set>
+		where dept_no = #{dept_no}
+	
+	</update>
+	
+	<select id = "depts" resultType="mc.admin.model.DeptDto">
+	
+	select * from department
+	
+	</select>	
+	
+	
+	<select id = "positions" parameterType="int" resultType="map">
+	
+	select distinct position from employee 
+	natural join department where dept_no = #{dept_no}
+	
+	</select>
+	
+	<select id = "names" parameterType="mc.admin.model.DeptInfo" resultType="map">
+	
+	select * from employee where position = #{position} and dept_no = #{dept_no}
+	
+	</select>
+	
+	<select id = "no" parameterType="mc.admin.model.DeptInfo" resultType="map">
+	
+	select * from employee where position = #{position} and dept_no = #{dept_no} and name = #{name}
+	
+<!-- 	
+	select * from employee where name = #{name} -->
+	
+	</select>
+	
+	<select id = "push" parameterType="mc.admin.model.DeptInfo" resultType="map">
+	<!-- select name, dept_name, position from employee natural join department  -->
+	select * from employee natural join department 
+	<where>
+	<if test="dept_no != 0">and dept_no = #{dept_no}</if>
+	<if test="position != ''">and position = #{position}</if>
+	<if test="name != ''">and name = #{name}</if>
+	<if test="employee_no != 0 ">and employee_no = #{employee_no}</if>
+	</where>	
+	
+	</select>
+	
+	<update id = "update_auto" parameterType="mc.admin.model.emName">
+		
+		<!-- update employee set authority = #{authority} where dept_name=#{dept_name} and position =#{position}
+		and name = #{name} -->
+		
+		update employee A inner join department B on A.dept_no = B.dept_no
+		set A.authority = #{authority} where B.dept_name=#{dept_name} and A.position =#{position}
+		and A.name = #{name}
+		
+	</update> 
+	
+	<select id = "count1" resultType="int" parameterType="date">
+	
+		select count(*) from attendance where date(start_time) = #{start_time}
+		
+	</select>
+	
+	<select id="list1" resultType="mc.admin.model.AttenDto" parameterType="map">
+		select * from department natural join employee natural join attendance where date(start_time) = #{start_time}
+		order by time(start_time) desc limit #{start},#{per}
+	</select>
+	
+	<update id = "update_attr" parameterType="mc.admin.model.AttenDto">
+	
+	update attendance set state = #{state} where attendance_no = #{attendance_no} 
+	
+	</update>
+	
+	<select id = "attr_form" parameterType="int" resultType="mc.admin.model.AttenDto">
+	
+	select * from department natural join employee natural join attendance where attendance_no = #{attendance_no};
+	
+	</select>
+	
+	<select id="list2" resultType="mc.admin.model.AttenDto" parameterType="map">
+		select * from department natural join employee natural join attendance where date(start_time) = #{start_time}
+		and dept_no = #{dept_no} order by time(start_time) desc limit #{start},#{per}
+	</select>
+	
+	<select id = "count2" resultType="int" parameterType="mc.admin.model.AttenDto">
+		select count(*) from department natural join employee natural join attendance
+		where date(start_time) = #{start_time} and dept_no = #{dept_no}
+	</select>
+	
+	<select id = "annual" resultType="double" parameterType="mc.admin.model.AttenDto">
+	
+		select Annual_leave - (state) from attendance natural join employee where attendance_no = #{attendance_no};
+		
+	</select>
+	
+	<update id = "setAnnual" parameterType="mc.admin.model.AnnualVo">
+		
+		update employee natural join attendance set Annual_leave = #{annual_leave} where attendance_no = #{attendance_no};
+		
+	</update> 
+	
+	<select id = "dname" parameterType="int" resultType="string">
+		
+		select dept_name from department where dept_no = ${dept_no}
+	
+	</select>
+	
+	
+	<!-- <select id="emps" resultType="map" parameterType="int">
+		select empno, ename from emp where deptno=#{deptno} order by hiredate
+	</select>
+	<select id="empOne" resultType="spring.model.EmpDto" parameterType="int">
+		select * from emp where empno=#{empno}
+	</select>
+ -->
+</mapper>

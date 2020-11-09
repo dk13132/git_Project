@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chat">
+	<!-- 채팅방 리스트 출력 -->
+	<select id="chat_list" parameterType="int"
+		resultType="mc.chat.model.ChatListDto">
+		select c.chat_no, chat_name, name, (
+		select count(*)
+		from
+		chat_participation cp
+		where c.chat_no = cp.chat_no) 'count', (
+		select
+		max(send_time)
+		from chat_message cm
+		where cm.chat_no = c.chat_no
+		and
+		cm.employee_no != 0)
+		'send_time'
+		from chat c, employee,
+		chat_participation cp1
+		where c.employee_no =
+		employee.employee_no
+		and
+		cp1.chat_no = c.chat_no
+		and cp1.employee_no = #{employee_no}
+		order by
+		send_time desc
+	</select>
+
+	<!-- 부서 정보 출력 -->
+	<select id="selectDept" resultType="mc.chat.model.DeptDto">
+		select * from department
+	</select>
+
+	<!-- 사원 정보 출력 -->
+	<select id="selectEmp" parameterType="int"
+		resultType="mc.chat.model.EmpDto">
+		select * from employee where dept_no = #{dept_no}
+	</select>
+
+	<!-- 채팅방 max번호 출력 -->
+	<select id="chatMaxNo" resultType="String">
+		select max(chat_no) + 1 from
+		chat
+	</select>
+
+	<!-- 채팅방 참여 max번호 출력 -->
+	<select id="participationMaxNo" resultType="String">
+		select
+		max(participation_no) + 1 from chat_participation
+	</select>
+
+	<!-- 채팅방 생성 -->
+	<insert id="chatInsert" parameterType="mc.chat.model.ChatDto">
+		insert into chat values
+		(#{chat_no}, #{employee_no}, #{chat_name})
+	</insert>
+
+	<!-- 채팅방 참여 -->
+	<insert id="participationInsert"
+		parameterType="mc.chat.model.Chat_participationDto">
+		insert into chat_participation values
+		(#{participation_no}, #{employee_no}, #{chat_no}, now())
+	</insert>
+
+	<!-- 메세지 저장 -->
+	<insert id="messageInsert"
+		parameterType="mc.chat.model.MessageDto">
+		insert into chat_message values (#{message_no},
+		#{chat_no}, #{employee_no}, #{contents}, now()) 
+	</insert>
+
+	<!-- 메세지 막번호 -->
+	<select id="lastMessageNo" resultType="String">
+		select max(message_no) + 1
+		from chat_message
+	</select>
+
+	<!-- 메세지 정보 출력 -->
+	<select id="messageInfo" parameterType="hashMap"
+		resultType="mc.chat.model.MessageDto">
+		select * from chat_message where chat_no = #{chat_no} and
+		send_time >= (
+		select participation_time
+		from chat_participation
+		where
+		employee_no = #{employee_no} and chat_no = #{chat_no});
+	</select>
+
+	<!-- 참여 정보 출력 -->
+	<select id="participationInfo" parameterType="int"
+		resultType="mc.chat.model.Chat_participationDto">
+		select *
+		from chat_participation
+		where chat_no = #{chat_no}
+	</select>
+
+	<!-- 사번으로 이름 검색 -->
+	<select id="searchEmployeeName" parameterType="int"
+		resultType="String">
+		select name from employee where employee_no =
+		#{employee_no}
+	</select>
+
+	<!-- 채팅방 나가 버리기 -->
+	<delete id="exitChat_room" parameterType="hashMap">
+		delete from
+		chat_participation where chat_no = #{chat_no} and employee_no =
+		#{employee_no}
+	</delete>
+
+	<!-- 채팅방 참여자 수 -->
+	<select id="headCount" parameterType="int" resultType="int">
+		select
+		count(*) from chat_participation where chat_no = #{chat_no}
+	</select>
+
+	<!-- 채팅방 참여자 목록 -->
+	<select id="employeeInfo" parameterType="int"
+		resultType="mc.chat.model.Employee_info">
+		select dept_name, position, name
+		from department, employee, chat_participation
+		where department.dept_no = employee.dept_no
+		and employee.employee_no = chat_participation.employee_no
+		and chat_no = #{chat_no};
+	</select>
+</mapper>

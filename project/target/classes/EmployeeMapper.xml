@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "employee">
+
+	<!-- 전체 사원 정보 조회 -->
+	<select id = "sltEmp" resultType = "mc.employee.Dto.EmployeeDto">
+		select * from employee e, department d where e.dept_no = d.dept_no
+	</select>
+	
+	<!-- 사원 조회 부서 필터 -->
+	<select id = "sltDptFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
+		select * 
+		from employee e, department d 
+		where e.dept_no = d.dept_no and e.dept_no = #{dept_no}
+	</select>
+
+	<!-- 사원 조회 직급 필터 -->
+	<select id = "sltPstFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
+		select * 
+		from employee e, department d 
+		where e.dept_no = d.dept_no and e.position = #{position}
+	</select>
+	
+	<!-- 조회 둘다 했을 때 -->
+	<select id = "sltAllFlt" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
+		select * 
+		from employee e, department d 
+		where e.dept_no = d.dept_no and e.position = #{position} and d.dept_no = #{dept_no}
+	</select>
+	
+	
+	<!-- 사원 상세 조회 -->
+	<select id = "sltEmpDtl" resultType = "mc.employee.Dto.EmployeeDto" parameterType = "mc.employee.Dto.EmployeeDto">
+		select * 
+		from employee e , department d, photo p 
+		where e.dept_no = d.dept_no and e.employee_no = p.employee_no and e.employee_no = #{employee_no}
+	</select>
+	
+	<!-- 사원 정보 수정 -->
+	<update id = "udtEmp" parameterType = "mc.employee.Dto.EmployeeDto">
+		update employee 
+		set dept_no = #{dept_no}, position = #{position}
+		where employee_no = #{employee_no}
+	</update>  
+	
+	<!-- 사원 정보 사진 변경  -->
+	<update id="udtEmpPt" parameterType = "mc.employee.Dto.EmployeeDto">
+		update photo
+		set photo_name = #{photo_name}, photo_path = #{photo_path}, photo_size = #{photo_size}
+		where employee_no = #{employee_no}
+	</update>
+	
+	<!-- 사원 상세 정보 셀렉트박스 내용 들고오기 -->
+	<select id="sltbxDno" resultType="map">
+		select * from department
+	</select>
+	
+	
+
+	<select id="deptInfo" resultType="mc.employee.Dto.EmployeeDto" parameterType="mc.employee.Dto.EmployeeDto"> 
+		select * from department where dept_no = #{dept_no} 
+	</select>
+<!--<insert id="employeeAdd" parameterType="mc.employee.model.EmployeeDto"> 
+		insert into employee 
+		values(#{employee_no}, #{dept_no}, #{password}, #{position}, #{birth}, 1, #{name}, #{hiredate}, 22) 
+	</insert>
+	<select resultType="hashMap" id="deptList"> 
+		select dept_no, dept_name from department 
+	</select>
+ -->
+	<select resultType="String" id="employee_noCheck" parameterType="String"> 
+		select employee_no from employee where employee_no = #{employee_no} 
+	</select>
+	
+	
+	<!-- 신규 사원 등록 -->
+	<insert id = "istEmp" useGeneratedKeys="true" keyProperty="employee_no" parameterType = "mc.employee.Dto.EmployeeDto">
+		insert into 
+		employee
+		(employee_no, dept_no, password, position, birth, authority, name, hiredate, annual_leave) 
+		values
+		(#{employee_no}, #{dept_no}, #{password}, #{position}, #{birth}, #{authority}, #{name}, #{hiredate}, #{annual_leave})
+	</insert>
+	
+	<!-- 신규 사원 사진 등록 -->
+	<insert id="istEmpPt" useGeneratedKeys="true" keyProperty="employee_no" parameterType = "mc.employee.Dto.EmployeeDto">
+		insert into 
+		photo
+		(photo_name, employee_no, photo_path, photo_size)
+		values
+		(#{photo_name}, #{employee_no}, #{photo_path}, #{photo_size})
+	</insert>
+
+	<!-- 사원 삭제 -->
+	<delete id = "dltEmp" parameterType = "mc.employee.Dto.EmployeeDto">
+		delete from employee where employee_no = #{employee_no}
+	</delete>
+	
+	<!-- and employee_no = #{employee_no} 로그인해서 가져오는 세션값..-->
+	<!-- 사원 삭제 관리자 검증 카운트 -->
+	<select id="cntatrt" resultType="int" parameterType="map">
+		select count(*) from employee where authority = #{authority} and employee_no = #{employee_no}
+	</select>
+	
+</mapper>

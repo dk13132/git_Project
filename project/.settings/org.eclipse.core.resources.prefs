@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/java/mc/admin/controller/DeptController.java=UTF-8
+encoding//src/main/java/mc/board/controller/BoardController.java=UTF-8
+encoding//src/main/java/mc/board/controller/DeptBoardController.java=UTF-8
+encoding//src/main/java/mc/employee/Controller/EmployeeController.java=UTF-8
+encoding//src/main/java/mc/employee/Service/EmployeeDao.java=UTF-8
+encoding//src/main/java/mc/employee/Service/EmployeeService.java=UTF-8
+encoding//src/main/java/mc/myInfo/controller/MyInfoController.java=UTF-8
+encoding//src/main/java/mc/project/service/ProjectService.java=UTF-8
+encoding//src/main/java/mc/projectWork/controller/ProjectWorkController.java=UTF-8

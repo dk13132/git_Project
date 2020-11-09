@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="appDomtSQL_text">
+	<!--리스트 확인 하기 -->
+	<!-- <select id="appDomt_domt_listselect" resultType="mc.domt.model.DomtDto"> 
+		select * from document where employee_no=#{employee_no} order by document_no 
+		DESC; </select> -->
+
+	<!--진행중인 리스트 확인 -->
+<!-- 	<select id="appDomt_domt_listselect2"
+		resultType="mc.domt.model.DomtDto">
+		select *
+		from document d, approval a
+		where a.employee_no = #{employee_no}
+		and a.document_no = d.document_no
+		and (
+		select state
+		from approval a1
+		where a1.document_no = a.document_no
+		and a1.approval_no = a.approval_no - 1) = 1
+		and state = 0;
+	</select> -->
+
+	<select id="appDomt_domt_imok_list"
+		resultType="mc.domt.model.DomtDto">
+		select *
+		from document d
+		where (
+		select count(*)
+		from approval a
+		where d.document_no = a.document_no
+		and state = 1) = (
+		select count(*)
+		from approval a
+		where d.document_no = a.document_no)
+		and d.employee_no = #{employee_no}
+	</select>
+
+
+	<!--테이블 페이징 처리 -->
+	<!--// LIMIT 시작점, 갯수 (아래 예의 경우 #start 다음 번째부터 per개 추출. 첫번째 파라미터는 0 부터 시작함!) -->
+	<select id="list" resultType="mc.domt.model.DomtDto" parameterType="map">
+		select * from document where employee_no=#{employee_no} order by document_no DESC limit
+		#{start},#{per} 
+	</select>
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="count" resultType="int" parameterType="String">
+		select
+		count(*) from document where employee_no=#{employee_no}
+	</select>
+
+	<!--테이블 페이징 처리2 -->
+	<!--// LIMIT 시작점, 갯수 (아래 예의 경우 #start 다음 번째부터 per개 추출. 첫번째 파라미터는 0 부터 시작함!) -->
+	<select id="list2" resultType="mc.domt.model.DomtDto" parameterType="map">
+		select * from document d, approval a
+		where a.employee_no = #{employee_no}
+		and a.document_no = d.document_no
+		and
+		(select state from approval a1
+		where a1.document_no = a.document_no
+		and a1.approval_no = a.approval_no - 1) = 1
+		and state = 0 order by d.document_no DESC limit #{start},#{per} ;
+	</select>
+
+	<!-- 총 게시글 갯수 출력2 -->
+	<select id="count2" resultType="int" parameterType="String">
+		select count(*)
+		from document d, approval a
+		where a.employee_no = #{employee_no}
+		and a.document_no = d.document_no
+		and (
+		select state
+		from approval a1
+		where a1.document_no = a.document_no
+		and a1.approval_no = a.approval_no - 1) = 1
+		and state = 0;
+	</select>
+
+
+	<select id="appDomt_domt_employee_add_listselect"
+		resultType="mc.domt.model.EmployeeDto">
+		SELECT employee_no,dept_no,dept_name FROM employee natural
+		join department
+		group by dept_no;
+	</select>
+
+	<select id="appDomt_domt_employee_add_listselect_two"
+		resultType="map" parameterType="int">
+		select employee_no,position,name from
+		employee where dept_no=#{dept_no} and employee_no != #{employee_no}
+	</select>
+
+	<select id="appDomt_domt_employee_add_listselect_thr"
+		resultType="mc.domt.model.EmployeeDto" parameterType="int">
+		select * from
+		employee
+		where employee_no=#{employee_no}
+	</select>
+
+	<!--결재문서의 자동 -->
+	<select id="appDomt_domt_auto"
+		resultType="mc.domt.model.DomtAutoDto">
+		SELECT
+		employee_no,dept_name,name FROM department natural
+		join employee
+		where employee_no=#{employee_no}
+	</select>
+
+	<select id="appDomt_domt_auto_Nemder" resultType="int">
+		SELECT
+		MAX(document_no)+1 FROM document;
+	</select>
+
+	<select id="insert_app_app_auto_Nemder" resultType="int">
+		SELECT
+		MAX(approval_no)+1 FROM approval;
+	</select>
+
+	<!--결재문서 인서트하기 -->
+	<insert id="insert_app_domt"
+		parameterType="mc.domt.model.DomtDto">
+		insert into document
+		(document_no, employee_no, subject,
+		contents,reg_date,type)
+		values(#{document_no},#{employee_no},#{subject},#{contents},#{reg_date},#{type})
+	</insert>
+
+
+	<!--결재문서 결재라인 인서트하기 -->
+	<insert id="insert_app_domt_app"
+		parameterType="mc.domt.model.DomtApprovalDto">
+		insert into approval (document_no,
+		employee_no,
+		state,approval_date)
+		values(#{document_no},#{employee_no},#{state},#{approval_date})
+	</insert>
+
+	<update id="insert_app_domt_app_up"
+		parameterType="mc.domt.model.DomtDto">
+		update approval set state = 1 where
+		document_no=#{document_no} and employee_no=#{employee_no};
+	</update>
+
+	<!--결제문서 보기 -->
+	<select id="domtViewPage_domt"
+		resultType="mc.domt.model.Domt_P_ApprovalDto" parameterType="int">
+		SELECT document_no,employee_no,subject,contents,reg_date,dept_name,name FROM
+		document natural join employee natural join department where
+		document_no = #{document_no};
+	</select>
+	<select id="domtViewPage_appline"
+		resultType="mc.domt.model.Domt_P_ApprovalDto" parameterType="int">
+		select
+		employee_no,name,dept_no,dept_name,state from approval natural join
+		employee natural join department where document_no =#{document_no}
+		group by employee_no;
+	</select>
+	<!--승인 -->
+	<update id="imok" parameterType="mc.domt.model.DomtApprovalDto">
+		update approval set state = 1
+		where document_no=#{document_no} and employee_no=#{employee_no};
+	</update>
+	<update id="imno" parameterType="mc.domt.model.DomtApprovalDto">
+		update approval set state = 2
+		where document_no=#{document_no} and employee_no=#{employee_no};
+	</update>
+
+</mapper>
